@@ -120,29 +120,33 @@ def deluser(request):
         dolog.error("删除失败，发生异常:{}".format(e))
         return JsonResponse({'ret': 1 , 'msg':"登出失败，发生异常:{}".format(e)})  
     
-@api_view(['GET'])
+@api_view(['POST'])
 def getlist(request):
     try:
         if request.user.is_authenticated: 
             if request.user.is_superuser:
-                ret = models.User.ulist()
+                data = json.loads(request.body)
+                ret = models.User.ulist(data)
                 return  JsonResponse(ret)
-
     except Exception as e:
-        dolog.error("获取失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"获取失败，发生异常:{}".format(e)})  
+        dolog.error("用户列表获取失败，发生异常:{}".format(e))
+        return JsonResponse({'ret': 1 , 'msg':"用户列表获取失败，发生异常:{}".format(e)})  
 
-@api_view(['GET'])
+@api_view(['POST'])
 def getlist_total(request):
     try:
         if request.user.is_authenticated: 
             if request.user.is_superuser:  
-                ret = models.User.ulist_total()
+                data = json.loads(request.body)
+                if 'username' in data:
+                    uname = data['username']
+                else:
+                    uname=request.user.username
+                ret = models.User.ulist_total(data,uname)
                 return  JsonResponse(ret)
-
     except Exception as e:
-        dolog.error("获取失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"获取失败，发生异常:{}".format(e)})  
+        dolog.error("指定用户参数获取失败，发生异常:{}".format(e))
+        return JsonResponse({'ret': 1 , 'msg':"指定用户参数获取失败，发生异常:{}".format(e)})  
 
 @api_view(['POST'])
 def re_user_active(request):
@@ -150,10 +154,12 @@ def re_user_active(request):
         if request.user.is_authenticated: 
             if request.user.is_superuser:  
                 data = json.loads(request.body)
-                dolog.debug("更新禁用状态，操作者为：{}".format(request.user.username))                
+                dolog.debug("已更新{}的禁用状态，操作者为：{}".format(data['username'],request.user.username))                
                 ret = models.User.re_active(data)
                 return  JsonResponse(ret)
     except Exception as e:
-        dolog.error("发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"发生异常:{}".format(e)})  
+        dolog.error("禁用状态更新发生异常:{}".format(e))  
+        return JsonResponse({'ret': 1 , 'msg':"禁用状态更新发生异常:{}".format(e)})  
+
+
 

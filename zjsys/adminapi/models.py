@@ -64,47 +64,50 @@ class User(AbstractUser):
         this_user.delete()
         return {'ret':0,"msg":"删除成功"}
     
-    def ulist():
+    def ulist(data):
+        paging = int(data['paging'])
         try:
-            qs = User.objects.values()
+            qs = User.objects.values('realname','username','usertype','is_active','is_superuser').order_by('id')[:paging]
             retlist = list(qs)
             return {'ret':0,'data':retlist}
         except User.DoesNotExist as e:
-            dolog.error("发生异常：{}".format(e))
+            dolog.error("用户列表获取失败，发生异常:{}".format(e))
             return{
                     'ret': 1,
-                    'msg': "发生异常:{}".format(e)
+                    'msg': "用户列表获取失败，发生异常:{}".format(e)
                 }
 
-    def ulist_total():
+#指定数据查询
+    def ulist_total(data,uname):
         try:
-            qs = User.objects.count()
-            return {'ret':0,'total':qs}
+            control = data['control']
+            if control is not None:
+                if control == 'total':
+                    retlist = User.objects.count()
+                else:
+                    qs = User.objects.filter(username=uname).values('{}'.format(control))
+                    retlist = list(qs)
+                return {'ret':0,'total':retlist}
         except User.DoesNotExist as e:
-            dolog.error("发生异常：{}".format(e))
+            dolog.error("指定用户参数获取失败，发生异常:{}".format(e))
             return{
                 'ret': 1,
-                'msg': "发生异常:{}".format(e)
+                'msg': "指定用户参数获取失败，发生异常:{}".format(e)
             }
     
     def re_active(data):
         try:
-            un = data['username']
-            this_user = User.objects.get(username=un)
-            if 're_active' in data:
-                if type(data['re_active']) is int:
-                    this_user.is_active = int(data['re_active'])
-                else:
-                    return{
-                'ret': 1,
-                'msg': "re_active数据类型错误"
-            }
-                
+            uname = data['username']
+            this_user = User.objects.get(username=uname)
+            if this_user.is_active == 1 :
+                this_user.is_active = 0
+            elif this_user.is_active == 0:
+                this_user.is_active = 1
         except User.DoesNotExist as e:
-            dolog.error("发生异常:{}".format(e))  
+            dolog.error("禁用状态更新发生异常:{}".format(e))  
             return{
                 'ret': 1,
-                'msg': "发生异常:{}".format(e)
+                'msg': "禁用状态更新发生异常:{}".format(e)
             }
         this_user.save()    
-        return {'ret':0,'msg':'禁用状态已更新'}
+        return {'ret':0,'msg':'{}的禁用状态已更新'.format(uname)}

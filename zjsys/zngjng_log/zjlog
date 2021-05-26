@@ -521,3 +521,69 @@
 2021-05-25 21:30:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
 2021-05-25 21:30:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:User matching query does not exist.[0m
 
+2021-05-26 17:22:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 17:22:54 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 17:25:19 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:04:05 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:04:12 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 20:05:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:05:54 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 20:06:35 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m获取失败，发生异常:Expecting value: line 1 column 1 (char 0)[0m
+
+2021-05-26 20:06:55 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:06:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m获取失败，发生异常:Expecting value: line 1 column 1 (char 0)[0m
+
+2021-05-26 20:10:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:10:30 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:20:28 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:20:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 20:21:08 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m获取失败，发生异常:Object of type QuerySet is not JSON serializable[0m
+
+2021-05-26 20:24:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:28:00 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:28:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 20:30:29 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:47:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:47:45 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 20:48:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+2021-05-26 20:48:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:int() argument must be a string, a bytes-like object or a number, not 'QuerySet'[0m
+
+2021-05-26 20:50:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:50:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+2021-05-26 20:50:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:'QuerySet' object has no attribute 'is_active'[0m
+
+2021-05-26 20:51:35 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 20:51:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+
+2021-05-26 20:51:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+
+2021-05-26 20:51:59 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+
+2021-05-26 20:52:05 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m更新禁用状态，操作者为：admin[0m
+
+2021-05-26 21:03:59 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:04:05 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 21:07:32 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
