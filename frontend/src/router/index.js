@@ -46,6 +46,15 @@ const router = new Router({
             usertype: 9
           },
           component: () => import("@/components/views/AccountManager")
+        },
+        {
+          path:"attencemodel",
+          name:"attencemodel",
+          meta:{
+            title:"考勤模板管理",
+            usertype:1
+          },
+          component:()=>import("@/components/views/AttenceModel")
         }
       ]
     },

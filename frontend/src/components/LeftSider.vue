@@ -29,7 +29,7 @@
           <i class="el-icon-setting"></i>
           <span> 数据库连接配置</span>
         </el-menu-item>
-        <el-menu-item index="/">
+        <el-menu-item index="/mgr/attencemodel">
           <i class="el-icon-setting"></i>
           <span> 考勤模板管理</span>
         </el-menu-item>

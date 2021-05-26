@@ -57,14 +57,15 @@
                 </el-link>
               </template>
             </el-table-column>
-            <el-table-column prop="is_active" label="账号状态">
-              <template slot-scope="scope">
-                {{ scope.row.is_active ? "启用" : "停用" }}
-              </template>
-            </el-table-column>
+
             <el-table-column label="超级管理员">
               <template slot-scope="scope">
                 {{ scope.row.is_superuser ? "是" : "否" }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="is_active" label="账号状态">
+              <template slot-scope="scope">
+                {{ scope.row.is_active ? "启用" : "停用" }}
               </template>
             </el-table-column>
             <el-table-column align="right" width="600">
@@ -117,6 +118,9 @@
             layout="total,prev, pager, next,jumper"
             :page-size="20"
             :total="account_list_total"
+            @current-change="getAccountList"
+            @prev-click="getAccountList"
+            @next-click="getAccountList"
           >
           </el-pagination>
         </el-col>
@@ -145,6 +149,11 @@
       :show-close="true"
       :wrapperClosable="true"
     >
+      <h1>
+        新增账号
+      </h1>
+      <el-divider direction="horizontal"></el-divider>
+
       <account-add style="margin-right: 20px"></account-add>
     </el-drawer>
   </div>
@@ -166,8 +175,8 @@ export default {
           account: "admin",
           account_type: "管理员",
           account_status: "可用",
-          is_superuser: true,
-        },
+          is_superuser: true
+        }
       ],
       search: "", // 搜索框内容
       btn_size: "medium", // 按钮大小
@@ -176,7 +185,7 @@ export default {
       account_drawer: false, // 新增账号抽屉，默认false，关闭
       now_account: "", // 修改密码的账号
       password_status: false, // 判断是否已经输入过管理员密码的状态
-      account_list_total: 0, // 账号管理列表数据量
+      account_list_total: 0 // 账号管理列表数据量
     };
   },
   methods: {
@@ -193,7 +202,7 @@ export default {
           '<div class="el-input"><input class="el-input__inner" type="password" id="admin_password" size="normal" clearable></input></div>',
           "请输入管理员密码",
           {
-            dangerouslyUseHTMLString: true,
+            dangerouslyUseHTMLString: true
           }
         )
           .then(() => {
@@ -202,18 +211,18 @@ export default {
             self.$axios
               .post("/", {
                 admin_password: self.admin_password,
-                account: account,
+                account: account
               })
               // 请求成功弹出修改密码界面
-              .then(function (ret) {
+              .then(function(ret) {
                 self.password_status = true;
                 self.now_account = account;
                 self.drawer = true;
               })
-              .catch(function (error) {
+              .catch(function(error) {
                 self.$message({
                   type: "info",
-                  message: "获取密码失败",
+                  message: "获取密码失败"
                 });
               });
           })
@@ -231,21 +240,21 @@ export default {
       this.$confirm("此操作将启用/停用此账号, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
+        type: "warning"
       })
         .then(() => {
           // 确定则执行操作
           self.$axios
             .put("/change_account_status", {
-              account: account,
+              account: account
             })
-            .then((res) => {
+            .then(res => {
               self.$message({
                 type: "success",
-                message: res.data,
+                message: res.data
               });
             })
-            .catch((err) => {
+            .catch(err => {
               self.$message.error("操作失败");
             });
         })
@@ -260,7 +269,7 @@ export default {
           '<div class="el-input"><input class="el-input__inner" type="password" id="admin_password" size="normal" clearable></input></div>',
           "请输入管理员密码",
           {
-            dangerouslyUseHTMLString: true,
+            dangerouslyUseHTMLString: true
           }
         )
           .then(() => {
@@ -269,17 +278,17 @@ export default {
             self.$axios
               .post("/", {
                 admin_password: self.admin_password,
-                account: account,
+                account: account
               })
               // 请求成功弹出真实密码
-              .then(function (ret) {
+              .then(function(ret) {
                 self.password_status = true;
                 self.$alert(ret.data, "该账号的密码是");
               })
-              .catch(function (error) {
+              .catch(function(error) {
                 self.$message({
                   type: "info",
-                  message: "获取密码失败",
+                  message: "获取密码失败"
                 });
               });
           })
@@ -288,16 +297,16 @@ export default {
         self.$axios
           .post("/", {
             admin_password: self.admin_password,
-            account: account,
+            account: account
           })
           // 请求成功弹出真实密码
-          .then(function (ret) {
+          .then(function(ret) {
             self.$alert(ret.data, "该账号的密码是");
           })
-          .catch(function (error) {
+          .catch(function(error) {
             self.$message({
               type: "info",
-              message: "获取密码失败",
+              message: "获取密码失败"
             });
           });
       }
@@ -308,23 +317,23 @@ export default {
       this.$confirm("确认是否删除此账号", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
+        type: "warning"
       })
         .then(() => {
           self.$axios
             .post("", {
-              account: account,
+              account: account
             })
-            .then(function (ret) {
+            .then(function(ret) {
               self.$message({
                 type: "success",
-                message: "删除成功",
+                message: "删除成功"
               });
             })
-            .catch(function (error) {
+            .catch(function(error) {
               self.$message({
                 type: "error",
-                message: "删除失败",
+                message: "删除失败"
               });
             });
         })
@@ -334,26 +343,34 @@ export default {
     getAccountListTotal() {
       let self = this;
       this.$axios
-        .get("/api/adminapi/gettotal")
-        .then((res) => {
+        .post("/api/adminapi/gettotal", {
+          control: "password"
+        })
+        .then(res => {
           if (res.data.ret == 0) {
             self.account_list_total = parseInt(res.data.total);
+            console.log(res.data.total[0].password);
+            console.log(res.data);
           }
         })
-        .catch((err) => {});
+        .catch(err => {});
     },
     // 获取账号列表
-    getAccountList() {
+    getAccountList(val) {
+      let page_num = val ? val : 1;
       let self = this;
       this.$axios({
-        method: "get",
+        method: "post",
         url: "/api/adminapi/getlist",
-      }).then((res) => {
+        data: {
+          paging: page_num
+        }
+      }).then(res => {
         if (res.data.ret == 0) {
           self.account_data = res.data.data;
         }
       });
-    },
+    }
   },
   mounted() {
     this.getAccountListTotal();
@@ -361,8 +378,8 @@ export default {
   },
   components: {
     PasswordChange,
-    AccountAdd,
-  },
+    AccountAdd
+  }
 };
 </script>
 
@@ -388,5 +405,11 @@ export default {
 
 #accountmanager .el-table th {
   background-color: #ecf5ff;
+}
+
+h1 {
+  margin: 10px auto;
+  text-align: center;
+  font-size: 1.6rem;
 }
 </style>
