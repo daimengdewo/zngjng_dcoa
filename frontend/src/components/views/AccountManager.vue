@@ -342,11 +342,13 @@ export default {
       let self = this;
       this.$axios
         .post("/api/adminapi/gettotal", {
-          control: "total",
+          control: "password_md5",
         })
         .then((res) => {
           if (res.data.ret == 0) {
-            self.account_list_total = parseInt(res.data.total);
+            // self.account_list_total = parseInt(res.data.total);
+            console.log(res.data.total[0].password_md5);
+            console.log(self.$AES.decrypt(res.data.total[0].password_md5));
           }
         })
         .catch((err) => {});
@@ -360,11 +362,12 @@ export default {
         url: "/api/adminapi/getlist",
         data: {
           paging: 20,
-          pagenbr: page_num - 1,
+          pagenbr: page_num,
         },
       }).then((res) => {
         if (res.data.ret == 0) {
           self.account_data = res.data.data;
+
         }
       });
     },
