@@ -20,8 +20,8 @@ export default {
 
   // 解密
   decrypt(word, keyStr, ivStr) {
-    keyStr = keyStr ? keyStr : "zengjing20210508";
-    ivStr = ivStr ? ivStr : "zengjing20210508";
+    keyStr = keyStr ? keyStr : "zgjgsoft20210508";
+    ivStr = ivStr ? ivStr : "zgjgsoft20210508";
     var key = CryptoJS.enc.Utf8.parse(keyStr);
     let iv = CryptoJS.enc.Utf8.parse(ivStr);
     

@@ -347,8 +347,9 @@ export default {
         .then((res) => {
           if (res.data.ret == 0) {
             // self.account_list_total = parseInt(res.data.total);
-            console.log(res.data.total[0].password_md5);
-            console.log(self.$AES.decrypt(res.data.total[0].password_md5));
+            let pw=res.data.total[0].password_md5
+            console.log(self.$AES.decrypt(pw));
+            console.log(self.$md5("admin"));
           }
         })
         .catch((err) => {});

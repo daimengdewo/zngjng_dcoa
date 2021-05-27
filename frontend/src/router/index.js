@@ -72,7 +72,7 @@ router.beforeEach((to, from, next) => {
   } else {
     let token = localStorage.getItem("Authorization");
     let usertype = parseInt(AES.decrypt(store.state.usertype));
-    let is_active = AES.decrypt(store.state.is_active).replaceAll("/u0000","");
+    let is_active = AES.decrypt(store.state.is_active);
     if (token === null || token === "") {
       next("/login");
     } else {

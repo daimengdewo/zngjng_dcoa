@@ -9,7 +9,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import "default-passive-events";
 import store from "./store";
 import AES from "./AES";
-import SHA256 from "./SHA256"
+import md5 from "js-md5"
 
 axios.defaults.withCredentials = true;
 
@@ -49,7 +49,7 @@ axios.interceptors.response.use(
 
 Vue.use(ElementUI);
 Vue.prototype.$AES = AES;
-Vue.prototype.$SHA256=SHA256;
+Vue.prototype.$md5=md5;
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 

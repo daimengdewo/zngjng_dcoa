@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import accountmanager from "@/components/views/AccountManager"
+
 export default {
   data() {
     //   所有密码的验证规则
@@ -115,6 +117,7 @@ export default {
                   type: "success",
                   message: "新建账户成功"
                 });
+                accountmanager.getAccountList();
               }else if(res.data.ret==1){
                 self.$message.error(res.data.msg);
               }

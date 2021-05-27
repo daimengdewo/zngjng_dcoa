@@ -14,6 +14,7 @@
     "default-passive-events": "^2.0.0",
     "element-ui": "^2.15.1",
     "jquery": "^3.6.0",
+    "js-md5": "^0.7.3",
     "js-sha256": "^0.9.0",
     "json": "^11.0.0",
     "vue": "^2.5.2",
