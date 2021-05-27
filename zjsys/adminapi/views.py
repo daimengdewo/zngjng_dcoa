@@ -1,15 +1,13 @@
 #coding=utf-8
 from django.http import JsonResponse
 # from django.shortcuts import HttpResponse
-from .import models,logdb
-import json,base64
+from .import models,logdb,encryption
+import json
 
 from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from django.contrib import auth
 from django.contrib.auth import login, logout
-
-from Crypto.Cipher import AES
 
 dolog =logdb.NbLog() 
 
@@ -25,7 +23,7 @@ def signin(request):
         if user is not None:
             if user.is_active:
                     if user.is_superuser:
-                        login(request, user)
+                        login(request,user)
                         # 校验通过
                         # 删除原有的Token
                         old_token = Token.objects.filter(user=user)
@@ -33,8 +31,6 @@ def signin(request):
                         # 创建新的Token
                         token = Token.objects.create(user=user)
         
-                        # 秘钥
-                        keys = 'zengjing20210508'
                         # 待加密文本
                         aes_usertype = str(user.usertype)
                         aes_is_active = ''
@@ -42,20 +38,15 @@ def signin(request):
                             aes_is_active = '1'
                         else:
                             aes_is_active = '0'
-                        # aes_is_active = str(user.is_active)
-                        # 初始化加密器
-                        ut = AES.new(add_to_16(keys), AES.MODE_ECB)
-                        at = AES.new(add_to_16(keys), AES.MODE_ECB)
-                        #先进行aes加密
-                        encrypt_usertype = ut.encrypt(add_to_16(aes_usertype))
-                        encrypt_active = at.encrypt(add_to_16(aes_is_active))
-                        usertype_result = base64.encodebytes(encrypt_usertype).decode('utf-8')
-                        active_result = base64.encodebytes(encrypt_active).decode('utf-8')
+                        aes_is_active = str(user.is_active)
+                        #调用加密工具
+                        usertype_result = encryption.encrypt(aes_usertype).encryp_add()
+                        active_result = encryption.encrypt(aes_is_active).encryp_add()
 
                         dolog.debug("管理员登陆成功，操作者为：{}".format(user.username))
 
                         return JsonResponse({'ret': 0 ,"username": user.username, "token": token.key,
-                        "usertypen": usertype_result.strip() , "is_active" : active_result.strip() })
+                        "usertypen": usertype_result , "is_active" : active_result })
                     else:
                         dolog.error("非管理员登陆，操作者为：{}".format(username))
                         return JsonResponse({'ret': 3, 'msg': '请使用管理员账户登录'})
@@ -67,13 +58,6 @@ def signin(request):
             return JsonResponse({'ret': 1, 'msg': '用户名或者密码错误'})
     except Exception as e:
         dolog.error("发生异常:{}".format(e))
-        
-
-# str不是16的倍数那就补足为16的倍数
-def add_to_16(value):
-    while len(value) % 16 != 0:
-        value += '\0'
-    return str.encode(value)  # 返回bytes
 
 # 登出处理
 @api_view(['POST'])
@@ -94,14 +78,14 @@ def adduser(request):
                 data = json.loads(request.body)
                 username = data['username']
                 dolog.debug("执行用户添加操作，操作者为：{}".format(username))
-                # 直接调用 models中的添加 用户 的代码    
-                ret = models.User.add(data)
+        # 直接调用 models中的添加 用户 的代码    
+        ret = models.User.add(data)
 
-                return  JsonResponse(ret)
+        return  JsonResponse(ret)
 
     except Exception as e:
         dolog.error("添加失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"登出失败，发生异常:{}".format(e)})  
+        return JsonResponse({'ret': 1 , 'msg':"添加失败，发生异常:{}".format(e)})  
 
 
 @api_view(['POST'])
@@ -126,7 +110,8 @@ def getlist(request):
         if request.user.is_authenticated: 
             if request.user.is_superuser:
                 data = json.loads(request.body)
-                ret = models.User.ulist(data)
+                pagenbr = int(data['pagenbr'])
+                ret = models.User.ulist(data,pagenbr)
                 return  JsonResponse(ret)
     except Exception as e:
         dolog.error("用户列表获取失败，发生异常:{}".format(e))

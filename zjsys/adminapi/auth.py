@@ -50,7 +50,7 @@ class ExpiringTokenAuthentication(BaseAuthentication):
  
         # Token有效期时间判断（注意时间时区问题）
         # 我在设置里面设置了时区 USE_TZ = False，如果使用utc这里需要改变。
-        if (datetime.datetime.now() - token.created) > datetime.timedelta(hours=0.1*1):
+        if (datetime.datetime.now() - token.created) > datetime.timedelta(hours=1):
             raise exceptions.AuthenticationFailed({'ret': 3, 'msg': '认证信息已过期'})
  
         # 加入缓存增加查询速度，下面和上面是配套的，上面没有从缓存中读取，这里就不用保存到缓存中了

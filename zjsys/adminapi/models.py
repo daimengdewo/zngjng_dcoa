@@ -1,5 +1,5 @@
 from django.db import models
-from .import logdb
+from .import logdb,encryption
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
@@ -10,6 +10,7 @@ class User(AbstractUser):
     usertype = models.PositiveIntegerField()
     realname = models.CharField(max_length=30, db_index=True)
     phone = models.CharField(max_length=20,verbose_name='手机号')
+    password_md5 = models.CharField(max_length=100,default="")
 
     class Meta:
         db_table = "zjsys_user"
@@ -31,10 +32,10 @@ class User(AbstractUser):
             user = User.objects.create(
                     username  = un,
                     password  = make_password(data['password']),
+                    password_md5 = encryption.encrypt(data['password']).encryp_add(),
                     usertype  = usertype,
                     realname  = rn,
-                    is_superuser = is_superuser,
-                    phone = data['phone']
+                    is_superuser = is_superuser
                 )
             dolog.debug("用户添加成功,即时生效")    
             return {'ret': 0,'id': user.id}
@@ -64,10 +65,10 @@ class User(AbstractUser):
         this_user.delete()
         return {'ret':0,"msg":"删除成功"}
     
-    def ulist(data):
+    def ulist(data,pagenbr=1):
         paging = int(data['paging'])
         try:
-            qs = User.objects.values('realname','username','usertype','is_active','is_superuser').order_by('id')[:paging]
+            qs = User.objects.values('realname','username','usertype','is_active','is_superuser').order_by('id')[paging*pagenbr-paging:paging*pagenbr]
             retlist = list(qs)
             return {'ret':0,'data':retlist}
         except User.DoesNotExist as e:
@@ -84,8 +85,11 @@ class User(AbstractUser):
             if control is not None:
                 if control == 'total':
                     retlist = User.objects.count()
+                elif control == 'query':
+                    qs = User.objects.filter(username__contains=uname).values('realname','username','usertype','is_active','is_superuser')
+                    retlist = list(qs)
                 else:
-                    qs = User.objects.filter(username=uname).values('{}'.format(control))
+                    qs = User.objects.filter(username=uname).values(control)
                     retlist = list(qs)
                 return {'ret':0,'total':retlist}
         except User.DoesNotExist as e:

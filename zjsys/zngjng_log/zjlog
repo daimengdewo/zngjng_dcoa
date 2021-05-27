@@ -587,3 +587,372 @@
 
 2021-05-26 21:07:32 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
 
+2021-05-26 21:19:17 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 21:21:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Expecting value: line 2 column 13 (char 14)[0m
+
+2021-05-26 21:22:18 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m已更新test的禁用状态，操作者为：admin[0m
+
+2021-05-26 21:22:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m已更新test的禁用状态，操作者为：admin[0m
+
+2021-05-26 21:44:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:44:43 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 21:44:55 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword 'total' into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:45:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:45:59 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword 'total' into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:47:51 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:48:43 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:49:02 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword 'password,username' into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:49:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:49:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword "'password','username'" into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:49:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:50:00 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword "'password','username'" into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:50:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:50:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 21:50:53 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword 'password,username' into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 21:53:24 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 21:53:25 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'list' object has no attribute 'split'[0m
+
+2021-05-26 22:12:43 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:12:59 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:13:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 22:13:15 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword "['password', 'username']" into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 22:14:41 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:14:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'str' object cannot be interpreted as an integer[0m
+
+2021-05-26 22:15:04 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:15:09 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'NoneType' object has no attribute 'split'[0m
+
+2021-05-26 22:15:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:15:33 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'str' object cannot be interpreted as an integer[0m
+
+2021-05-26 22:18:21 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:18:24 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword "['password', 'username']" into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 22:18:56 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:18:59 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Cannot resolve keyword "'password', 'username'" into field. Choices are: auth_token, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, mouldlist, password, phone, realname, user_permissions, username, usertype[0m
+
+2021-05-26 22:35:26 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:35:32 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 22:35:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'control'[0m
+
+2021-05-26 22:38:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:38:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:'control'[0m
+
+2021-05-26 22:39:15 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Object of type QuerySet is not JSON serializable[0m
+
+2021-05-26 22:40:36 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:40:38 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Object of type User is not JSON serializable[0m
+
+2021-05-26 22:42:12 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m指定用户参数获取失败，发生异常:Object of type User is not JSON serializable[0m
+
+2021-05-26 22:51:27 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:51:33 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-26 22:52:54 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-26 22:53:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test1[0m
+2021-05-26 22:53:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-26 22:53:49 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test11[0m
+2021-05-26 22:53:49 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-26 22:53:53 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test111[0m
+2021-05-26 22:53:53 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-26 22:53:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test1111[0m
+2021-05-26 22:53:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-26 22:54:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test11111[0m
+2021-05-26 22:54:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 16:21:55 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 16:22:09 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 18:14:20 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:14:25 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:encryp_add() takes 1 positional argument but 2 were given[0m
+
+2021-05-27 18:18:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:19:03 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:encryp_add() takes 1 positional argument but 2 were given[0m
+
+2021-05-27 18:25:58 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:26:00 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:object of type 'builtin_function_or_method' has no len()[0m
+
+2021-05-27 18:27:38 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:27:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:encryp_add() takes 1 positional argument but 2 were given[0m
+
+2021-05-27 18:28:49 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:28:51 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+2021-05-27 18:28:51 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:Object of type method is not JSON serializable[0m
+
+2021-05-27 18:29:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:29:09 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 18:30:04 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 18:30:06 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 19:56:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 19:56:41 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m发生异常:login() missing 1 required positional argument: 'user'[0m
+
+2021-05-27 20:14:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:14:52 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 20:14:56 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m登陆失败，用户名或者密码错误，操作者为：admin[0m
+
+2021-05-27 20:27:16 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:27:18 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m登陆失败，用户名或者密码错误，操作者为：admin[0m
+
+2021-05-27 20:27:23 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 20:55:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:55:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:56:53 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:57:24 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:59:27 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:59:39 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 20:59:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:02:30 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:02:45 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:02:45 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:05:10 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:05:13 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:05:13 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:07:24 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:07:26 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:07:26 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:10:06 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:10:09 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:10:09 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:10:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:10:38 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:10:38 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:11:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:11:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:11:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:12:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:12:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:12:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:Unicode-objects must be encoded before hashing[0m
+
+2021-05-27 21:17:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:17:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+
+2021-05-27 21:17:43 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:'builtin_function_or_method' object has no attribute 'encode'[0m
+
+2021-05-27 21:18:06 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:18:08 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 21:18:08 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 21:20:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:20:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 21:26:19 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:26:54 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:local variable 'data' referenced before assignment[0m
+
+2021-05-27 21:28:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test[0m
+2021-05-27 21:28:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 21:41:36 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:42:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test1[0m
+2021-05-27 21:42:07 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 21:44:51 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:45:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test2[0m
+2021-05-27 21:45:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 21:46:06 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 21:52:41 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:52:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 21:53:04 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test3[0m
+2021-05-27 21:53:04 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 21:57:44 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 21:57:46 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test4[0m
+2021-05-27 21:57:46 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:02:46 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:02:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test4[0m
+2021-05-27 22:02:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m用户添加失败,登录名 test4 已经存在[0m
+
+2021-05-27 22:02:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test5[0m
+2021-05-27 22:02:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:11:48 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:11:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 22:12:05 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:12:05 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:12:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:13:02 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:13:02 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m用户添加失败,登录名 test6 已经存在[0m
+
+2021-05-27 22:13:11 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:13:11 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:15:16 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:15:19 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:15:19 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m用户添加失败,登录名 test6 已经存在[0m
+
+2021-05-27 22:15:29 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:15:29 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:__init__() missing 1 required positional argument: 'keys'[0m
+
+2021-05-27 22:16:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:16:36 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:16:36 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:__init__() missing 1 required positional argument: 'keys'[0m
+
+2021-05-27 22:17:38 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:17:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test6[0m
+2021-05-27 22:17:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:24:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:25:01 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 22:31:36 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:31:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m管理员登陆成功，操作者为：admin[0m
+
+2021-05-27 22:31:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test[0m
+2021-05-27 22:31:57 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:(1406, "Data too long for column 'password_md5' at row 1")[0m
+
+2021-05-27 22:33:27 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test[0m
+2021-05-27 22:33:27 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:34:32 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:34:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test[0m
+2021-05-27 22:34:34 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m用户添加失败,登录名 test 已经存在[0m
+
+2021-05-27 22:34:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test[0m
+2021-05-27 22:34:43 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:35:35 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:35:41 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：test1[0m
+2021-05-27 22:35:41 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:37:32 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:40:33 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:40:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:41:29 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:41:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 22:41:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:(1406, "Data too long for column 'password_md5' at row 1")[0m
+
+2021-05-27 22:41:54 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 22:42:14 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 22:42:14 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 22:48:27 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:27:31 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:28:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:28:52 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:29:42 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:30:12 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:30:22 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 23:30:22 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:IV is not meaningful for the ECB mode[0m
+
+2021-05-27 23:30:47 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:30:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m执行用户添加操作，操作者为：admin[0m
+2021-05-27 23:30:50 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m用户添加成功,即时生效[0m
+
+2021-05-27 23:32:22 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:34:37 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:local variable 'data' referenced before assignment[0m
+
+2021-05-27 23:35:12 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:35:17 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:local variable 'data' referenced before assignment[0m
+
+2021-05-27 23:35:40 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:8" - debug - DEBUG - [0;30;42m加载路由表...[0m
+
+2021-05-27 23:35:46 - simple - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:6" - error - ERROR - [0;30;45m添加失败，发生异常:local variable 'data' referenced before assignment[0m
+
