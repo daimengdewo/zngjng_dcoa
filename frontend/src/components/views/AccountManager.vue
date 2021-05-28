@@ -56,6 +56,7 @@
             <el-table-column prop="usertype" label="账号类型">
               <template slot-scope="scope">
                 <span v-if="scope.row.usertype == 9">管理员</span>
+                <span v-else-if="scope.row.usertype == 1">普通用户</span>
               </template>
             </el-table-column>
             <el-table-column label="超级管理员">
@@ -77,7 +78,7 @@
                   :size="btn_size"
                   round
                   plain
-                  @click="openDrawer(scope.row.account)"
+                  @click="openDrawer(scope.row.username)"
                   >权限控制</el-button
                 >
                 <el-button
@@ -86,7 +87,7 @@
                   :size="btn_size"
                   round
                   plain
-                  @click="changeStatus(scope.row.account)"
+                  @click="changeStatus(scope.row.username)"
                   >启用/停用</el-button
                 >
                 <el-button
@@ -95,7 +96,7 @@
                   :size="btn_size"
                   round
                   plain
-                  @click="delAccount(scope.row.account)"
+                  @click="delAccount(scope.row.username)"
                   >删除账号</el-button
                 >
               </template>
@@ -121,6 +122,7 @@
             @current-change="getAccountList"
             @prev-click="getAccountList"
             @next-click="getAccountList"
+            :current-page.sync="page_num"
           >
           </el-pagination>
         </el-col>
@@ -152,7 +154,11 @@
       <h1>新增账号</h1>
       <el-divider direction="horizontal"></el-divider>
 
-      <account-add style="margin-right: 20px"></account-add>
+      <account-add
+        @getList="getAccountList"
+        @getTotal="getAccountListTotal"
+        style="margin-right: 20px"
+      ></account-add>
     </el-drawer>
   </div>
 </template>
@@ -166,16 +172,7 @@ export default {
   name: "accountmanager",
   data() {
     return {
-      account_data: [
-        // 列表数据
-        {
-          realname: "管理员",
-          account: "admin",
-          account_type: "管理员",
-          account_status: "可用",
-          is_superuser: true,
-        },
-      ],
+      account_data: [{}], // 列表数据
       search: "", // 搜索框内容
       btn_size: "medium", // 按钮大小
       admin_password: "", // 管理员密码
@@ -184,6 +181,7 @@ export default {
       now_account: "", // 修改密码的账号
       password_status: false, // 判断是否已经输入过管理员密码的状态
       account_list_total: 0, // 账号管理列表数据量
+      page_num: 1,
     };
   },
   methods: {
@@ -233,6 +231,7 @@ export default {
     },
     // 启用/停用账号
     changeStatus(account) {
+      console.log(account);
       let self = this;
       // 提示是否启用/停用该账号
       this.$confirm("此操作将启用/停用此账号, 是否继续?", "提示", {
@@ -243,14 +242,22 @@ export default {
         .then(() => {
           // 确定则执行操作
           self.$axios
-            .put("/change_account_status", {
-              account: account,
+            .post("/api/adminapi/reactive", {
+              username: account,
             })
             .then((res) => {
-              self.$message({
-                type: "success",
-                message: res.data,
-              });
+              if (res.data.ret == 0) {
+                self.$message({
+                  type: "success",
+                  message: account + "账号状态已更新",
+                });
+                self.getAccountList();
+              } else if (res.data.ret == 1) {
+                self.$message({
+                  type: "error",
+                  message: res.data.msg,
+                });
+              }
             })
             .catch((err) => {
               self.$message.error("操作失败");
@@ -319,14 +326,20 @@ export default {
       })
         .then(() => {
           self.$axios
-            .post("", {
-              account: account,
+            .post("/api/adminapi/deluser", {
+              username: account,
             })
             .then(function (ret) {
-              self.$message({
-                type: "success",
-                message: "删除成功",
-              });
+              if (ret.data.ret == 0) {
+                self.$message({
+                  type: "success",
+                  message: "删除账号" + account + "成功",
+                });
+                self.getAccountList();
+                self.getAccountListTotal();
+              } else if (ret.data.ret == 1) {
+                self.$message.error(ret.data.msg);
+              }
             })
             .catch(function (error) {
               self.$message({
@@ -342,33 +355,28 @@ export default {
       let self = this;
       this.$axios
         .post("/api/adminapi/gettotal", {
-          control: "password_md5",
+          control: "total",
         })
         .then((res) => {
           if (res.data.ret == 0) {
-            // self.account_list_total = parseInt(res.data.total);
-            let pw=res.data.total[0].password_md5
-            console.log(self.$AES.decrypt(pw));
-            console.log(self.$md5("admin"));
+            self.account_list_total = parseInt(res.data.total);
           }
         })
         .catch((err) => {});
     },
     // 获取账号列表
-    getAccountList(val) {
-      let page_num = val ? val : 1;
+    getAccountList() {
       let self = this;
       this.$axios({
         method: "post",
         url: "/api/adminapi/getlist",
         data: {
           paging: 20,
-          pagenbr: page_num,
+          pagenbr: self.page_num,
         },
       }).then((res) => {
         if (res.data.ret == 0) {
           self.account_data = res.data.data;
-
         }
       });
     },
@@ -397,6 +405,16 @@ export default {
 </style>
 
 <style>
+::-webkit-scrollbar {
+  width: 10px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgb(200, 200, 200);
+}
+
 #accountmanager .el-table td,
 #accountmanager .el-table td span,
 #accountmanager .el-table th {

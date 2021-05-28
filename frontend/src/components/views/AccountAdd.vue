@@ -37,8 +37,6 @@
 </template>
 
 <script>
-import accountmanager from "@/components/views/AccountManager"
-
 export default {
   data() {
     //   所有密码的验证规则
@@ -63,36 +61,36 @@ export default {
         realname: "",
         account: "",
         password: "",
-        password_again: ""
+        password_again: "",
       },
       rules: {
         realname: [
           {
             required: true,
             message: "请输入用户名",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         account: [
           {
             required: true,
             message: "请输入账号",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { validator: validPassword, trigger: ["blur", "change"] }
+          { validator: validPassword, trigger: ["blur", "change"] },
         ],
         password_again: [
           {
             required: true,
             message: "请输入确认密码",
-            trigger: "blur"
+            trigger: "blur",
           },
-          { validator: againPasswordSame, trigger: ["blur", "change"] }
-        ]
-      }
+          { validator: againPasswordSame, trigger: ["blur", "change"] },
+        ],
+      },
     };
   },
   methods: {
@@ -102,36 +100,37 @@ export default {
     // 新增账号
     accountAdd() {
       let self = this;
-      this.$refs["account_add_form"].validate(valid => {
+      this.$refs["account_add_form"].validate((valid) => {
         // 校验通过则请求修改密码
         if (valid) {
           this.$axios
             .post("/api/adminapi/adduser", {
               realname: self.account_add_form.realname,
               username: self.account_add_form.account,
-              password: self.account_add_form.password
+              password: self.account_add_form.password,
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.ret == 0) {
                 self.$message({
                   type: "success",
-                  message: "新建账户成功"
+                  message: "新建账户成功",
                 });
-                accountmanager.getAccountList();
-              }else if(res.data.ret==1){
+                self.$emit("getList");
+                self.$emit("getTotal");
+              } else if (res.data.ret == 1) {
                 self.$message.error(res.data.msg);
               }
             })
-            .catch(err => {
+            .catch((err) => {
               self.$message({
                 type: "error",
-                message: "提交失败"
+                message: "提交失败",
               });
             });
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

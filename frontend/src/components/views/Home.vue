@@ -96,7 +96,7 @@ export default {
       second = second < 10 ? "0" + systime.getSeconds() : systime.getSeconds();
       this.nowtime = hour + ":" + minute + ":" + second;
     },
-    
+
     //获取最新的5条系统日志
     getSystemLog() {
       let self = this;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      default-active="/mgr"
+      :default-active.sync="router_path"
       class="el-menu-vertical-demo"
       background-color="#242f42"
       text-color="#FFFFFF"
@@ -62,6 +62,7 @@ export default {
   name: "liftsider",
   data() {
     return {
+      router_path: "/mgr",
       database_drawer: false,
     };
   },
@@ -72,10 +73,10 @@ export default {
     openDatabaseConnectDrawer() {
       this.database_drawer = true;
     },
-    loginOut(){
-      this.$store.dispatch('loginOut');
+    loginOut() {
+      this.$store.dispatch("loginOut");
       this.$router.push("/login");
-    }
+    },
   },
 };
 </script>
