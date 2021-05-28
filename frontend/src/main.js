@@ -41,6 +41,10 @@ axios.interceptors.response.use(
         router.push("/login");
         store.dispatch("loginOut");
         ElementUI.Message.error("token已过期，请重新登录");
+      }else if(res_data.ret == 1){
+        router.push("/login");
+        store.dispatch("loginOut");
+        ElementUI.Message.error("token验证失败，请重新登录");
       }
     }
     return Promise.reject(error);

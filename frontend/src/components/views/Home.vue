@@ -28,7 +28,7 @@
           :body-style="{
             padding: '0px',
             height: '480px',
-            overflow: 'auto',
+            overflow: 'auto'
           }"
         >
           <div slot="header">
@@ -53,9 +53,9 @@
               <el-timeline-item
                 v-for="(activity, index) in activities"
                 :key="index"
-                :timestamp="activity.timestamp"
+                :timestamp="activity.time"
               >
-                {{ activity.content }}
+                {{ activity.detail_msg }}
               </el-timeline-item>
             </el-timeline>
           </div>
@@ -71,17 +71,9 @@ export default {
   data() {
     return {
       nowtime: "", //获取时间参数
-      reverse: true, //时间排序，为true时，时间最新的一条在第一条
-      activities: [
-        {
-          content: "我的",
-          timestamp: "2021-03-20",
-        },
-        {
-          content: "我的",
-          timestamp: "2021-03-21",
-        },
-      ],
+      reverse: false, //时间排序
+      timer: null,
+      activities: [{}] // 输出日志数据
     };
   },
   methods: {
@@ -101,31 +93,40 @@ export default {
     getSystemLog() {
       let self = this;
       this.$axios
-        .get("/static/sys_log.json", {})
-        .then(function (ret) {
-          self.activities = ret.data;
+        .get("/api/getlog")
+        .then(function(ret) {
+          self.activities = ret.data.data;
         })
-        .catch(function (error) {
-          if (error.response.status === 401) {
-            localStorage.removeItem("token");
-            self.$router.push("/login");
-          }
+        .catch(function(error) {
+          this.$message.error(error.response.data.msg);
         });
     },
     //定时执行函数
     currentTime() {
-      setInterval(this.getTime, 500); //0.5秒更新一次系统时间
-    },
+      let getTime = setInterval(this.getTime, 500); //0.5秒更新一次系统时间
+      let getSystemLog = setInterval(this.getSystemLog, 1000); // 1秒刷新一次日志
+      return { getTime, getSystemLog };
+    }
   },
   mounted() {
     this.getTime(); //页面加载完成时，第一次获取系统时间
     this.getSystemLog(); //获取系统日志
-    this.currentTime(); //页面加载完成后，定时更新
+    this.timer = {
+      getTime: setInterval(() => {
+        this.getTime();
+      }, 500),
+      getSystemLog: setInterval(() => {
+        this.getSystemLog();
+      }, 1000)
+    };
   },
+  beforeDestroy() {
+    clearInterval(this.timer.getTime);
+    clearInterval(this.timer.getSystemLog);
+    this.timer = null;
+  }
 };
 </script>
-
-
 
 <style scoped>
 .nowtime {

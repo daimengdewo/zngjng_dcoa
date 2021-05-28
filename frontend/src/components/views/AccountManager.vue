@@ -266,7 +266,6 @@ export default {
     },
     // 对比密码
     comparePassword(username, password) {
-
       this.$axios({
         method: "post",
         url: "/api/adminapi/gettotal",
@@ -278,7 +277,6 @@ export default {
         if (res.data.ret == 0) {
           if (this.$AES.encrypt(password) == res.data.total[0].password_md5) {
             this.password_status = true;
-            
           } else {
             this.password_status = false;
           }
