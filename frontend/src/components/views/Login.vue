@@ -100,10 +100,12 @@ export default {
               if (res.data.ret == 0) {
                 let usertype = res.data.usertypen;
                 let is_active = res.data.is_active;
+                let username=res.data.username
                 self.$store.dispatch("login", {
                   token: res.data.token,
                   usertype,
-                  is_active
+                  is_active,
+                  username
                 });
                 let usertype_int = parseInt(self.$AES.decrypt(usertype));
                 if (usertype_int >= 9) {
