@@ -121,6 +121,7 @@ mkl-fft==1.3.0
 mkl-random @ file:///tmp/build/80754af9/mkl_random_1618853849286/work
 mkl-service==2.3.0
 mock @ file:///tmp/build/80754af9/mock_1607622725907/work
+mongoengine==0.23.1
 more-itertools @ file:///tmp/build/80754af9/more-itertools_1613676688952/work
 mpmath==1.2.1
 msgpack @ file:///tmp/build/80754af9/msgpack-python_1612287151062/work

@@ -7,8 +7,7 @@ payload = {
 }
 
 # 发送请求给web服务
-response = requests.post('http://127.0.0.1:8000/adminapi/signin',
-              json=payload)
+response = requests.post('http://127.0.0.1:8000/getlog')
 
 pprint.pprint(response)
 

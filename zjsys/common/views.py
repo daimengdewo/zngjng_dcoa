@@ -33,11 +33,11 @@ def dispatcher(request):
             return m_del(request)
 
         else:
-            dolog.debug("不支持该类型http请求")
+            dolog.error("不支持该类型http请求")
             return JsonResponse({'ret': 1, 'msg': '不支持该类型http请求'})
     else:
-        dolog.debug("token验证失败")
-        return JsonResponse({'ret': 1, "msg": "token验证失败"})
+        dolog.error("token验证失败")
+        return JsonResponse({'ret': 2, "msg": "token验证失败"})
 
 def m_list(request):
     try:
@@ -45,37 +45,38 @@ def m_list(request):
         retlist = list(qs)
         return JsonResponse({'ret':0,'data':retlist})
     except mouldlist.DoesNotExist as e:
-        dolog.error("发生未知异常：{}".format(e))
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 def m_add(request):
     try:
+        uid = request.user.id
         info = request.params['data']
-        mouldname = request.params['data']['mouldname']
-        mould = mouldlist.objects.get(mouldname=mouldname)
-        if mould is not None or mouldlist!='':
-            dolog.error("该模板名称{}已经存在".format(mouldname))
-            return JsonResponse({'ret':1 , 'msg':"该模板名称已经存在"})
+        mname = request.params['data']['mouldname']
+        if mouldlist.objects.filter(mouldname=mname).exists():
+                dolog.error("模板名称:{} 已经存在".format(mname))
+                return JsonResponse({'ret':1 , 'msg':"模板名称{} 已经存在".format(mname)})
+                
+        mouldlist.objects.create(mouldname=info['mouldname'],
+        mouldjson=info['mouldjson'],
+        userid_id = uid)
+        dolog.debug("模板名称:{} 已添加成功".format(mname))
+        return JsonResponse({'ret':0})
     except mouldlist.DoesNotExist as e:
-        dolog.error("发生未知异常：{}".format(e))
-        try:
-            record = mouldlist.objects.create(mouldname=info['mouldname'],
-            mouldjson=info['mouldjson'],
-            userid_id = info['uid'])
-            return JsonResponse({'ret':0 ,'id':record.mouldid,"msg":"添加成功"})
-        except mouldlist.DoesNotExist as e:
-            dolog.error("发生未知异常：{}".format(e))
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 def m_re(request):
-    mouldname = request.params['data']['mouldname']
+    mname = request.params['data']['mouldname']
     newdata = request.params['data']
 
     try:
-        mould = mouldlist.objects.get(mouldname=mouldname)
+        mould = mouldlist.objects.get(mouldname=mname)
     except mouldlist.DoesNotExist as e:
-        dolog.error("发生异常：{}".format(e))
+        dolog.error("模板修改失败，发生异常：{}".format(e))
         return JsonResponse({
             'ret': 1,
-            'msg': "名字为{}的模板不存在".format(mouldname)
+            'msg': "模板修改失败，发生异常：{}".format(e)
         })
 
     try:
@@ -84,7 +85,7 @@ def m_re(request):
         else:
             return JsonResponse({
                 'ret': 1,
-                'msg': "数据异常"
+                'msg': "格式不正确，数据异常"
             })
 
         if 'mouldjson' in newdata:
@@ -92,30 +93,26 @@ def m_re(request):
         else:
             return JsonResponse({
                 'ret': 1,
-                'msg': "数据异常"
+                'msg': "格式不正确，数据异常"
             })
     except mouldlist.DoesNotExist as e:
-        dolog.error("发生未知异常：{}".format(e))
+        msg = dolog.error("发生异常:{}".format(e))  
+        return JsonResponse({'ret': 1 , 'msg':msg}) 
 
     mould.save()
 
-    return JsonResponse({'ret':0,"msg":"修改成功"})
+    return JsonResponse({'ret':0})
 
 
 def m_del(request):
     try:
         mouldname = request.params['data']['mouldname']
         mould = mouldlist.objects.get(mouldname=mouldname)
-        if mould is None or mould == '':
-            return JsonResponse({
-            'ret': 1,
-            'msg': "名字为{}的模板不存在".format(mouldname)
-        })
     except mouldlist.DoesNotExist as e:
-        dolog.error("发生未知异常：{}".format(e))
+        dolog.error("模板删除失败，发生异常：{}".format(e))
         return JsonResponse({
             'ret': 1,
-            'msg': "发生未知异常：{}".format(e)
+            'msg': "模板删除失败，发生异常：{}".format(e)
         })
     mould.delete()
-    return JsonResponse({'ret':0,"msg":"删除成功"})
+    return JsonResponse({'ret':0})

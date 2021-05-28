@@ -21,23 +21,24 @@ class User(AbstractUser):
         try:
             un = data['username']
             rn = data['realname']
+            ps = data['password']
             if User.objects.filter(username=un).exists():
                 dolog.error(f"用户添加失败,登录名 {un} 已经存在")
                 return {'ret': 1, 'msg': f'登录名 {un} 已经存在'}
             if User.objects.filter(realname=rn).exists():
                 dolog.error(f"用户添加失败,昵称 {rn} 已经存在")
-                return {'ret': 1, 'msg': f'昵称 {rn} 已经存在'}
+                return {'ret': 2, 'msg': f'昵称 {rn} 已经存在'}
 
 
             user = User.objects.create(
                     username  = un,
-                    password  = make_password(data['password']),
-                    password_md5 = encryption.encrypt(data['password']).encryp_add(),
+                    password  = make_password(ps,'zngjng','pbkdf2_sha256'),
+                    password_md5 = encryption.encrypt(ps).encryp_add(),
                     usertype  = usertype,
                     realname  = rn,
                     is_superuser = is_superuser
                 )
-            dolog.debug("用户添加成功,即时生效")    
+            dolog.debug("用户{}添加成功,即时生效".format(un))    
             return {'ret': 0,'id': user.id}
         except User.DoesNotExist as e:
             dolog.error("用户添加失败,发生异常:{}".format(e))  
@@ -50,11 +51,10 @@ class User(AbstractUser):
         try:
             un = data['username']
             this_user = User.objects.get(username=un)
-            if this_user is None or this_user == '':
-                dolog.error(f"用户删除失败,登录名 {un} 不存在")
-                return {
-                'ret': 1,
-                'msg': f"用户删除失败,登录名 {un} 不存在"
+            if this_user.is_superuser == 1:
+                return{
+                'ret': 2,
+                'msg': "无法删除超级用户"
             }
         except User.DoesNotExist as e:
             dolog.error("用户删除失败,发生异常:{}".format(e))  
@@ -94,11 +94,12 @@ class User(AbstractUser):
                 return {'ret':0,'total':retlist}
         except User.DoesNotExist as e:
             dolog.error("指定用户参数获取失败，发生异常:{}".format(e))
-            return{
-                'ret': 1,
-                'msg': "指定用户参数获取失败，发生异常:{}".format(e)
-            }
+            return {
+                    'ret': 1,
+                    'msg': "指定用户参数获取失败，发生异常:{}".format(e)
+                }
     
+#禁用状态更新
     def re_active(data):
         try:
             uname = data['username']
@@ -108,10 +109,23 @@ class User(AbstractUser):
             elif this_user.is_active == 0:
                 this_user.is_active = 1
         except User.DoesNotExist as e:
-            dolog.error("禁用状态更新发生异常:{}".format(e))  
-            return{
-                'ret': 1,
-                'msg': "禁用状态更新发生异常:{}".format(e)
-            }
+            dolog.error("禁用状态更新失败，发生异常:{}".format(e))  
+            return ("禁用状态更新失败，发生异常:{}".format(e))  
         this_user.save()    
-        return {'ret':0,'msg':'{}的禁用状态已更新'.format(uname)}
+        return ("用户{}的禁用状态更新成功".format(uname))
+    
+    def re_pass(data):
+        try:
+            uname = data['username']
+            opass = data['old_pass']
+            npass = data['new_pass']
+            this_user = User.objects.get(username=uname)
+            if this_user.password == make_password(opass,'zngjng','pbkdf2_sha256') :
+                this_user.password  = make_password(npass,'zngjng','pbkdf2_sha256')
+                this_user.password_md5 = encryption.encrypt(npass).encryp_add()
+            else:
+                return ("用户密码修改失败，跟原密码匹配失败")
+        except User.DoesNotExist as e:
+            return ("用户密码修改失败，发生异常:{}".format(e))  
+        this_user.save()    
+        return ('用户{}的密码已更新'.format(uname))

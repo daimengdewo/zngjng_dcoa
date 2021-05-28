@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 27/05/2021 23:31:43
+ Date: 28/05/2021 15:08:23
 */
 
 SET NAMES utf8mb4;
@@ -292,7 +292,7 @@ CREATE TABLE `zjsys_user` (
 -- Records of zjsys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `zjsys_user` VALUES ('pbkdf2_sha256$150000$InvEIgGrohkb$NswZkEL9JE1tJLonDBCfE4b2QFqg83MyTTmQOeHbRGU=', NULL, 0, 'admin', '', '', '', 0, 1, '2021-05-27 23:30:50.745534', 1, 1, 'admin', '', 'P1AmyxcTf8LBdcYFvbMwbg==');
+INSERT INTO `zjsys_user` VALUES ('pbkdf2_sha256$150000$InvEIgGrohkb$NswZkEL9JE1tJLonDBCfE4b2QFqg83MyTTmQOeHbRGU=', NULL, 1, 'admin', '', '', '', 0, 1, '2021-05-27 23:30:50.745534', 1, 9, 'admin', '', 'P1AmyxcTf8LBdcYFvbMwbg==');
 COMMIT;
 
 -- ----------------------------

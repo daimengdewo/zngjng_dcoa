@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from adminapi import logdb
+
 dolog =logdb.NbLog() 
 dolog.debug("加载路由表...")
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('adminapi/',include('adminapi.urls')),
+    path('common/',include('common.urls')),
+    path('getlog', logdb.get_logs),
 ]

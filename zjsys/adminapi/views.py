@@ -57,7 +57,8 @@ def signin(request):
             dolog.error("登陆失败，用户名或者密码错误，操作者为：{}".format(username))
             return JsonResponse({'ret': 1, 'msg': '用户名或者密码错误'})
     except Exception as e:
-        dolog.error("发生异常:{}".format(e))
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 # 登出处理
 @api_view(['POST'])
@@ -84,8 +85,8 @@ def adduser(request):
         return  JsonResponse(ret)
 
     except Exception as e:
-        dolog.error("添加失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"添加失败，发生异常:{}".format(e)})  
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 
 @api_view(['POST'])
@@ -101,8 +102,8 @@ def deluser(request):
 
                 return  JsonResponse(ret)
     except Exception as e:
-        dolog.error("删除失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"登出失败，发生异常:{}".format(e)})  
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
     
 @api_view(['POST'])
 def getlist(request):
@@ -114,8 +115,8 @@ def getlist(request):
                 ret = models.User.ulist(data,pagenbr)
                 return  JsonResponse(ret)
     except Exception as e:
-        dolog.error("用户列表获取失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"用户列表获取失败，发生异常:{}".format(e)})  
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 @api_view(['POST'])
 def getlist_total(request):
@@ -128,23 +129,36 @@ def getlist_total(request):
                 else:
                     uname=request.user.username
                 ret = models.User.ulist_total(data,uname)
+                dolog.debug('指定用户参数获取成功 , 操作者：{}'.format(request.user.realname)) 
                 return  JsonResponse(ret)
     except Exception as e:
-        dolog.error("指定用户参数获取失败，发生异常:{}".format(e))
-        return JsonResponse({'ret': 1 , 'msg':"指定用户参数获取失败，发生异常:{}".format(e)})  
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 @api_view(['POST'])
 def re_user_active(request):
     try:
         if request.user.is_authenticated: 
             if request.user.is_superuser:  
-                data = json.loads(request.body)
-                dolog.debug("已更新{}的禁用状态，操作者为：{}".format(data['username'],request.user.username))                
+                data = json.loads(request.body)             
                 ret = models.User.re_active(data)
-                return  JsonResponse(ret)
+                dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname)) 
+                return  JsonResponse({'ret': 0 })
     except Exception as e:
-        dolog.error("禁用状态更新发生异常:{}".format(e))  
-        return JsonResponse({'ret': 1 , 'msg':"禁用状态更新发生异常:{}".format(e)})  
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg})  
 
+@api_view(['POST'])
+def re_user_pass(request):
+    try:
+        if request.user.is_authenticated: 
+            if request.user.is_superuser:  
+                data = json.loads(request.body)           
+                ret = models.User.re_pass(data)
+                dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname))
+                return  JsonResponse({'ret': 0 })
+    except Exception as e:
+        msg = dolog.error("该路由发生异常:{}".format(e))  
+        return JsonResponse({'ret': 9 , 'msg':msg})  
 
 
