@@ -143,7 +143,7 @@ def re_user_active(request):
                 data = json.loads(request.body)             
                 ret = models.User.re_active(data)
                 dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname)) 
-                return  JsonResponse({'ret': 0 })
+                return  JsonResponse(ret)
     except Exception as e:
         msg = dolog.error("该路由发生异常:{}".format(e))  
         return JsonResponse({'ret': 9 , 'msg':msg})  
@@ -156,7 +156,7 @@ def re_user_pass(request):
                 data = json.loads(request.body)           
                 ret = models.User.re_pass(data)
                 dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname))
-                return  JsonResponse({'ret': 0 })
+                return  JsonResponse(ret)
     except Exception as e:
         msg = dolog.error("该路由发生异常:{}".format(e))  
         return JsonResponse({'ret': 9 , 'msg':msg})  

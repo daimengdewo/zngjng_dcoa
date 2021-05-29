@@ -32,7 +32,7 @@ class User(AbstractUser):
 
             user = User.objects.create(
                     username  = un,
-                    password  = make_password(ps,'zngjng','pbkdf2_sha256'),
+                    password  = make_password(ps),
                     password_md5 = encryption.encrypt(ps).encryp_add(),
                     usertype  = usertype,
                     realname  = rn,
@@ -95,7 +95,7 @@ class User(AbstractUser):
         except User.DoesNotExist as e:
             dolog.error("指定用户参数获取失败，发生异常:{}".format(e))
             return {
-                    'ret': 1,
+                    'ret': 9,
                     'msg': "指定用户参数获取失败，发生异常:{}".format(e)
                 }
     
@@ -104,15 +104,19 @@ class User(AbstractUser):
         try:
             uname = data['username']
             this_user = User.objects.get(username=uname)
-            if this_user.is_active == 1 :
-                this_user.is_active = 0
-            elif this_user.is_active == 0:
-                this_user.is_active = 1
+            if this_user.is_superuser == 0:
+                if this_user.is_active == 1:
+                    this_user.is_active = 0
+                elif this_user.is_active == 0:
+                    this_user.is_active = 1
+            else:
+                dolog.error("禁用状态更新失败，无法禁用超级用户")  
+                return {'ret': 1, 'msg': "禁用状态更新失败，无法禁用超级用户"}
         except User.DoesNotExist as e:
             dolog.error("禁用状态更新失败，发生异常:{}".format(e))  
-            return ("禁用状态更新失败，发生异常:{}".format(e))  
+            return {'ret': 9, 'msg': "禁用状态更新失败，发生异常:{}".format(e)}
         this_user.save()    
-        return ("用户{}的禁用状态更新成功".format(uname))
+        return {'ret': 0, 'msg': "用户{}的禁用状态更新成功".format(uname)}
     
     def re_pass(data):
         try:
@@ -120,12 +124,12 @@ class User(AbstractUser):
             opass = data['old_pass']
             npass = data['new_pass']
             this_user = User.objects.get(username=uname)
-            if this_user.password == make_password(opass,'zngjng','pbkdf2_sha256') :
-                this_user.password  = make_password(npass,'zngjng','pbkdf2_sha256')
+            if this_user.password_md5 == encryption.encrypt(opass).encryp_add():
+                this_user.set_password(npass)
                 this_user.password_md5 = encryption.encrypt(npass).encryp_add()
             else:
-                return ("用户密码修改失败，跟原密码匹配失败")
+                return {'ret': 1 ,'msg': "用户密码修改失败，跟原密码匹配失败"}
         except User.DoesNotExist as e:
-            return ("用户密码修改失败，发生异常:{}".format(e))  
+            return {'ret': 9 ,'msg': "用户密码修改失败，发生异常:{}".format(e)}
         this_user.save()    
-        return ('用户{}的密码已更新'.format(uname))
+        return {'ret': 0 ,'msg': '用户{}的密码已更新'.format(uname)}

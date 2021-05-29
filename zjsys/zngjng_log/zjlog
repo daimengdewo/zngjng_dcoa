@@ -2,3 +2,48 @@
 
 2021-05-28 23:16:01 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
 
+2021-05-29 22:13:18 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-29 22:13:24 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-05-29 22:13:39 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - {'ret': 0, 'msg': '用户test的禁用状态更新成功'} , 操作者：admin
+
+2021-05-29 22:13:52 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - {'ret': 0, 'msg': '用户test的禁用状态更新成功'} , 操作者：admin
+
+2021-05-29 22:13:57 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 禁用状态更新失败，无法禁用超级用户
+2021-05-29 22:13:57 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - {'ret': 1, 'msg': '禁用状态更新失败，无法禁用超级用户'} , 操作者：admin
+
+2021-05-29 22:14:07 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - {'ret': 0, 'msg': '用户test的禁用状态更新成功'} , 操作者：admin
+
+2021-05-29 22:14:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:14:48 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:15:11 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:16:28 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-05-29 22:16:40 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户密码修改失败，跟原密码匹配失败 , 操作者：admin
+
+2021-05-29 22:16:56 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:17:07 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:23:22 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-29 22:23:42 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户test的密码已更新 , 操作者：admin
+
+2021-05-29 22:23:52 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 非管理员登陆，操作者为：test
+
+2021-05-29 22:24:14 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：test
+
+2021-05-29 22:24:39 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户test的密码已更新 , 操作者：admin
+
+2021-05-29 22:28:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-29 22:28:26 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - {'ret': 1, 'msg': '用户密码修改失败，跟原密码匹配失败'} , 操作者：admin
+
+2021-05-29 22:28:37 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：test
+
+2021-05-29 22:28:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：test
+
