@@ -110,10 +110,8 @@ class User(AbstractUser):
                 elif this_user.is_active == 0:
                     this_user.is_active = 1
             else:
-                dolog.error("禁用状态更新失败，无法禁用超级用户")  
                 return {'ret': 1, 'msg': "禁用状态更新失败，无法禁用超级用户"}
         except User.DoesNotExist as e:
-            dolog.error("禁用状态更新失败，发生异常:{}".format(e))  
             return {'ret': 9, 'msg': "禁用状态更新失败，发生异常:{}".format(e)}
         this_user.save()    
         return {'ret': 0, 'msg': "用户{}的禁用状态更新成功".format(uname)}

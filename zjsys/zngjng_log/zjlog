@@ -47,3 +47,69 @@
 
 2021-05-29 22:28:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：test
 
+2021-05-29 22:46:05 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-29 22:46:10 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：test
+
+2021-05-29 22:46:25 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-05-29 22:48:10 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-29 22:48:14 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 禁用状态更新失败，无法禁用超级用户 , 操作者：admin
+
+2021-05-30 22:45:20 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:45:24 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:'bool' object has no attribute 'password_md5'
+
+2021-05-30 22:46:22 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:47:11 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:47:14 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:48:09 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:48:39 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:48:40 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:48:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:49:14 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:49:16 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:50:15 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:50:16 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 22:50:33 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 22:50:35 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 登陆失败，用户名或者密码错误，操作者为：admin
+
+2021-05-30 23:03:09 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:03:14 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-05-30 23:03:22 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:Incorrect padding
+
+2021-05-30 23:03:27 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+
+2021-05-30 23:07:24 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:07:27 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+
+2021-05-30 23:08:30 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:08:35 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+
+2021-05-30 23:09:08 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:09:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:09:25 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 该路由发生异常:Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+
+2021-05-30 23:10:27 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-05-30 23:10:30 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+

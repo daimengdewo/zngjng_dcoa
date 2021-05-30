@@ -1,10 +1,9 @@
 #coding=utf-8
-import base64,hashlib
+import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 
 class encrypt(object):
-    
     
     def __init__(self,text,keys='zgjgsoft20210508'):  
         self.text = text
@@ -20,15 +19,19 @@ class encrypt(object):
         encrypted_text_str = encrypted_text.replace("\n", "")
         # 此处我的输出结果老有换行符，所以用了临时方法将它剔除
         return encrypted_text_str
-
-    # def md5_encrypt(self):
-    #     # 生成MD5对象
-    #     md5 = hashlib.md5(str(self.text).encode("utf-8"))
-    #     # 获取密文
-    #     pwd = str(md5.hexdigest())
-    #     print(pwd)
-    #     result =  encrypt(pwd,self.keys).encryp_add()
-    #     return result
+    
+    def AES_Decrypt(self):
+        vi = '0200020100050008'
+        data = str(self.text).encode('utf8')
+        encodebytes = base64.decodebytes(data)
+        # 将加密数据转换位bytes类型数据
+        cipher = AES.new(str(self.keys).encode('utf8'), AES.MODE_CBC, vi.encode('utf8'))
+        text_decrypted = cipher.decrypt(encodebytes)
+        unpad = lambda s: s[0:-s[-1]]
+        text_decrypted = unpad(text_decrypted)
+        # 去补位
+        text_decrypted = text_decrypted.decode('utf8')
+        return text_decrypted
 
 # str不是16的倍数那就补足为16的倍数
 def add_to_16(value):

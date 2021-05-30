@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from django.contrib import auth
 from django.contrib.auth import login, logout
+from .import encryption
 
 dolog =logdb.NbLog() 
 
@@ -18,7 +19,9 @@ def signin(request):
         username = receive.get('username')
         password = receive.get('password')
 
-        user = auth.authenticate(username=username, password=password)
+        ps = encryption.encrypt(password).AES_Decrypt()
+
+        user = auth.authenticate(username=username, password=ps)
 
         if user is not None:
             if user.is_active:
@@ -142,7 +145,7 @@ def re_user_active(request):
             if request.user.is_superuser:  
                 data = json.loads(request.body)             
                 ret = models.User.re_active(data)
-                dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname)) 
+                dolog.debug('{} , 操作者：{}'.format(ret['msg'],request.user.realname)) 
                 return  JsonResponse(ret)
     except Exception as e:
         msg = dolog.error("该路由发生异常:{}".format(e))  
@@ -155,7 +158,7 @@ def re_user_pass(request):
             if request.user.is_superuser:  
                 data = json.loads(request.body)           
                 ret = models.User.re_pass(data)
-                dolog.debug('{} , 操作者：{}'.format(ret,request.user.realname))
+                dolog.debug('{} , 操作者：{}'.format(ret['msg'],request.user.realname))
                 return  JsonResponse(ret)
     except Exception as e:
         msg = dolog.error("该路由发生异常:{}".format(e))  
