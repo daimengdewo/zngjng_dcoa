@@ -93,7 +93,8 @@ export default {
           self.$axios
             .post("/api/adminapi/signin", {
               username: self.login_form.account,
-              password: self.login_form.password
+              // password: self.$AES.encrypt(self.login_form.password) 
+              password:self.login_form.password
             })
             .then(res => {
               // 解密用户类型和激活状态

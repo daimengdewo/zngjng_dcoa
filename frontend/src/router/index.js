@@ -18,7 +18,7 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 };
 
 const router = new Router({
-  mode: "history",
+  mode:"history",
   routes: [{
       path: "/",
       redirect: "/login"

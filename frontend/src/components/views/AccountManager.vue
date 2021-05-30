@@ -46,7 +46,7 @@
                 <el-link
                   type="primary"
                   :underline="false"
-                  @click="getPassword(scope.row.username)"
+                  @click="isNeedPassword(scope.row.username)"
                 >
                   <span>查看</span>
                   <i class="el-icon-view"></i>
@@ -143,6 +143,8 @@
         style="margin-right: 20px"
       ></password-change>
     </el-drawer>
+
+    <!-- 新增账号的抽屉 -->
     <el-drawer
       :visible.sync="account_drawer"
       direction="rtl"
@@ -160,6 +162,25 @@
         style="margin-right: 20px"
       ></account-add>
     </el-drawer>
+    <!-- 输入管理员密码的对话框 -->
+    <el-dialog
+      title="请输入管理员密码"
+      :visible.sync="password_visable"
+      width="30%"
+    >
+      <el-input
+        type="password"
+        show-password
+        v-model="admin_password"
+        size="normal"
+        clearable
+      ></el-input>
+
+      <span slot="footer">
+        <el-button @click="password_visable = false">取消</el-button>
+        <el-button type="primary" @click="comparePassword()">确定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -181,7 +202,8 @@ export default {
       now_account: "", // 修改密码的账号
       password_status: false, // 判断是否已经输入过管理员密码的状态
       account_list_total: 0, // 账号管理列表数据量
-      page_num: 1
+      page_num: 1, // 控制页码
+      password_visable: false //控制管理员密码输入对话框
     };
   },
   methods: {
@@ -264,8 +286,10 @@ export default {
         })
         .catch(() => {});
     },
-    // 对比密码
-    comparePassword(username, password) {
+    // 对比管理员密码
+    comparePassword() {
+      let username = this.$store.state.username;
+      let password = this.$AES.encrypt(this.admin_password);
       this.$axios({
         method: "post",
         url: "/api/adminapi/gettotal",
@@ -275,90 +299,52 @@ export default {
         }
       }).then(res => {
         if (res.data.ret == 0) {
-          if (this.$AES.encrypt(password) == res.data.total[0].password_md5) {
+          if (password == res.data.total[0].password_md5) {
             this.password_status = true;
+            this.password_visable = false;
+            this.getPassword(this.now_account);
           } else {
             this.password_status = false;
+            this.password_visable = false;
+            this.$message.error("管理员密码错误");
           }
         }
       });
     },
-
-    getPasswordStatue() {
-      console.log(this.password_status);
-    },
-    // 查看密码
-    getPassword(account) {
+    // 判断是否需要输入管理员密码
+    isNeedPassword(account) {
       let self = this;
       // 判断是否已经输入过管理员密码
       if (!this.password_status) {
-        this.$alert(
-          '<div class="el-input"><input class="el-input__inner" type="password" id="admin_password" size="normal" clearable></input></div>',
-          "请输入管理员密码",
-          {
-            dangerouslyUseHTMLString: true
-          }
-        )
-          .then(() => {
-            // 获取弹出层数据
-            self.admin_password = $("#admin_password").val();
-            self.comparePassword(
-              self.$store.state.username,
-              self.admin_password
-            );
-            self.getPasswordStatue();
-            if (self.password_status) {
-              self
-                .$axios({
-                  method: "post",
-                  url: "/api/adminapi/gettotal",
-                  data: {
-                    control: "password_md5",
-                    username: account
-                  }
-                })
-                .then(res => {
-                  if (res.data.ret == 0) {
-                    self.$alert(
-                      "账号" +
-                        account +
-                        "的密码为" +
-                        self.$AES.decrypt(res.data.total[0].password_md5)
-                    );
-                  }
-                })
-                .catch(err => {
-                  self.$message.error(err.response.data);
-                });
-            } else {
-              self.$message.error("管理员密码错误");
-            }
-          })
-          .catch(() => {});
+        self.password_visable = true;
+        this.now_account = account;
       } else {
-        self
-          .$axios({
-            method: "post",
-            url: "/api/adminapi/gettotal",
-            data: {
-              control: "password_md5",
-              username: account
-            }
-          })
-          .then(res => {
-            if (res.data.ret == 0) {
-              self.$alert(
-                "账号" +
-                  account +
-                  "的密码为" +
-                  self.$AES.decrypt(res.data.total[0].password_md5)
-              );
-            }
-          })
-          .catch(err => {
-            self.$message.error(err.response.data);
-          });
+        this.getPassword(account);
       }
+    },
+    // 获取密码
+    getPassword(account) {
+      this.$axios({
+        method: "post",
+        url: "/api/adminapi/gettotal",
+        data: {
+          control: "password_md5",
+          username: account
+        }
+      })
+        .then(res => {
+          if (res.data.ret == 0) {
+            this.$alert(
+              "账号" +
+                account +
+                "的密码为" +
+                this.$AES.decrypt(res.data.total[0].password_md5)
+            );
+          }
+        })
+        .catch(err => {
+          this.$message.error(err.response.data);
+        });
     },
     // 删除账号
     delAccount(account) {
