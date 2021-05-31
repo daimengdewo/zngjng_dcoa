@@ -21,6 +21,8 @@ class NbLog:
 from rest_framework.decorators import api_view
 import pymongo
 
+
+
 dolog = NbLog() 
 
 @api_view(['GET'])
