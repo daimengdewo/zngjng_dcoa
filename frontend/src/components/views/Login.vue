@@ -64,49 +64,49 @@ export default {
     return {
       login_form: {
         account: "",
-        password: ""
+        password: "",
       },
       login_rules: {
         account: [
           {
             required: true,
             message: "请输入账号",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         password: [
           {
             required: true,
             message: "请输入密码",
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
     login() {
       let self = this;
-      this.$refs["login_form"].validate(valid => {
+      this.$refs["login_form"].validate((valid) => {
         if (valid) {
           localStorage.removeItem("Authorization");
           self.$axios
             .post("/api/adminapi/signin", {
               username: self.login_form.account,
-              // password: self.$AES.encrypt(self.login_form.password) 
-              password:self.login_form.password
+              password: self.$AES.encrypt(self.login_form.password),
+              // password: self.login_form.password,
             })
-            .then(res => {
+            .then((res) => {
               // 解密用户类型和激活状态
               if (res.data.ret == 0) {
                 let usertype = res.data.usertypen;
                 let is_active = res.data.is_active;
-                let username=res.data.username
+                let username = res.data.username;
                 self.$store.dispatch("login", {
                   token: res.data.token,
                   usertype,
                   is_active,
-                  username
+                  username,
                 });
                 let usertype_int = parseInt(self.$AES.decrypt(usertype));
                 if (usertype_int >= 9) {
@@ -118,11 +118,11 @@ export default {
                 self.$message.error(res.data.msg);
               }
             })
-            .catch(err => {});
+            .catch((err) => {});
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

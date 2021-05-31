@@ -2,10 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import main from "@/components/MainWin";
 import store from "@/store";
-import {
-  Message
-} from "element-ui";
-import AES from "@/AES"
+import { Message } from "element-ui";
+import AES from "@/AES";
 
 Vue.use(Router);
 
@@ -18,8 +16,9 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 };
 
 const router = new Router({
-  mode:"history",
-  routes: [{
+  mode: "history",
+  routes: [
+    {
       path: "/",
       redirect: "/login"
     },
@@ -29,7 +28,8 @@ const router = new Router({
       meta: {
         usertype: 9
       },
-      children: [{
+      children: [
+        {
           path: "",
           name: "home",
           meta: {
@@ -48,13 +48,13 @@ const router = new Router({
           component: () => import("@/components/views/AccountManager")
         },
         {
-          path:"attencemodel",
-          name:"attencemodel",
-          meta:{
-            title:"考勤模板管理",
-            usertype:1
+          path: "attencemodel",
+          name: "attencemodel",
+          meta: {
+            title: "考勤模板管理",
+            usertype: 1
           },
-          component:()=>import("@/components/views/AttenceModel")
+          component: () => import("@/components/views/AttenceModel")
         }
       ]
     },
@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
     if (token === null || token === "") {
       next("/login");
     } else {
-      if (usertype >= to.meta.usertype && is_active) {
+      if (usertype >= to.meta.usertype && is_active == "True") {
         next();
       } else {
         Vue.use(Message);
