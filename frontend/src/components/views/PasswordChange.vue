@@ -93,18 +93,6 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    // 获取旧密码
-    getOldPassword() {
-      let self = this;
-      this.$axios
-        .post("", {
-          account: self.account
-        })
-        .then(function(ret) {
-          self.old_password = ret.data;
-        })
-        .catch(function(error) {});
-    },
     // 修改密码
     updatePassword() {
       let self = this;
@@ -112,16 +100,20 @@ export default {
         // 校验通过则请求修改密码
         if (valid) {
           this.$axios
-            .post("/", {
-              old_password: self.old_password,
-              new_password: self.new_password,
-              account: self.account
+            .post("/api/adminapi/repass", {
+              // old_pass: self.$AES.encrypt(self.old_password) ,
+              // new_pass: self.$AES.encrypt(self.new_password) ,
+              old_pass:self.old_password,
+              new_pass:self.new_password,
+              username: self.account
             })
             .then(res => {
-              self.$message({
-                type: "info",
-                message: res.data
-              });
+              console.log(self.account);
+              if(res.data.ret==0){
+                self.$message.success("账号"+self.account+"修改密码成功");
+              }else if(res.data.ret==1){
+                self.$message.error(res.data.msg);
+              }
             })
             .catch(err => {
               self.$message({
@@ -132,9 +124,6 @@ export default {
         }
       });
     }
-  },
-  mounted() {
-    this.getOldPassword();
   }
 };
 </script>
@@ -152,6 +141,6 @@ export default {
 }
 
 #passwordchange .el-form-item__error {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 </style>
