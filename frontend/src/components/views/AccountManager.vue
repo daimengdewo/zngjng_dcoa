@@ -13,7 +13,18 @@
               icon="el-icon-circle-plus-outline"
               >新增账号</el-button
             >
-            <el-button type="primary" icon="el-icon-search" size="default"
+            <el-button
+              type="warning"
+              size="default"
+              icon="el-icon-refresh"
+              @click="resetList"
+              >重置</el-button
+            >
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="default"
+              @click="getSearchList"
               >搜索</el-button
             >
             <el-input
@@ -120,8 +131,6 @@
             :page-size="20"
             :total="account_list_total"
             @current-change="getAccountList"
-            @prev-click="getAccountList"
-            @next-click="getAccountList"
             :current-page.sync="page_num"
           >
           </el-pagination>
@@ -151,7 +160,7 @@
       size="auto"
       :destroy-on-close="true"
       :show-close="true"
-      :wrapperClosable="true"
+      :wrapperClosable="false"
     >
       <h1>新增账号</h1>
       <el-divider direction="horizontal"></el-divider>
@@ -159,6 +168,8 @@
       <account-add
         @getList="getAccountList"
         @getTotal="getAccountListTotal"
+        @getSearch="getSearchList"
+        :search_status="search_status"
         style="margin-right: 20px"
       ></account-add>
     </el-drawer>
@@ -195,6 +206,8 @@ export default {
     return {
       account_data: [{}], // 列表数据
       search: "", // 搜索框内容
+      search_status: false, // 搜索状态控制
+      search_list: [{}], // 搜索结果列表
       btn_size: "medium", // 按钮大小
       admin_password: "", // 管理员密码
       drawer: false, // 修改密码抽屉状态，默认false，关闭
@@ -203,7 +216,7 @@ export default {
       password_status: false, // 判断是否已经输入过管理员密码的状态
       account_list_total: 0, // 账号管理列表数据量
       page_num: 1, // 控制页码
-      password_visable: false //控制管理员密码输入对话框
+      password_visable: false, //控制管理员密码输入对话框
     };
   },
   methods: {
@@ -220,7 +233,7 @@ export default {
           '<div class="el-input"><input class="el-input__inner" type="password" id="admin_password" size="normal" clearable></input></div>',
           "请输入管理员密码",
           {
-            dangerouslyUseHTMLString: true
+            dangerouslyUseHTMLString: true,
           }
         )
           .then(() => {
@@ -229,18 +242,18 @@ export default {
             self.$axios
               .post("/", {
                 admin_password: self.admin_password,
-                account: account
+                account: account,
               })
               // 请求成功弹出修改密码界面
-              .then(function(ret) {
+              .then(function (ret) {
                 self.password_status = true;
                 self.now_account = account;
                 self.drawer = true;
               })
-              .catch(function(error) {
+              .catch(function (error) {
                 self.$message({
                   type: "info",
-                  message: "获取密码失败"
+                  message: "获取密码失败",
                 });
               });
           })
@@ -258,29 +271,33 @@ export default {
       this.$confirm("此操作将启用/停用此账号, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
         .then(() => {
           // 确定则执行操作
           self.$axios
             .post("/api/adminapi/reactive", {
-              username: account
+              username: account,
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.ret == 0) {
                 self.$message({
                   type: "success",
-                  message: account + "账号状态已更新"
+                  message: account + "账号状态已更新",
                 });
-                self.getAccountList();
+                if (self.search_status) {
+                  self.getSearchList();
+                } else {
+                  self.getAccountList();
+                }
               } else if (res.data.ret == 1) {
                 self.$message({
                   type: "error",
-                  message: res.data.msg
+                  message: res.data.msg,
                 });
               }
             })
-            .catch(err => {
+            .catch((err) => {
               self.$message.error("操作失败");
             });
         })
@@ -295,9 +312,9 @@ export default {
         url: "/api/adminapi/gettotal",
         data: {
           control: "password_md5",
-          username: username
-        }
-      }).then(res => {
+          username: username,
+        },
+      }).then((res) => {
         if (res.data.ret == 0) {
           if (password == res.data.total[0].password_md5) {
             this.password_status = true;
@@ -329,10 +346,10 @@ export default {
         url: "/api/adminapi/gettotal",
         data: {
           control: "password_md5",
-          username: account
-        }
+          username: account,
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.ret == 0) {
             this.$alert(
               "账号" +
@@ -342,7 +359,7 @@ export default {
             );
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.$message.error(err.response.data);
         });
     },
@@ -352,29 +369,33 @@ export default {
       this.$confirm("确认是否删除此账号", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
         .then(() => {
           self.$axios
             .post("/api/adminapi/deluser", {
-              username: account
+              username: account,
             })
-            .then(function(ret) {
+            .then(function (ret) {
               if (ret.data.ret == 0) {
                 self.$message({
                   type: "success",
-                  message: "删除账号" + account + "成功"
+                  message: "删除账号" + account + "成功",
                 });
-                self.getAccountList();
-                self.getAccountListTotal();
-              } else if (ret.data.ret == 1) {
+                if (self.search_status) {
+                  self.getSearchList();
+                } else {
+                  self.getAccountList();
+                  self.getAccountListTotal();
+                }
+              } else if (ret.data.ret == 1 || ret.data.ret == 2) {
                 self.$message.error(ret.data.msg);
               }
             })
-            .catch(function(error) {
+            .catch(function (error) {
               self.$message({
                 type: "error",
-                message: "删除失败"
+                message: "删除失败",
               });
             });
         })
@@ -385,31 +406,74 @@ export default {
       let self = this;
       this.$axios
         .post("/api/adminapi/gettotal", {
-          control: "total"
+          control: "total",
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.ret == 0) {
             self.account_list_total = parseInt(res.data.total);
           }
         })
-        .catch(err => {});
+        .catch((err) => {});
     },
     // 获取账号列表
     getAccountList() {
       let self = this;
-      this.$axios({
-        method: "post",
-        url: "/api/adminapi/getlist",
-        data: {
-          paging: 20,
-          pagenbr: self.page_num
+      // 非搜索状态时
+      if (!this.search_status) {
+        this.$axios({
+          method: "post",
+          url: "/api/adminapi/getlist",
+          data: {
+            paging: 20,
+            pagenbr: self.page_num,
+          },
+        }).then((res) => {
+          if (res.data.ret == 0) {
+            self.account_data = res.data.data;
+          }
+        });
+      } else {
+        self.account_data = []; // 清空列表
+        let start_data_num = (self.page_num - 1) * 20; // 20条数据为一页，记录到开始数据序号
+        let paging = 0;
+        for (let i = start_data_num; i < self.account_list_total; i++) {
+          if (paging > 19) {
+            return;
+          } else {
+            self.account_data[i] = self.search_list[i]; // 重新赋值
+          }
+          paging++;
         }
-      }).then(res => {
-        if (res.data.ret == 0) {
-          self.account_data = res.data.data;
-        }
-      });
-    }
+      }
+    },
+    // 获取搜索列表
+    getSearchList() {
+      this.search_status = true;
+      if (this.search == "" || this.search == null) {
+        this.$message.error("请先输入搜索内容");
+      } else {
+        this.$axios({
+          method: "post",
+          url: "/api/adminapi/gettotal",
+          data: {
+            control: "query",
+            username: this.search,
+          },
+        }).then((res) => {
+          if (res.data.ret == 0) {
+            this.search_list = res.data.total; // 搜索结果存放到搜索列表
+            this.account_list_total = this.search_list.length; // 搜索总数据量放入分页插件的total值
+            this.getAccountList();
+          }
+        });
+      }
+    },
+    // 重置列表
+    resetList() {
+      this.search_status = false;
+      this.getAccountListTotal();
+      this.getAccountList();
+    },
   },
   mounted() {
     this.getAccountListTotal();
@@ -417,8 +481,8 @@ export default {
   },
   components: {
     PasswordChange,
-    AccountAdd
-  }
+    AccountAdd,
+  },
 };
 </script>
 

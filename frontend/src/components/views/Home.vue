@@ -28,7 +28,7 @@
           :body-style="{
             padding: '0px',
             height: '480px',
-            overflow: 'auto'
+            overflow: 'auto',
           }"
         >
           <div slot="header">
@@ -73,7 +73,7 @@ export default {
       nowtime: "", //获取时间参数
       reverse: false, //时间排序
       timer: null,
-      activities: [{}] // 输出日志数据
+      activities: [{}], // 输出日志数据
     };
   },
   methods: {
@@ -94,10 +94,10 @@ export default {
       let self = this;
       this.$axios
         .get("/api/getlog")
-        .then(function(ret) {
+        .then(function (ret) {
           self.activities = ret.data.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           this.$message.error(error.response.data.msg);
         });
     },
@@ -106,7 +106,7 @@ export default {
       let getTime = setInterval(this.getTime, 500); //0.5秒更新一次系统时间
       let getSystemLog = setInterval(this.getSystemLog, 1000); // 1秒刷新一次日志
       return { getTime, getSystemLog };
-    }
+    },
   },
   mounted() {
     this.getTime(); //页面加载完成时，第一次获取系统时间
@@ -117,14 +117,14 @@ export default {
       }, 500),
       getSystemLog: setInterval(() => {
         this.getSystemLog();
-      }, 1000)
+      }, 1000),
     };
   },
   beforeDestroy() {
     clearInterval(this.timer.getTime);
     clearInterval(this.timer.getSystemLog);
     this.timer = null;
-  }
+  },
 };
 </script>
 

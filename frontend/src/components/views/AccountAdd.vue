@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  props: ["search_status"],
   data() {
     //   所有密码的验证规则
     let validPassword = (rule, value, callback) => {
@@ -115,8 +116,12 @@ export default {
                   type: "success",
                   message: "新建账户成功",
                 });
-                self.$emit("getList");
-                self.$emit("getTotal");
+                if (this.search_status) {
+                  self.$emit("getSearch");
+                } else {
+                  self.$emit("getList");
+                  self.$emit("getTotal");
+                }
               } else if (res.data.ret == 1) {
                 self.$message.error(res.data.msg);
               }
