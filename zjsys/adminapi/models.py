@@ -122,9 +122,9 @@ class User(AbstractUser):
             opass = data['old_pass']
             npass = data['new_pass']
             this_user = User.objects.get(username=uname)
-            if this_user.password_md5 == encryption.encrypt(opass).encryp_add():
-                this_user.set_password(npass)
-                this_user.password_md5 = encryption.encrypt(npass).encryp_add()
+            if this_user.password_md5 == opass:
+                this_user.set_password(encryption.encrypt(npass).AES_Decrypt())
+                this_user.password_md5 = npass
             else:
                 return {'ret': 1 ,'msg': "用户密码修改失败，跟原密码匹配失败"}
         except User.DoesNotExist as e:
