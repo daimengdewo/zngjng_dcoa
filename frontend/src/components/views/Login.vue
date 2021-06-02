@@ -113,7 +113,7 @@ export default {
                   self.$message.success("登录成功");
                 }
                 // 登录失败
-              } else if (res.data.ret == 1) {
+              } else if (res.data.ret == 1 || res.data.ret == 3) {
                 self.$message.error(res.data.msg);
               }
             })

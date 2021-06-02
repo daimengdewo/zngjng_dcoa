@@ -67,26 +67,26 @@ export default {
       passwordform: {
         old_password: "",
         new_password: "",
-        new_password_again: ""
+        new_password_again: "",
       },
       rules: {
         //旧密码验证规则
         old_password: [
           { required: true, message: "请输入原密码", trigger: "blur" },
-          { validator: validPassword, trigger: ["blur", "change"] }
+          { validator: validPassword, trigger: ["blur", "change"] },
         ],
         // 新密码验证规则
         new_password: [
           { required: true, message: "请输入新密码", trigger: "blur" },
           { validator: validPassword, trigger: ["blur", "change"] },
-          { validator: oldAnewPasswordSame, trigger: ["blur", "change"] }
+          { validator: oldAnewPasswordSame, trigger: ["blur", "change"] },
         ],
         // 确认密码验证规则
         new_password_again: [
           { required: true, message: "请输入确认密码", trigger: "blur" },
-          { validator: againPasswordSame, trigger: ["blur", "change"] }
-        ]
-      }
+          { validator: againPasswordSame, trigger: ["blur", "change"] },
+        ],
+      },
     };
   },
   methods: {
@@ -96,35 +96,32 @@ export default {
     // 修改密码
     updatePassword() {
       let self = this;
-      this.$refs["passwordform"].validate(valid => {
+      this.$refs["passwordform"].validate((valid) => {
         // 校验通过则请求修改密码
         if (valid) {
           this.$axios
             .post("/api/adminapi/repass", {
-              // old_pass: self.$AES.encrypt(self.old_password) ,
-              // new_pass: self.$AES.encrypt(self.new_password) ,
-              old_pass:self.old_password,
-              new_pass:self.new_password,
-              username: self.account
+              old_pass: self.$AES.encrypt(self.passwordform.old_password),
+              new_pass: self.$AES.encrypt(self.passwordform.new_password),
+              username: self.account,
             })
-            .then(res => {
-              console.log(self.account);
-              if(res.data.ret==0){
-                self.$message.success("账号"+self.account+"修改密码成功");
-              }else if(res.data.ret==1){
+            .then((res) => {
+              if (res.data.ret == 0) {
+                self.$message.success("账号" + self.account + "修改密码成功");
+              } else if (res.data.ret == 1) {
                 self.$message.error(res.data.msg);
               }
             })
-            .catch(err => {
+            .catch((err) => {
               self.$message({
                 type: "error",
-                message: "提交失败"
+                message: "提交失败",
               });
             });
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
