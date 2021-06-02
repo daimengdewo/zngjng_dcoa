@@ -25,12 +25,13 @@ const router = new Router({
     {
       path: "/mgr",
       component: main,
+      redirect:"/mgr/home",
       meta: {
         usertype: 9
       },
       children: [
         {
-          path: "",
+          path: "home",
           name: "home",
           meta: {
             title: "管理后台",

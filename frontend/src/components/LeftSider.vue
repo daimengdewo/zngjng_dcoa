@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      :default-active.sync="router_path"
+      ref="menu"
       class="el-menu-vertical-demo"
       background-color="#242f42"
       text-color="#FFFFFF"
@@ -9,10 +9,11 @@
       style="height: 100%"
       :unique-opened="true"
       :router="true"
+      :default-active='$route.path' 
     >
-      <el-menu-item index="/mgr">
+      <el-menu-item index="/mgr/home">
         <i class="el-icon-s-home"></i>
-        <span slot="title">首页</span>
+        <span>首页</span>
       </el-menu-item>
 
       <el-menu-item index="/mgr/accountmanager">
@@ -63,11 +64,11 @@ export default {
   data() {
     return {
       router_path: "/mgr",
-      database_drawer: false,
+      database_drawer: false
     };
   },
   components: {
-    DatabaseConnect,
+    DatabaseConnect
   },
   methods: {
     openDatabaseConnectDrawer() {
@@ -76,8 +77,19 @@ export default {
     loginOut() {
       this.$store.dispatch("loginOut");
       this.$router.push("/login");
-    },
+    }
   },
+  // 处理浏览器刷新后导航选中问题
+  watch: {
+    $route() {
+      let i = this.$route.path;
+      localStorage.setItem("index", i); //刷新
+      setTimeout(() => {
+        //路由跳转
+        this.$refs.menu.activeIndex = i;
+      }, 100);
+    }
+  }
 };
 </script>
 
