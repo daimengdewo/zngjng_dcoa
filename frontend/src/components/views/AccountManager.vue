@@ -1,6 +1,6 @@
 <template>
   <div id="accountmanager">
-    <el-card shadow="always" :body-style="{ padding: '20px' }">
+    <el-card shadow="always" :body-style="{ padding: '20px', height: '100%' }">
       <!-- card body -->
       <el-row type="flex" justify="space-around" style="height: 40px">
         <el-col :span="1" :offset="0"></el-col>
@@ -138,6 +138,7 @@
         <el-col :span="1" :offset="0"></el-col>
       </el-row>
     </el-card>
+
     <!-- 修改密码的抽屉 -->
     <el-drawer
       :visible.sync="drawer"
@@ -473,7 +474,7 @@ export default {
 <style>
 ::-webkit-scrollbar {
   width: 10px;
-  height: 1px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {

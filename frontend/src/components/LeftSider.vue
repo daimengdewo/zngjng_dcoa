@@ -9,7 +9,7 @@
       style="height: 100%"
       :unique-opened="true"
       :router="true"
-      :default-active='$route.path' 
+      :default-active="$route.path"
     >
       <el-menu-item index="/mgr/home">
         <i class="el-icon-s-home"></i>
@@ -34,7 +34,7 @@
           <i class="el-icon-setting"></i>
           <span> 考勤模板管理</span>
         </el-menu-item>
-        <el-menu-item index="/">
+        <el-menu-item index="">
           <i class="el-icon-document"></i>
           <span>导出数据</span>
         </el-menu-item>
@@ -64,11 +64,11 @@ export default {
   data() {
     return {
       router_path: "/mgr",
-      database_drawer: false
+      database_drawer: false,
     };
   },
   components: {
-    DatabaseConnect
+    DatabaseConnect,
   },
   methods: {
     openDatabaseConnectDrawer() {
@@ -77,7 +77,7 @@ export default {
     loginOut() {
       this.$store.dispatch("loginOut");
       this.$router.push("/login");
-    }
+    },
   },
   // 处理浏览器刷新后导航选中问题
   watch: {
@@ -88,8 +88,8 @@ export default {
         //路由跳转
         this.$refs.menu.activeIndex = i;
       }, 100);
-    }
-  }
+    },
+  },
 };
 </script>
 

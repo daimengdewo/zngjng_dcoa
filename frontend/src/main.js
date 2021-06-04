@@ -2,14 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import App from "./App";
-import router from "./router";
 import axios from "axios";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "default-passive-events";
 import store from "./store";
 import AES from "./AES";
-import md5 from "js-md5"
+import md5 from "js-md5";
+import router from "./router";
 
 axios.defaults.withCredentials = true;
 
@@ -41,7 +41,7 @@ axios.interceptors.response.use(
         router.push("/login");
         store.dispatch("loginOut");
         ElementUI.Message.error("token已过期，请重新登录");
-      }else if(res_data.ret == 1){
+      } else if (res_data.ret == 1) {
         router.push("/login");
         store.dispatch("loginOut");
         ElementUI.Message.error("token验证失败，请重新登录");
@@ -53,7 +53,7 @@ axios.interceptors.response.use(
 
 Vue.use(ElementUI);
 Vue.prototype.$AES = AES;
-Vue.prototype.$md5=md5;
+Vue.prototype.$md5 = md5;
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 

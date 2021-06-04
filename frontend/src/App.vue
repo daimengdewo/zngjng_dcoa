@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
@@ -18,9 +18,7 @@ body {
   background-color: #fff;
 }
 
-#app{
+#app {
   height: 100%;
 }
-
-
 </style>

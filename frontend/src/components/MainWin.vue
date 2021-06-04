@@ -43,6 +43,7 @@ export default {
 
 .el-main {
   background-color: #ddd;
+  padding: 0px;
 }
 
 .el-aside {
@@ -59,3 +60,5 @@ export default {
   background-color: #ddd;
 }
 </style>
+
+

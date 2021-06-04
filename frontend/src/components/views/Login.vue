@@ -87,7 +87,7 @@ export default {
   methods: {
     login() {
       let self = this;
-      this.$refs["login_form"].validate((valid) => {
+      this.$refs["login_form"].validate((valid, v_data) => {
         if (valid) {
           localStorage.removeItem("Authorization");
           self.$axios
@@ -118,6 +118,8 @@ export default {
               }
             })
             .catch((err) => {});
+        } else {
+          console.log(v_data);
         }
       });
     },
