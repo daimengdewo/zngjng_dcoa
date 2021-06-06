@@ -1,6 +1,6 @@
 from django.db import models
 from adminapi.models import User
-import datetime
+import time
 
 class mouldlist(models.Model):
     # 模板id
@@ -15,4 +15,4 @@ class mouldlist(models.Model):
     # 用户id
     userid = models.ForeignKey(User,max_length=30,on_delete=models.PROTECT)
 
-    create_date = models.DateTimeField(default=datetime.datetime.now)
+    create_date = models.CharField(max_length=20)

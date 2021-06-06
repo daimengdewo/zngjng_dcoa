@@ -49,6 +49,7 @@ def m_list(request):
         return JsonResponse({'ret': 9 , 'msg':msg}) 
 
 def m_add(request):
+    import time
     try:
         uid = request.user.id
         info = request.params['data']
@@ -59,7 +60,8 @@ def m_add(request):
                 
         mouldlist.objects.create(mouldname=info['mouldname'],
         mouldjson=info['mouldjson'],
-        userid_id = uid)
+        userid_id = uid,
+        create_date = int(time.time()))
         dolog.debug("模板名称:{} 已添加成功".format(mname))
         return JsonResponse({'ret':0})
     except mouldlist.DoesNotExist as e:
