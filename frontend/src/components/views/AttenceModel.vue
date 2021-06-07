@@ -122,6 +122,8 @@ export default {
         }
       }).then(res=>{
         console.log(res.data.data);
+        let newTime=new Date(res.data.data[0].create_date*1000)
+        console.log(newTime.getMonth());
       })
     }
   },
