@@ -31,6 +31,8 @@ def dispatcher(request):
             return m_re(request)
         elif action == 'del':
             return m_del(request)
+        elif action == 'total':
+            return m_total(request)
 
         else:
             dolog.error("不支持该类型http请求")
@@ -39,19 +41,10 @@ def dispatcher(request):
         dolog.error("token验证失败")
         return JsonResponse({'ret': 2, "msg": "token验证失败"})
 
-def m_list(request):
-    try:
-        qs = mouldlist.objects.values()
-        retlist = list(qs)
-        return JsonResponse({'ret':0,'data':retlist})
-    except mouldlist.DoesNotExist as e:
-        msg = dolog.error("该路由发生异常:{}".format(e))  
-        return JsonResponse({'ret': 9 , 'msg':msg}) 
-
 def m_add(request):
     import time
     try:
-        uid = request.user.id
+        uname = request.user.username
         info = request.params['data']
         mname = request.params['data']['mouldname']
         if mouldlist.objects.filter(mouldname=mname).exists():
@@ -60,7 +53,7 @@ def m_add(request):
                 
         mouldlist.objects.create(mouldname=info['mouldname'],
         mouldjson=info['mouldjson'],
-        userid_id = uid,
+        username_id = uname,
         create_date = int(time.time()))
         dolog.debug("模板名称:{} 已添加成功".format(mname))
         return JsonResponse({'ret':0})
@@ -118,3 +111,44 @@ def m_del(request):
         })
     mould.delete()
     return JsonResponse({'ret':0})
+
+def m_total(request):
+    try:
+        control = request.params['data']['control']
+
+        if 'username' in request.params['data']:
+            uname = request.params['data']['username']
+        else:
+            uname=request.user.username
+
+        if control is not None:
+            if control == 'total':
+                retlist = mouldlist.objects.count()
+            elif control == 'query':
+                qs = mouldlist.objects.filter(username_id__username__contains=uname).values('mouldname','mouldjson','create_date','username_id')
+                retlist = list(qs)
+            else:
+                qs = mouldlist.objects.filter(username_id=uname).values(control)
+                retlist = list(qs)
+            return JsonResponse({'ret':0,'data':retlist})
+    except Exception as e:
+        dolog.error("指定模板参数获取失败，发生异常:{}".format(e))
+        return JsonResponse({
+                'ret': 9,
+                'msg': "指定模板参数获取失败，发生异常:{}".format(e)
+            })
+
+def m_list(request):
+        pagenbr=1
+        paging = int(request.params['data']['paging'])
+        pagenbr = int(request.params['data']['pagenbr'])
+        try:
+            qs = mouldlist.objects.values('mouldname','mouldjson','create_date','username_id').order_by('mouldid')[paging*pagenbr-paging:paging*pagenbr]
+            retlist = list(qs)
+            return JsonResponse({'ret':0,'data':retlist})
+        except mouldlist.DoesNotExist as e:
+            dolog.error("模板列表获取失败，发生异常:{}".format(e))
+            return JsonResponse({
+                    'ret': 1,
+                    'msg': "模板列表获取失败，发生异常:{}".format(e)
+                })

@@ -167,3 +167,112 @@
 
 2021-06-06 21:38:24 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test 已添加成功
 
+2021-06-07 18:15:39 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:15:44 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:15:47 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:35:38 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:38:43 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:41:16 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:41:31 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:42:13 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:42:18 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:51:35 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:58:07 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 18:59:19 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-07 19:00:29 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test 已添加成功
+
+2021-06-07 19:01:28 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test1 已添加成功
+
+2021-06-07 19:01:31 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test11 已添加成功
+
+2021-06-07 19:01:33 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test111 已添加成功
+
+2021-06-07 19:01:35 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test1111 已添加成功
+
+2021-06-07 19:01:38 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 模板名称:test11111 已添加成功
+
+2021-06-07 19:04:54 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:08:40 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:08:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-07 19:10:24 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:12:10 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:12:57 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:12:58 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:argument of type 'Request' is not iterable
+
+2021-06-07 19:14:18 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:14:19 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'Request' object is not subscriptable
+
+2021-06-07 19:15:06 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:15:08 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:Related Field got invalid lookup: contains
+
+2021-06-07 19:21:42 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:21:45 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:Related Field got invalid lookup: contains
+
+2021-06-07 19:22:31 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:22:32 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'Request' object is not subscriptable
+
+2021-06-07 19:26:31 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:26:56 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:Related Field got invalid lookup: contains
+
+2021-06-07 19:27:29 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:27:30 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'Request' object is not subscriptable
+
+2021-06-07 19:27:59 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:28:16 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:Related Field got invalid lookup: contains
+
+2021-06-07 19:32:10 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:35:21 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-07 19:38:54 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-07 19:40:02 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 执行用户添加操作，操作者为：test
+2021-06-07 19:40:02 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 用户添加失败,登录名 test 已经存在
+
+2021-06-07 19:40:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 执行用户添加操作，操作者为：test1
+
+2021-06-07 19:40:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户test1添加成功,即时生效
+
+2021-06-07 19:41:21 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 执行用户删除操作，操作者为：admin
+
+2021-06-07 19:44:08 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 模板删除失败，发生异常：mouldlist matching query does not exist.
+
+2021-06-07 19:50:00 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 指定用户参数获取成功 , 操作者：admin
+
+2021-06-07 19:55:01 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户密码修改失败，跟原密码匹配失败 , 操作者：admin
+
+2021-06-07 19:55:09 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户密码修改失败，跟原密码匹配失败 , 操作者：admin
+
+2021-06-07 19:55:22 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户密码修改失败，跟原密码匹配失败 , 操作者：admin
+
+2021-06-07 19:55:57 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 用户test的密码已更新 , 操作者：admin
+
+2021-06-07 19:57:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：test
+
+2021-06-07 19:57:32 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
