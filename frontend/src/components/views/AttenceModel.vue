@@ -62,7 +62,7 @@
           style="padding-left: 10px; margin-top: 5px"
         >
           <h2 style="margin: 0">预览效果:</h2>
-          <table
+          <!-- <table
             border="1"
             cellpadding="0"
             cellspacing="0"
@@ -79,7 +79,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </el-col>
       </el-row>
       <el-row type="flex" justify="space-around">
@@ -104,9 +104,30 @@ export default {
     return {
       model_data: [{}],
       view_data: [{}],
+      page_num:1 // 控制页码
     };
   },
-  methods: {},
+  methods: {
+    // 获取模板列表
+    getlist(){
+      this.$axios({
+        method:'post',
+        url: "/api/common/dispat",
+        data: {
+          action:'list',
+          data:{
+            paging:20,
+            pagenbr:this.page_num
+          }
+        }
+      }).then(res=>{
+        console.log(res.data.data);
+      })
+    }
+  },
+  mounted () {
+    this.getlist();
+  },
 };
 </script>
 
