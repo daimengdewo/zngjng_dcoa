@@ -63,7 +63,11 @@
         >
           <h2 style="margin: 0">预览效果:</h2>
           <!-- <table
+<<<<<<< HEAD
             border="1px #ddd solid"
+=======
+            border="1"
+>>>>>>> 32208f930e61c30244907ae7a5775d0ebb8854f4
             cellpadding="0"
             cellspacing="0"
             style="margin-top: 10px; font-size: 15px; text-align: center"
@@ -105,6 +109,7 @@ export default {
     return {
       model_data: [{}],
       view_data: [{}],
+<<<<<<< HEAD
       page_num: 1, // 控制页码
     };
   },
@@ -128,6 +133,33 @@ export default {
   },
   mounted() {
     // this.getlist();
+=======
+      page_num:1 // 控制页码
+    };
+  },
+  methods: {
+    // 获取模板列表
+    getlist(){
+      this.$axios({
+        method:'post',
+        url: "/api/common/dispat",
+        data: {
+          action:'list',
+          data:{
+            paging:20,
+            pagenbr:this.page_num
+          }
+        }
+      }).then(res=>{
+        console.log(res.data.data);
+        let newTime=new Date(res.data.data[0].create_date*1000)
+        console.log(newTime.getMonth());
+      })
+    }
+  },
+  mounted () {
+    this.getlist();
+>>>>>>> 32208f930e61c30244907ae7a5775d0ebb8854f4
   },
 };
 </script>
