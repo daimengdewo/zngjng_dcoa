@@ -25,7 +25,7 @@ const router = new Router({
     {
       path: "/mgr",
       component: main,
-      redirect:"/mgr/home",
+      redirect: "/mgr/home",
       meta: {
         usertype: 9
       },
@@ -56,6 +56,15 @@ const router = new Router({
             usertype: 1
           },
           component: () => import("@/components/views/AttenceModel")
+        },
+        {
+          path: "dataExport",
+          name: "dataExport",
+          meta: {
+            title: "数据导出",
+            usertype: 1
+          },
+          component: () => import("@/components/views/DataExport")
         }
       ]
     },

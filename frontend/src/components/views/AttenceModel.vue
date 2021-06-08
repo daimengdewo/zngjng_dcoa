@@ -62,24 +62,25 @@
           style="padding-left: 10px; margin-top: 5px"
         >
           <h2 style="margin: 0">预览效果:</h2>
-          <table
-            border="1"
+          <!-- <table
+            border="1px #ddd solid"
             cellpadding="0"
             cellspacing="0"
             style="margin-top: 10px; font-size: 15px; text-align: center"
           >
             <tbody>
-              <tr v-for="item in 9" :key="item">
+              <tr v-for="item in view_data" :key="item">
                 <td
-                  v-for="j in item"
-                  :key="j"
-                  style="border: 1px black solid; padding: 5px"
+                  v-for="(cell, index) in item"
+                  :key="index"
+                  style="border: 1px #ddd solid; padding: 5px"
+                  :rowspan="cell.rowspan"
                 >
-                  {{ j + "x" + item + "=" + j * item }}
+                  {{ cell.value }}
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </el-col>
       </el-row>
       <el-row type="flex" justify="space-around">
@@ -104,9 +105,30 @@ export default {
     return {
       model_data: [{}],
       view_data: [{}],
+      page_num: 1, // 控制页码
     };
   },
-  methods: {},
+  methods: {
+    getlist() {
+      this.$axios({
+        method: "post",
+        url: "/api/common/dispat",
+        data: {
+          action: "list",
+          data: {
+            paging: 20,
+            pagenbr: this.page_num,
+          },
+        },
+      }).then((res) => {
+        // console.log(res.data.data[0].mouldjson);
+        console.log(res.data.data);
+      });
+    },
+  },
+  mounted() {
+    // this.getlist();
+  },
 };
 </script>
 
