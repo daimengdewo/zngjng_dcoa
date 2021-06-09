@@ -35,7 +35,10 @@
       <el-row type="flex" justify="space-around">
         <el-col :span="15" :offset="0">
           <el-table :data="model_data" :fit="true" stripe height="650">
-            <el-table-column prop="" label="序号" width="100">
+            <el-table-column label="序号" width="100">
+              <template slot-scope="scope">
+                {{ scope.$index + 1 }}
+              </template>
             </el-table-column>
             <el-table-column prop="mouldname" label="模板名称">
             </el-table-column>
