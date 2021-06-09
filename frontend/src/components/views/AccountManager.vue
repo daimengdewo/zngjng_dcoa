@@ -4,7 +4,7 @@
       <!-- card body -->
       <el-row type="flex" justify="space-around" style="height: 40px">
         <el-col :span="1" :offset="0"></el-col>
-        <el-col :span="22" :offset="0" style="text-align: right">
+        <el-col :span="22" :offset="0" style="text-align: left">
           <el-button-group>
             <el-button
               type="success"

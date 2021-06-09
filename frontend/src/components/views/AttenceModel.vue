@@ -35,11 +35,17 @@
       <el-row type="flex" justify="space-around">
         <el-col :span="15" :offset="0">
           <el-table :data="model_data" :fit="true" stripe height="650">
-            <el-table-column prop="num" label="序号" width="100">
+            <el-table-column prop="" label="序号" width="100">
             </el-table-column>
-            <el-table-column prop="name" label="模板名称"> </el-table-column>
+            <el-table-column prop="mouldname" label="模板名称">
+            </el-table-column>
             <el-table-column prop="type" label="所属分类"> </el-table-column>
-            <el-table-column prop="people" label="作者"> </el-table-column>
+            <el-table-column prop="username_id" label="作者"> </el-table-column>
+            <el-table-column label="创建时间" width="108">
+              <template slot-scope="scope">
+                {{ changeTime(scope.row.create_date) }}
+              </template>
+            </el-table-column>
             <el-table-column label="模板样式">
               <template slot-scope="scope">
                 <el-button type="text" size="default" icon="el-icon-view"
@@ -88,8 +94,10 @@
           <el-pagination
             layout="total,prev, pager, next,jumper"
             background
-            :total="50"
+            :total="model_data_total"
             :page-size="20"
+            @current-change="getlist"
+            :current-page.sync="page_num"
           >
           </el-pagination>
         </el-col>
@@ -100,15 +108,36 @@
 </template>
 
 <script>
+import formatTime from "@/store/timeTotimestr.js";
+
 export default {
   data() {
     return {
-      model_data: [{}],
+      model_data: [{}], // 模板管理表格数据
+      model_data_total: 0,
       view_data: [{}],
       page_num: 1, // 控制页码
     };
   },
   methods: {
+    // 获取模板管理表格最大数据量
+    getTotal() {
+      this.$axios({
+        method: "post",
+        url: "/api/common/dispat",
+        data: {
+          action: "total",
+          data: {
+            control: "total",
+          },
+        },
+      }).then((res) => {
+        if (res.data.ret == 0) {
+          this.model_data_total = res.data.data;
+        }
+      });
+    },
+    // 获取模板管理表格数据
     getlist() {
       this.$axios({
         method: "post",
@@ -121,13 +150,19 @@ export default {
           },
         },
       }).then((res) => {
-        // console.log(res.data.data[0].mouldjson);
-        console.log(res.data.data);
+        if (res.data.ret == 0) {
+          this.model_data = res.data.data;
+        }
       });
+    },
+    // 时间戳转时间字符串
+    changeTime(fmt) {
+      return formatTime.setTime(fmt);
     },
   },
   mounted() {
-    // this.getlist();
+    this.getTotal();
+    this.getlist();
   },
 };
 </script>
