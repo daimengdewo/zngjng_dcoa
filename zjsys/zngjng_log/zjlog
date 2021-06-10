@@ -276,3 +276,23 @@
 
 2021-06-07 19:57:32 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
 
+2021-06-10 16:02:12 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-10 16:02:18 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-10 16:02:37 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-10 16:03:26 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-10 16:03:56 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-10 16:05:05 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-10 16:06:22 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-10 16:06:34 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:local variable 'mname' referenced before assignment
+
+2021-06-10 16:07:17 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-10 16:10:04 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+

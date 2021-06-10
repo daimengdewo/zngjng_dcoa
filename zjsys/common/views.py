@@ -116,16 +116,21 @@ def m_total(request):
     try:
         control = request.params['data']['control']
 
-        if 'username' in request.params['data']:
-            uname = request.params['data']['username']
+        if 'name' in request.params['data']:
+            uname = request.params['data']['name']
+            mname = request.params['data']['name']
         else:
             uname=request.user.username
+            mname=request.user.mouldname
 
         if control is not None:
             if control == 'total':
                 retlist = mouldlist.objects.count()
-            elif control == 'query':
+            elif control == 'query_un':
                 qs = mouldlist.objects.filter(username_id__username__contains=uname).values('mouldname','mouldjson','create_date','username_id')
+                retlist = list(qs)
+            elif control == 'query_mn':
+                qs = mouldlist.objects.filter(mouldname__contains=mname).values('mouldname','mouldjson','create_date','username_id')
                 retlist = list(qs)
             else:
                 qs = mouldlist.objects.filter(username_id=uname).values(control)
