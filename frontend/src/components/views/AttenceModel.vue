@@ -18,13 +18,14 @@
               type="primary"
               size="default"
               icon="el-icon-search"
-              @click=""
+              @click="getSearchList"
               >搜索</el-button
             >
             <el-input
               placeholder="请输入模板名称搜索"
               size="normal"
               clearable
+              v-model="search_model_name"
               style="width: 300px"
             ></el-input>
           </el-button-group>
@@ -58,7 +59,11 @@
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
-                <el-button type="danger" size="medium" icon="el-icon-delete"
+                <el-button
+                  type="danger"
+                  size="medium"
+                  icon="el-icon-delete"
+                  @click="delModel(scope.row.mouldname)"
                   >删除</el-button
                 >
               </template>
@@ -117,9 +122,12 @@ export default {
   data() {
     return {
       model_data: [{}], // 模板管理表格数据
-      model_data_total: 0,
-      view_data: [{}],
+      model_data_total: 0, // 模板管理表格最大数据量
+      view_data: [{}], // 预览模板
       page_num: 1, // 控制页码
+      search_status: false, // 控制是否处于搜索状态
+      search_data: [{}], // 搜索结果
+      search_model_name: "", // 搜索关键字
     };
   },
   methods: {
@@ -161,6 +169,50 @@ export default {
     // 时间戳转时间字符串
     changeTime(fmt) {
       return formatTime.setTime(fmt);
+    },
+    // 删除模板
+    delModel(mouldname) {
+      this.$confirm("是否删除模板" + mouldname + "?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.$axios({
+          method: "post",
+          url: "/api/common/dispat",
+          data: {
+            action: "del",
+            data: {
+              mouldname,
+            },
+          },
+        }).then((res) => {
+          if (res.data.ret == 0) {
+            this.$message.success(mouldname + "模板删除成功！");
+            this.getTotal();
+            this.getlist();
+          } else if (res.data.ret == 1) {
+            this.$message.error(res.data.msg);
+          }
+        });
+      });
+    },
+    // 获取搜索列表并赋值给search_list
+    getSearchList() {
+      this.search_status = true;
+      this.$axios({
+        method: "post",
+        url: "/api/common/dispat",
+        data: {
+          action: "total",
+          data: {
+            control: "query",
+            modelname: this.search_model_name,
+          },
+        },
+      }).then((res) => {
+        console.log(res.data);
+      });
     },
   },
   mounted() {
