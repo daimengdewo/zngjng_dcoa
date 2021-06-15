@@ -121,7 +121,6 @@ def m_total(request):
             mname = request.params['data']['name']
         else:
             uname=request.user.username
-            mname=request.user.mouldname
 
         if control is not None:
             if control == 'total':

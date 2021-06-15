@@ -296,3 +296,45 @@
 
 2021-06-10 16:10:04 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
 
+2021-06-15 14:39:23 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-15 14:39:33 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:42:01 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:42:03 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:43:15 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:43:17 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:50:11 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:51:36 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:51:38 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:51:41 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:51:46 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:52:40 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:52:43 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:54:57 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:54:58 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:11" - error - ERROR - 指定模板参数获取失败，发生异常:'User' object has no attribute 'mouldname'
+
+2021-06-15 14:55:38 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:55:46 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 管理员登陆成功，操作者为：admin
+
+2021-06-15 14:56:05 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:56:53 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:57:30 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
+2021-06-15 14:59:48 - logs - "/mnt/hgfs/WORKSMB/zjsys/adminapi/logdb.py:13" - debug - DEBUG - 加载路由表...
+
