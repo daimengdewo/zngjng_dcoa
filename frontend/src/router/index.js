@@ -49,13 +49,13 @@ const router = new Router({
           component: () => import("@/components/views/AccountManager")
         },
         {
-          path: "attencemodel",
-          name: "attencemodel",
+          path: "model",
+          name: "model",
           meta: {
             title: "考勤模板管理",
             usertype: 1
           },
-          component: () => import("@/components/views/AttenceModel")
+          component: () => import("@/components/views/Model")
         },
         {
           path: "dataExport",

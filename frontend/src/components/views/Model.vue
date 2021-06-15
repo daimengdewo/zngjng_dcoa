@@ -9,11 +9,11 @@
             <el-button
               type="warning"
               size="default"
-              icon="el-icon-folder"
-              @click=""
-              >上传模板</el-button
+              icon="el-icon-refresh"
+              @click="resetList"
             >
-
+              重置
+            </el-button>
             <el-button
               type="primary"
               size="default"
@@ -21,6 +21,8 @@
               @click="getSearchList"
               >搜索</el-button
             >
+            
+
             <el-input
               placeholder="请输入模板名称搜索"
               size="normal"
@@ -28,6 +30,20 @@
               v-model="search_model_name"
               style="width: 300px"
             ></el-input>
+            <el-select
+              v-model="search_type"
+              value-key="1"
+              filterable
+              style="width:120px"
+            >
+              <el-option
+                v-for="item in search_type_options"
+                :key="item.no"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </el-button-group>
         </el-col>
         <el-col :span="9" :offset="0"></el-col>
@@ -128,6 +144,19 @@ export default {
       search_status: false, // 控制是否处于搜索状态
       search_data: [{}], // 搜索结果
       search_model_name: "", // 搜索关键字
+      search_type: "query_un", // 搜索类型
+      search_type_options: [
+        {
+          no: 1,
+          label: "作者",
+          value: "query_un"
+        },
+        {
+          no: 2,
+          label: "模板名称",
+          value: "query_mn"
+        }
+      ] // 搜索类型列表
     };
   },
   methods: {
@@ -139,10 +168,10 @@ export default {
         data: {
           action: "total",
           data: {
-            control: "total",
-          },
-        },
-      }).then((res) => {
+            control: "total"
+          }
+        }
+      }).then(res => {
         if (res.data.ret == 0) {
           this.model_data_total = res.data.data;
         }
@@ -150,21 +179,35 @@ export default {
     },
     // 获取模板管理表格数据
     getlist() {
-      this.$axios({
-        method: "post",
-        url: "/api/common/dispat",
-        data: {
-          action: "list",
+      if (!this.search_status) {
+        this.$axios({
+          method: "post",
+          url: "/api/common/dispat",
           data: {
-            paging: 20,
-            pagenbr: this.page_num,
-          },
-        },
-      }).then((res) => {
-        if (res.data.ret == 0) {
-          this.model_data = res.data.data;
+            action: "list",
+            data: {
+              paging: 20,
+              pagenbr: this.page_num
+            }
+          }
+        }).then(res => {
+          if (res.data.ret == 0) {
+            this.model_data = res.data.data;
+          }
+        });
+      } else {
+        this.model_data = []; // 清空列表
+        let start_data_num = (this.page_num - 1) * 20; // 20条数据一页,记录开始数据序号
+        let paging = 0;
+        for (let i = start_data_num; i < this.model_data_total; i++) {
+          if (paging > 19) {
+            return;
+          } else {
+            this.model_data[i] = this.search_data[i]; // 重新赋值
+          }
+          paging++;
         }
-      });
+      }
     },
     // 时间戳转时间字符串
     changeTime(fmt) {
@@ -175,7 +218,7 @@ export default {
       this.$confirm("是否删除模板" + mouldname + "?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
+        type: "warning"
       }).then(() => {
         this.$axios({
           method: "post",
@@ -183,10 +226,10 @@ export default {
           data: {
             action: "del",
             data: {
-              mouldname,
-            },
-          },
-        }).then((res) => {
+              mouldname
+            }
+          }
+        }).then(res => {
           if (res.data.ret == 0) {
             this.$message.success(mouldname + "模板删除成功！");
             this.getTotal();
@@ -206,19 +249,30 @@ export default {
         data: {
           action: "total",
           data: {
-            control: "query",
-            modelname: this.search_model_name,
-          },
-        },
-      }).then((res) => {
-        console.log(res.data);
+            control: this.search_type,
+            name: this.search_model_name
+          }
+        }
+      }).then(res => {
+        if (res.data.ret == 0) {
+          this.search_data = res.data.data; // 赋值给搜索结果数据
+          this.model_data_total = this.search_data.length; // 模板的最大数据量改为搜索结果的数据量
+          this.page_num = 1;
+          this.getlist();
+        }
       });
     },
+    // 重置列表
+    resetList() {
+      this.search_status = false;
+      this.getTotal();
+      this.getlist();
+    }
   },
   mounted() {
     this.getTotal();
     this.getlist();
-  },
+  }
 };
 </script>
 
@@ -256,4 +310,3 @@ export default {
   width: auto;
 }
 </style>
-
