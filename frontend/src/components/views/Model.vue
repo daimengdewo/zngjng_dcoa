@@ -21,7 +21,6 @@
               @click="getSearchList"
               >搜索</el-button
             >
-            
 
             <el-input
               placeholder="请输入模板名称搜索"
@@ -232,8 +231,12 @@ export default {
         }).then(res => {
           if (res.data.ret == 0) {
             this.$message.success(mouldname + "模板删除成功！");
-            this.getTotal();
-            this.getlist();
+            if (this.search_status) {
+              this.getSearchList();
+            } else {
+              this.getTotal();
+              this.getlist();
+            }
           } else if (res.data.ret == 1) {
             this.$message.error(res.data.msg);
           }
