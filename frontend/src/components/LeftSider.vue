@@ -21,6 +21,11 @@
         <span>账号管理</span>
       </el-menu-item>
 
+      <el-menu-item index="/mgr/facemanager">
+        <i class="el-icon-s-custom"></i>
+        <span>人脸数据管理</span>
+      </el-menu-item>
+
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-postcard"></i>

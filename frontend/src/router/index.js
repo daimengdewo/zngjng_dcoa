@@ -65,6 +65,15 @@ const router = new Router({
             usertype: 1
           },
           component: () => import("@/components/views/DataExport")
+        },
+        {
+          path:"facemanager",
+          name:"facemanager",
+          meta:{
+            title:"人脸数据管理",
+            usertype:9
+          },
+          component:()=>import("@/components/faceManager/faceManager")
         }
       ]
     },
