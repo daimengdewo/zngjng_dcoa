@@ -5,14 +5,20 @@
       <el-row type="flex" justify="space-around" style="height: 40px">
         <el-col :span="1" :offset="0"></el-col>
         <el-col :span="22" :offset="0" style="text-align: left">
+          
           <el-button-group>
-            <el-button
-              type="success"
-              size="default"
-              @click=""
-              icon="el-icon-circle-plus-outline"
-              >新增人脸</el-button
-            >
+            <el-popover placement="bottom-start" width="200" style="float:left" trigger="click">
+              <div ref="qrcode"></div>
+              <el-button
+                type="success"
+                size="default"
+                slot="reference"
+                icon="el-icon-circle-plus-outline"
+                
+                >新增人脸</el-button
+              >
+            </el-popover>
+            
             <el-button
               type="warning"
               size="default"
@@ -27,6 +33,7 @@
               @click=""
               >搜索</el-button
             >
+            
             <el-input
               v-model="search"
               placeholder="请输入任意员工姓名"
@@ -108,6 +115,8 @@
 </template>
 
 <script>
+import QRCode from "qrcodejs2";
+
 export default {
   name: "facemanager",
   data() {
@@ -119,7 +128,7 @@ export default {
       btn_size: "medium", // 按钮大小
       face_list_total: 0, // 账号管理列表数据量
       page_num: 1, // 控制页码
-      request_url: "" // 请求地址
+      request_url: "", // 请求地址
     };
   },
   methods: {
@@ -129,13 +138,24 @@ export default {
         url: this.request_url + "",
         data: {
           paging: 20,
-          pagenbr: this.page_num
-        }
-      }).then(res => {});
-    }
+          pagenbr: this.page_num,
+        },
+      }).then((res) => {});
+    },
+    test() {
+      let reg = /http:\/\/([^\/]+)/i; // 提取域名的正则表达式
+      let href = window.location.href.match(reg)[0]; // 获取域名
+      let qrcode = new QRCode(this.$refs.qrcode, {
+        width: 200,
+        height: 200, // 高度
+        text: href+"/faceadd", // 二维码内容
+      });
+    },
   },
-  mounted() {},
-  components: {}
+  mounted() {
+    this.test();
+  },
+  components: {},
 };
 </script>
 

@@ -73,20 +73,25 @@ const router = new Router({
             title:"人脸数据管理",
             usertype:9
           },
-          component:()=>import("@/components/faceManager/faceManager")
-        }
+          component:()=>import("@/components/faceManager/FaceManager")
+        },
+       
       ]
     },
     {
       path: "/login",
       component: () => import("@/components/views/Login")
+    },
+    {
+      path:"/faceadd",
+      component:()=>import("@/components/faceManager/FaceAdd")
     }
   ]
 });
 
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === "/login") {
+  if (to.path === "/login" || to.path === "/faceadd") {
     next();
   } else {
     let token = localStorage.getItem("Authorization");

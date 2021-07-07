@@ -10,6 +10,10 @@ import store from "./store";
 import AES from "./AES";
 import md5 from "js-md5";
 import router from "./router";
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 axios.defaults.withCredentials = true;
 
@@ -50,6 +54,7 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 Vue.use(ElementUI);
 Vue.prototype.$AES = AES;
