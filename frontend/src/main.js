@@ -13,7 +13,6 @@ import router from "./router";
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
-Vue.use(Vant);
 
 axios.defaults.withCredentials = true;
 
@@ -55,12 +54,13 @@ axios.interceptors.response.use(
   }
 );
 
-
+Vue.use(Vant);
 Vue.use(ElementUI);
 Vue.prototype.$AES = AES;
 Vue.prototype.$md5 = md5;
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+
 
 /* eslint-disable no-new */
 new Vue({

@@ -35,6 +35,7 @@
             multiple
             :max-count="1"
             preview-size="200px"
+            :before-read="beforeRead"
             :preview-full-image="false"
           />
         </template>
@@ -49,6 +50,11 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { Toast } from "vant";
+
+Vue.use(Toast);
+
 export default {
   name: "faceadd",
   data() {
@@ -56,11 +62,49 @@ export default {
       people_id: "",
       people_name: "",
       face_photo: [],
+      file: "",
     };
   },
   methods: {
     submit(val) {
-      console.log(this.face_photo[0].content);
+      let formdata = new FormData();
+      formdata.append("file", this.file);
+      formdata.append("id", val["id"]);
+      formdata.append("nm", val["name"]);
+      this.$axios({
+        method: "post",
+        url: "/nodeapi/faceapi/upload",
+        data: formdata,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+        if (res.data.ret == 0) {
+          Toast.success("新增人脸成功");
+        } else if (res.data.ret == 1) {
+          Toast.fail("新增人脸失败,请检查照片或网络");
+        } else if (res.data.ret == 2) {
+          Toast.fail("新增人脸失败,请检查照片或网络");
+        }
+      });
+    },
+    // 图片放入预览前的处理
+    beforeRead(file) {
+      if (file.size > 3 * 1024 * 1024) {
+        const imageConversion = require("image-conversion");
+        imageConversion.compressAccurately(file, {
+          size:3*1024,
+          type: "image/jpeg",
+　　　　  width: 640,
+　　　　  height: 640,
+        }).then((res) => {
+          //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
+          this.file = res;
+        });
+      }else{
+        this.file=file;
+      }
+      return true;
     },
   },
 };
@@ -83,7 +127,7 @@ export default {
 #faceadd .van-uploader__upload {
   border-radius: 12px;
 }
-#faceadd span{
+#faceadd span {
   font-size: 14px;
 }
 </style>
