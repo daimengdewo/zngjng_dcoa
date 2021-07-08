@@ -5,7 +5,6 @@
       <el-row type="flex" justify="space-around" style="height: 40px">
         <el-col :span="1" :offset="0"></el-col>
         <el-col :span="22" :offset="0" style="text-align: left">
-          <el-button-group>
             <el-popover
               placement="bottom-start"
               width="200"
@@ -20,31 +19,7 @@
                 icon="el-icon-circle-plus-outline"
                 >新增人脸</el-button
               >
-            </el-popover>
-
-            <el-button
-              type="warning"
-              size="default"
-              icon="el-icon-refresh"
-              @click=""
-              >重置</el-button
-            >
-            <el-button
-              type="primary"
-              icon="el-icon-search"
-              size="default"
-              @click=""
-              >搜索</el-button
-            >
-
-            <el-input
-              v-model="search"
-              placeholder="请输入任意员工姓名"
-              size="normal"
-              clearable
-              style="width: 200px"
-            ></el-input>
-          </el-button-group>
+            </el-popover>    
         </el-col>
         <el-col :span="1" :offset="0"></el-col>
       </el-row>
@@ -57,17 +32,16 @@
             stripe
             :data="face_data"
             height="700"
-            style="font-size: 0.9rem; text-align: center"
+            style="font-size: 0.9rem; text-align: center;width:790px;"
           >
             <el-table-column prop="ID" label="id" width="100">
             </el-table-column>
             <el-table-column prop="name" label="员工姓名" width="200">
             </el-table-column>
 
-            <el-table-column label="人脸图片" width="200">
+            <el-table-column label="人脸图片" width="280">
               <template slot-scope="scope">
-                <el-image :src="scope.row.faceid"></el-image>
-                <img :src="scope.row.faceid" />
+                <img :src="getFaceUrl(scope.row.faceid)"  style="width: 180px;height:auto;"></img>
               </template>
             </el-table-column>
             <el-table-column align="right" width="200">
@@ -79,7 +53,7 @@
                   :size="btn_size"
                   round
                   plain
-                  @click="dow"
+                  @click="delFace(scope.row.ID)"
                   >删除人脸</el-button
                 >
               </template>
@@ -121,13 +95,9 @@ export default {
   data() {
     return {
       face_data: [{}], // 列表数据
-      search: "", // 搜索框内容
-      search_status: false, // 搜索状态控制
-      search_list: [{}], // 搜索结果列表
       btn_size: "medium", // 按钮大小
       face_list_total: 0, // 账号管理列表数据量
       page_num: 1, // 控制页码
-      face_url: "",
     };
   },
   methods: {
@@ -137,12 +107,14 @@ export default {
       this.$axios({
         method: "post",
         url: "/nodeapi/faceapi/getface",
-        data: formdata,
-      }).then((res) => {
+        data: formdata
+      }).then(res => {
         this.face_data = res.data.data;
         this.face_list_total = res.data.total;
-        this.face_url = res.data.data[0].faceid;
       });
+    },
+    getFaceUrl(url){
+      return `https://${url}`;
     },
     getQRCodeUrl() {
       let reg = /http:\/\/([^\/]+)/i; // 提取域名的正则表达式
@@ -150,24 +122,35 @@ export default {
       let qrcode = new QRCode(this.$refs.qrcode, {
         width: 200,
         height: 200, // 高度
-        text: href + "/faceadd", // 二维码内容
+        text: `${href}/faceadd"` // 二维码内容
       });
     },
-    dow(){
-      this.$axios({
-        method:'get',
-        url: "https://"+this.face_url,
-        responseType: 'blob'
-      }).then(res=>{
-        console.log(res);
-      });
+    delFace(id) {
+      this.$confirm("确定删除该人脸？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        let formdata = new FormData();
+        formdata.append("id", id);
+        this.$axios({
+          method: "post",
+          url: "/nodeapi/faceapi/delface",
+          data: formdata
+        }).then(res => {
+          if (res.data.ret == 0) {
+            this.$message.success(`删除ID为：${id}人脸成功`);
+            this.getFacelist();
+          }
+        });
+      }).catch(()=>{});
     }
   },
   mounted() {
     this.getQRCodeUrl();
     this.getFacelist();
   },
-  components: {},
+  components: {}
 };
 </script>
 
@@ -180,10 +163,18 @@ export default {
 
 .el-table {
   width: 100%;
+  overflow: auto;
 }
+
+
 </style>
 
 <style>
+
+.el-table__body-wrapper{
+  overflow: auto;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

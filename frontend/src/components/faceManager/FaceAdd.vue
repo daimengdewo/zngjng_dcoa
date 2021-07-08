@@ -90,13 +90,13 @@ export default {
     },
     // 图片放入预览前的处理
     beforeRead(file) {
-      if (file.size > 3 * 1024 * 1024) {
+      if (file.size > 1 * 1024 * 1024) {
         const imageConversion = require("image-conversion");
         imageConversion.compressAccurately(file, {
-          size:3*1024,
+          size:1024,
           type: "image/jpeg",
-　　　　  width: 640,
-　　　　  height: 640,
+　　　　  width: 500,
+　　　　  height: 660,
         }).then((res) => {
           //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
           this.file = res;

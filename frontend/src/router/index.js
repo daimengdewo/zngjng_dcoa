@@ -75,7 +75,15 @@ const router = new Router({
           },
           component:()=>import("@/components/faceManager/FaceManager")
         },
-       
+        {
+          path:"attencemanager",
+          name:"attencemanager",
+          meta:{
+            title:"考勤数据管理",
+            usertype:9
+          },
+          component:()=>import("@/components/attenceManager/AttenceManager")
+        }
       ]
     },
     {

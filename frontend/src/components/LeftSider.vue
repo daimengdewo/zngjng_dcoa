@@ -39,6 +39,10 @@
           <i class="el-icon-setting"></i>
           <span> 考勤模板管理</span>
         </el-menu-item>
+        <el-menu-item index="/mgr/attencemanager">
+          <i class="el-icon-setting"></i>
+          <span> 考勤数据管理</span>
+        </el-menu-item>
         <el-menu-item index="/mgr/dataExport">
           <i class="el-icon-document"></i>
           <span>导出数据</span>
