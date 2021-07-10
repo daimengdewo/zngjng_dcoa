@@ -2,7 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import main from "@/components/MainWin";
 import store from "@/store";
-import { Message } from "element-ui";
+import {
+  Message
+} from "element-ui";
 import AES from "@/AES";
 
 Vue.use(Router);
@@ -17,8 +19,7 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 
 const router = new Router({
   mode: "history",
-  routes: [
-    {
+  routes: [{
       path: "/",
       redirect: "/login"
     },
@@ -29,8 +30,7 @@ const router = new Router({
       meta: {
         usertype: 9
       },
-      children: [
-        {
+      children: [{
           path: "home",
           name: "home",
           meta: {
@@ -67,22 +67,22 @@ const router = new Router({
           component: () => import("@/components/views/DataExport")
         },
         {
-          path:"facemanager",
-          name:"facemanager",
-          meta:{
-            title:"人脸数据管理",
-            usertype:9
+          path: "facemanager",
+          name: "facemanager",
+          meta: {
+            title: "人脸数据管理",
+            usertype: 9
           },
-          component:()=>import("@/components/faceManager/FaceManager")
+          component: () => import("@/components/faceManager/FaceManager")
         },
         {
-          path:"attencemanager",
-          name:"attencemanager",
-          meta:{
-            title:"考勤数据管理",
-            usertype:9
+          path: "attencemanager",
+          name: "attencemanager",
+          meta: {
+            title: "考勤数据管理",
+            usertype: 9
           },
-          component:()=>import("@/components/attenceManager/AttenceManager")
+          component: () => import("@/components/attenceManager/AttenceManager")
         }
       ]
     },
@@ -91,18 +91,22 @@ const router = new Router({
       component: () => import("@/components/views/Login")
     },
     {
-      path:"/faceadd",
-      component:()=>import("@/components/faceManager/FaceAdd")
-    },{
-      path:"/clockin",
-      component:()=>import("@/components/faceManager/ClockIn")
+      path: "/faceadd",
+      component: () => import("@/components/faceManager/FaceAdd")
+    }, {
+      path: "/clockin",
+      component: () => import("@/components/faceManager/ClockIn")
     }
   ]
 });
 
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === "/login" || to.path === "/faceadd" || to.path==="/clockin") {
+  if (to.path == "/login") {
+    next();
+  } else if (to.path == "/faceadd") {
+    next();
+  } else if (to.path == "/clockin") {
     next();
   } else {
     let token = localStorage.getItem("Authorization");

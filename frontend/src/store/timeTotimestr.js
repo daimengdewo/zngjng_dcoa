@@ -20,5 +20,20 @@ export default {
       .toString()
       .padStart(2, "0");
     return `${Y}-${M}-${D} ${h}:${m}:${s}`;
+  },
+  getNowTime(now) {
+    let year = now.getFullYear();
+    let month =
+      now.getMonth() + 1 < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
+    let day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
+    let hour = now.getHours() < 10 ? "0" + now.getHours() : now.getHours();
+    let min = now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes();
+    let seconds = now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
+    let now_date = year + "-" + month + "-" + day;
+    let now_time = hour + ":" + min + ":" + seconds;
+    return {
+      now_date,
+      now_time
+    };
   }
 };
