@@ -91,7 +91,8 @@ export default {
     // 图片放入预览前的处理
     beforeRead(file) {
       if (file.size > 1 * 1024 * 1024) {
-        const imageConversion = require("image-conversion");
+        const imageConversion = require("image-conversion"); // 导入依赖
+        // 压缩图片
         imageConversion.compressAccurately(file, {
           size:1024,
           type: "image/jpeg",

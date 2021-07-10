@@ -93,13 +93,16 @@ const router = new Router({
     {
       path:"/faceadd",
       component:()=>import("@/components/faceManager/FaceAdd")
+    },{
+      path:"/clockin",
+      component:()=>import("@/components/faceManager/ClockIn")
     }
   ]
 });
 
 // 路由前置守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === "/login" || to.path === "/faceadd") {
+  if (to.path === "/login" || to.path === "/faceadd" || to.path==="/clockin") {
     next();
   } else {
     let token = localStorage.getItem("Authorization");
