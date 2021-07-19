@@ -117,7 +117,12 @@ export default {
       return `https://${url}`;
     },
     getQRCodeUrl() {
-      let reg = /https:\/\/([^\/]+)/i; // 提取域名的正则表达式
+      let reg;// 提取域名的正则表达式
+      if(window.location.href.match(/https/)){
+        reg = /https:\/\/([^\/]+)/i; 
+      }else{
+        reg = /http:\/\/([^\/]+)/i;
+      }
       let href = window.location.href.match(reg)[0]; // 获取域名
       let qrcode = new QRCode(this.$refs.qrcode, {
         width: 200,

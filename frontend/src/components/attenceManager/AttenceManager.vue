@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { export2Excel } from "../../common/js/util";
+import { export2Excel } from "@/common/js/util";
 
 export default {
   name: "attencemanager",
