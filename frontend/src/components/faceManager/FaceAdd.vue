@@ -115,7 +115,7 @@ export default {
       this.$axios({
         method:'post',
         url: "/iaiapi",
-        headers:iai.getHeaders("GetGroupInfo",payload),
+        headers:iai.getHeaders("GetPersonList",payload),
         data:payload
       }).then(res=>{
         console.log(res.data);

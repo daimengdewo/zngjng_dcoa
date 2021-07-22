@@ -28,7 +28,12 @@ export default {
     const CanonicalQueryString = ``;
     const CanonicalHeaders = `content-type:application/json;charset=utf-8\nhost:iai.tencentcloudapi.com\n`;
     const SignedHeaders = `content-type;host`;
-    const HashedRequestPayload = getHash(JSON.stringify(payload));
+    let HashedRequestPayload;
+    if(payload=="{}"){
+      HashedRequestPayload = getHash("{}");
+    }else{
+      HashedRequestPayload = getHash(JSON.stringify(payload));
+    }   
     let CanonicalRequest =
       HTTPRequestMethod +
       "\n" +
