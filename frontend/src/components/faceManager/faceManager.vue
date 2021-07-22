@@ -127,7 +127,7 @@ export default {
       let qrcode = new QRCode(this.$refs.qrcode, {
         width: 200,
         height: 200, // 高度
-        text: `${href}/faceadd"` // 二维码内容
+        text: `${href}/faceadd` // 二维码内容
       });
     },
     delFace(id) {

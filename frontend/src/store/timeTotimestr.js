@@ -28,7 +28,8 @@ export default {
     let day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
     let hour = now.getHours() < 10 ? "0" + now.getHours() : now.getHours();
     let min = now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes();
-    let seconds = now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
+    let seconds =
+      now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
     let now_date = year + "-" + month + "-" + day;
     let now_time = hour + ":" + min + ":" + seconds;
     return {

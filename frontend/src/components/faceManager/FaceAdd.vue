@@ -52,6 +52,7 @@
 <script>
 import Vue from "vue";
 import { Toast } from "vant";
+import iai from "@/iai";
 
 Vue.use(Toast);
 
@@ -93,20 +94,36 @@ export default {
       if (file.size > 1 * 1024 * 1024) {
         const imageConversion = require("image-conversion"); // 导入依赖
         // 压缩图片
-        imageConversion.compressAccurately(file, {
-          size:1024,
-          type: "image/jpeg",
-　　　　  width: 500,
-　　　　  height: 660,
-        }).then((res) => {
-          //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
-          this.file = res;
-        });
-      }else{
-        this.file=file;
+        imageConversion
+          .compressAccurately(file, {
+            size: 1024,
+            type: "image/jpeg",
+            width: 500,
+            height: 660,
+          })
+          .then((res) => {
+            //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
+            this.file = res;
+          });
+      } else {
+        this.file = file;
       }
       return true;
     },
+    test() {
+      let payload={"GroupId":"1"}
+      this.$axios({
+        method:'post',
+        url: "/iaiapi",
+        headers:iai.getHeaders("GetGroupInfo",payload),
+        data:payload
+      }).then(res=>{
+        console.log(res.data);
+      })
+    },
+  },
+  mounted() {
+    this.test();
   },
 };
 </script>

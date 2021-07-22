@@ -13,12 +13,13 @@ import router from "./router";
 import Vant from "vant";
 import "vant/lib/index.css";
 
+
 axios.defaults.withCredentials = true;
 
 // 添加请求拦截器，在请求头中加token
 axios.interceptors.request.use(
   config => {
-    if (localStorage.getItem("Authorization")) {
+    if (localStorage.getItem("Authorization") && config.url=="/api") {
       config.headers.Authorization = localStorage.getItem("Authorization");
     }
 
@@ -27,6 +28,7 @@ axios.interceptors.request.use(
   error => {
     return Promise.reject(error);
   }
+  
 );
 
 // 全局捕捉请求错误
@@ -59,6 +61,7 @@ Vue.prototype.$AES = AES;
 Vue.prototype.$md5 = md5;
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+
 
 /* eslint-disable no-new */
 new Vue({
