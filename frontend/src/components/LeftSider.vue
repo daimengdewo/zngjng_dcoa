@@ -39,6 +39,10 @@
           <i class="el-icon-setting"></i>
           <span> 考勤模板管理</span>
         </el-menu-item>
+        <el-menu-item index="/mgr/attencerule">
+          <i class="el-icon-setting"></i>
+          <span> 考勤规则</span>
+        </el-menu-item>
         <el-menu-item index="/mgr/attencemanager">
           <i class="el-icon-setting"></i>
           <span> 考勤数据管理</span>

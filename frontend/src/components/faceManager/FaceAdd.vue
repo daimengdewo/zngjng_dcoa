@@ -72,6 +72,8 @@ export default {
       formdata.append("file", this.file);
       formdata.append("id", val["id"]);
       formdata.append("nm", val["name"]);
+      formdata.append("set","0");
+      formdata.append("BM","1");
       this.$axios({
         method: "post",
         url: "/nodeapi/faceapi/upload",
@@ -121,9 +123,6 @@ export default {
         console.log(res.data);
       })
     },
-  },
-  mounted() {
-    this.test();
   },
 };
 </script>

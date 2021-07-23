@@ -19,7 +19,7 @@ axios.defaults.withCredentials = true;
 // 添加请求拦截器，在请求头中加token
 axios.interceptors.request.use(
   config => {
-    if (localStorage.getItem("Authorization") && config.url=="/api") {
+    if (localStorage.getItem("Authorization") && /^\/api/.test(config.url)) {
       config.headers.Authorization = localStorage.getItem("Authorization");
     }
 
