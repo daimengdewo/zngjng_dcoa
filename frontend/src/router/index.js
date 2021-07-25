@@ -9,13 +9,13 @@ import AES from "@/AES";
 
 Vue.use(Router);
 
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location, onResolve, onReject) {
-  if (onResolve || onReject) {
-    return originalPush.call(this, location, onResolve, onReject);
-  }
-  return originalPush.call(this, location).catch(err => err);
-};
+// const originalPush = Router.prototype.push;
+// Router.prototype.push = function push(location, onResolve, onReject) {
+//   if (onResolve || onReject) {
+//     return originalPush.call(this, location, onResolve, onReject);
+//   }
+//   return originalPush.call(this, location).catch(err => err);
+// };
 
 const router = new Router({
   mode: "history",
@@ -67,7 +67,7 @@ const router = new Router({
           component: () => import("@/components/views/DataExport")
         },
         {
-          path: "facemanager",
+          path: "facemanager/:currentPage",
           name: "facemanager",
           meta: {
             title: "人脸数据管理",

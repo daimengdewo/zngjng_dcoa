@@ -69,6 +69,7 @@ export default {
   methods: {
     submit(val) {
       let formdata = new FormData();
+      formdata.append('url','file');
       formdata.append("file", this.file);
       formdata.append("id", val["id"]);
       formdata.append("nm", val["name"]);
