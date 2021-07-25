@@ -72,7 +72,7 @@ export default {
       formdata.append("file", this.file);
       formdata.append("id", val["id"]);
       formdata.append("nm", val["name"]);
-      formdata.append("set","0");
+      formdata.append("set","1");
       formdata.append("BM","1");
       this.$axios({
         method: "post",
