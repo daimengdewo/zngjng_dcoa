@@ -23,6 +23,17 @@
         v-model="people_name"
       />
       <van-field
+        readonly
+        clickable
+        class="faceform"
+        required
+        name="department"
+        label="部门"
+        :value="people_department"
+        :rules="[{ required: true, message: '请选择部门' }]"
+        @click="showPicker = true"
+      />
+      <van-field
         class="faceform"
         name="uploader"
         label="人脸图片上传"
@@ -33,6 +44,7 @@
           <van-uploader
             v-model="face_photo"
             multiple
+            capture="camera"
             :max-count="1"
             preview-size="200px"
             :before-read="beforeRead"
@@ -46,13 +58,20 @@
         >
       </div>
     </van-form>
+    <van-popup v-model="showPicker" position="bottom">
+      <van-picker
+        show-toolbar
+        :columns="department_list"
+        @confirm="setDepartment"
+        @cancel="showPicker = false"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import { Toast } from "vant";
-import iai from "@/iai";
 
 Vue.use(Toast);
 
@@ -62,19 +81,22 @@ export default {
     return {
       people_id: "",
       people_name: "",
+      people_department: "",
+      department_list: [],
       face_photo: [],
       file: "",
+      showPicker: false,
     };
   },
   methods: {
     submit(val) {
       let formdata = new FormData();
-      formdata.append('url','file');
+      formdata.append("url", "file");
       formdata.append("file", this.file);
       formdata.append("id", val["id"]);
       formdata.append("nm", val["name"]);
-      formdata.append("set","1");
-      formdata.append("BM","1");
+      formdata.append("set", "1");
+      formdata.append("BM", val["department"]);
       this.$axios({
         method: "post",
         url: "/nodeapi/faceapi/upload",
@@ -113,17 +135,25 @@ export default {
       }
       return true;
     },
-    test() {
-      let payload={"GroupId":"1"}
+    showDepartment(){
       this.$axios({
         method:'post',
-        url: "/iaiapi",
-        headers:iai.getHeaders("GetPersonList",payload),
-        data:payload
+        url: "/nodeapi/faceapi/BMlist",
       }).then(res=>{
-        console.log(res.data);
+        let data_array=[];
+        for(let i=0;i<res.data.length;i++){
+          data_array[i]=res.data[i].BM;
+        }
+        this.department_list=data_array;
       })
     },
+    setDepartment(val){
+      this.people_department=val;
+      this.showPicker=false;
+    }
+  },
+  mounted () {
+    this.showDepartment();
   },
 };
 </script>

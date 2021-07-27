@@ -92,6 +92,15 @@ const router = new Router({
             usertype: 9
           },
           component: () => import("@/components/attenceManager/AttenceRule")
+        },
+        {
+          path: "attencerulemanager",
+          name: "attencerulemanager",
+          meta: {
+            title: "考勤规则管理",
+            usertype: 9
+          },
+          component: () => import("@/components/attenceManager/AttenceRuleManager")
         }
       ]
     },
