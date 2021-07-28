@@ -156,3 +156,42 @@ def m_list(request):
                     'ret': 1,
                     'msg': "模板列表获取失败，发生异常:{}".format(e)
                 })
+
+
+@api_view(['POST'])
+def face_netpass(request):
+
+    receive = request.data
+    pic = receive.get('pic')
+
+    import json
+    from tencentcloud.common import credential
+    from tencentcloud.common.profile.client_profile import ClientProfile
+    from tencentcloud.common.profile.http_profile import HttpProfile
+    from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
+    from tencentcloud.iai.v20200303 import iai_client, models
+    from django.shortcuts import HttpResponse
+    try: 
+        cred = credential.Credential("AKIDlKgohNp21kETTDiyznPp7B3h6HEwPdcN", "Y05wXu2vZ7QUJtDJAmBMK5e1YxAB4mIa")
+        httpProfile = HttpProfile()
+        httpProfile.endpoint = "iai.tencentcloudapi.com"
+
+        clientProfile = ClientProfile()
+        clientProfile.httpProfile = httpProfile
+        client = iai_client.IaiClient(cred, "ap-guangzhou", clientProfile) 
+
+        req = models.SearchFacesRequest()
+        params = {
+            "GroupIds": [ "1" ],
+            "Image": pic,
+            "MaxPersonNum": 1,
+            "NeedPersonInfo": 1
+        }
+        req.from_json_string(json.dumps(params))
+
+        resp = client.SearchFaces(req) 
+
+        return HttpResponse(resp.to_json_string())
+        
+    except TencentCloudSDKException as err: 
+        return HttpResponse(err)

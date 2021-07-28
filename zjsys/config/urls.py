@@ -24,5 +24,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('adminapi/',include('adminapi.urls')),
     path('common/',include('common.urls')),
+    path('userapi/',include('userapi.urls')),
     path('getlog', logdb.get_logs),
 ]
