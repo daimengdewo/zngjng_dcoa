@@ -170,6 +170,22 @@ export default {
         type: "warning",
       })
         .then(() => {
+          Promise.all([this.delFaceSubmit(id),this.delDeviceFaceSubmit(id)]).then(res=>{
+            console.log(res);
+            if(res[0]==0 && res[1]==200){
+              this.$message.success(`删除ID为：${id}人脸成功`);
+              this.getFacelist();
+            }else{
+              this.$message.error(`删除ID为：${id}人脸失败`);
+              this.getFacelist();
+            }
+          })
+        })
+        .catch(() => {});
+    },
+    async delFaceSubmit(id){
+      const post=()=>{
+        return new Promise((resolve,reject)=>{
           let formdata = new FormData();
           formdata.append("id", id);
           this.$axios({
@@ -177,14 +193,28 @@ export default {
             url: "/nodeapi/faceapi/delface",
             data: formdata,
           }).then((res) => {
-            if (res.data.ret == 0) {
-              this.$message.success(`删除ID为：${id}人脸成功`);
-              this.getFacelist();
-            }
+            resolve(res.data.ret);
           });
         })
-        .catch(() => {});
-    }, 
+      }
+      return await post();
+    },
+    async delDeviceFaceSubmit(id){
+      const post=()=>{
+        return new Promise((resolve,reject)=>{
+          this.$axios({
+            method:'post',
+            url: "/api/userapi/delface",
+            data: {
+              id:id
+            }
+          }).then(res=>{
+            resolve(res.data.code);
+          })
+        })
+      }
+      return await post();
+    }
   },
   mounted() {
     this.getQRCodeUrl();

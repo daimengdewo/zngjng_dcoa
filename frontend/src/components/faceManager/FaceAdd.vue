@@ -1,6 +1,6 @@
 <template>
   <div id="faceadd">
-    <van-form class="faceform" @submit="submit">
+    <van-form class="faceform" @submit="lastSubmit">
       <h2 style="margin: 0; padding: 10px 0; box-shadow: 0 8px 12px #ebedf0">
         新增人脸
       </h2>
@@ -89,7 +89,7 @@ export default {
     };
   },
   methods: {
-    submit(val) {
+    async submit(val) {
       let formdata = new FormData();
       formdata.append("url", "file");
       formdata.append("file", this.file);
@@ -97,22 +97,49 @@ export default {
       formdata.append("nm", val["name"]);
       formdata.append("set", "1");
       formdata.append("BM", val["department"]);
-      this.$axios({
-        method: "post",
-        url: "/nodeapi/faceapi/upload",
-        data: formdata,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }).then((res) => {
-        if (res.data.ret == 0) {
+      const post = () => {
+        return new Promise((resolve,reject) => {
+          this.$axios({
+            method: "post",
+            url: "/nodeapi/faceapi/upload",
+            data: formdata,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }).then((res) => {
+            resolve(res.data.ret);
+          });
+        });
+      }
+      return await post();
+    },
+    async pySubmit(val){
+      const post=()=>{
+        return new Promise((resolve,reject)=>{
+          this.$axios({
+            method:'post',
+            url: "/api/userapi/newface",
+            data: {
+              id:val["id"],
+              name:val["name"],
+              face:this.file
+            }
+          }).then(res=>{
+            resolve(res.data.code);
+          })
+        })
+      }
+      return await post();
+    },
+    lastSubmit(val){
+      Promise.all([this.submit(val),this.pySubmit(val)]).then(res=>{
+        console.log(res);
+        if(res[0]==0 && res[1]==200){
           Toast.success("新增人脸成功");
-        } else if (res.data.ret == 1) {
-          Toast.fail("新增人脸失败,请检查照片或网络");
-        } else if (res.data.ret == 2) {
+        }else{
           Toast.fail("新增人脸失败,请检查照片或网络");
         }
-      });
+      })
     },
     // 图片放入预览前的处理
     beforeRead(file) {
@@ -135,24 +162,24 @@ export default {
       }
       return true;
     },
-    showDepartment(){
+    showDepartment() {
       this.$axios({
-        method:'post',
+        method: "post",
         url: "/nodeapi/faceapi/BMlist",
-      }).then(res=>{
-        let data_array=[];
-        for(let i=0;i<res.data.length;i++){
-          data_array[i]=res.data[i].BM;
+      }).then((res) => {
+        let data_array = [];
+        for (let i = 0; i < res.data.length; i++) {
+          data_array[i] = res.data[i].BM;
         }
-        this.department_list=data_array;
-      })
+        this.department_list = data_array;
+      });
     },
-    setDepartment(val){
-      this.people_department=val;
-      this.showPicker=false;
-    }
+    setDepartment(val) {
+      this.people_department = val;
+      this.showPicker = false;
+    },
   },
-  mounted () {
+  mounted() {
     this.showDepartment();
   },
 };

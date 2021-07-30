@@ -52,7 +52,7 @@
           >
             <el-table-column prop="ID" label="ID"> </el-table-column>
             <el-table-column prop="name" label="姓名"> </el-table-column>
-            <el-table-column prop="device" label="部门"> </el-table-column>
+            <el-table-column prop="BM" label="部门"> </el-table-column>
             <el-table-column prop="date" label="打卡日期"> </el-table-column>
             <el-table-column prop="time" label="打卡时间"> </el-table-column>
             <el-table-column prop="nbr" label="打卡地点"> </el-table-column>
@@ -108,7 +108,6 @@ export default {
   methods: {
     // 翻页
     getAttenceList() {
-      this.table_loading=true;
       if (!this.search_status) {
         let formdata = new FormData();
         formdata.append("currentPage", this.page_num);
@@ -370,8 +369,9 @@ export default {
               }
             }
           }
-          this.search_list = res_list;
           this.table_loading=false;
+          this.page_num=1;
+          this.search_list = res_list;
           this.getAttenceList();
         });
       } else {
