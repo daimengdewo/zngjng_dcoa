@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from copy import Error
 import  requests,json,time,os,sys
 import datetime,MySQLdb
 import MySQLdb.cursors
@@ -17,56 +18,78 @@ token = res['access_token']
 
 form_header = {"Authorization": "Bearer {}".format(token)}
 
-#获取consumerId
-response = requests.post('https://api2.hik-cloud.com/api/v1/mq/consumer/group1', headers=form_header)
-res = response.json()
-print(res)
-if res is not None:
-	if 'consumerId' in res['data']:
-		consumerId = res['data']['consumerId']
+consumerId = '5bef4093287f4c9392f865fc437003e4'
 
 #构建data
-form_data = {"consumerId": "{}".format(consumerId) , "autoCommit": 'true'}
+form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
+
+#关闭多余连接
+s = requests.session()
+s.keep_alive = False
 
 # 获取实时事件
 # try:
 while True:
 		response = requests.post('https://api2.hik-cloud.com/api/v1/mq/consumer/messages', data=form_data, headers=form_header)
-		if res is not None:
-			res = response.json()
-			# print(res)
+		if response is not None:
+			try:
+				res = response.json()
+				# print(res)
+			except:
+				pass
+
 		
 		if 'code' in res:
-			if res['code'] == '514004':
-				python = sys.executable
-				os.execl(python, python, * sys.argv)
+			if res['code'] == 514004:
+				#获取consumerId
+				response = requests.post('https://api2.hik-cloud.com/api/v1/mq/consumer/group1', headers=form_header)
+				code = response.json()
+				if code is not None:
+					if 'consumerId' in code['data']:
+						consumerId = code['data']['consumerId']
+						form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
 
-		time.sleep(2)
+			if res['code'] == 514002:
+				#获取consumerId
+				response = requests.post('https://api2.hik-cloud.com/api/v1/mq/consumer/group1', headers=form_header)
+				code = response.json()
+				if code is not None:
+					if 'consumerId' in code['data']:
+						consumerId = code['data']['consumerId']
+						form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
+
+		time.sleep(4)
 		if 'data' in res:
-			if res['data'] != []:
-				content = json.loads(res['data'][0]['content'])
-				if content['eventCode'] == '10114':
-					t = content["dateTime"]
-					new_date = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%Y-%m-%d")
-					new_time = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%H:%M:%S")
+			if res['data'] != [] and res['data'] != None:
+				resdata = list(res['data'])
 
-					cursor = db.cursor()
-					cursor.execute("select BM from face where ID = '{}'".format(content["employeeNo"]))
-					rs = cursor.fetchall()
-					cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
-					db.commit()
-					cursor.close()
+				if len(resdata) > 1 :
+					for i in range(len(resdata)):
+						if json.loads(resdata[i]['content'])['eventCode'] == '10114':
+							content = json.loads(resdata[i]['content'])
+							t = content["dateTime"]
+							new_date = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%Y-%m-%d")
+							new_time = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%H:%M:%S")
+							
+							db.ping(True)
+							cursor = db.cursor()
+							cursor.execute("select BM from face where ID = '{}'".format(content["employeeNo"]))
+							rs = cursor.fetchall()
+							cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
+							db.commit()
+							cursor.close()
 
-					data = {"id" : "{}".format(content["employeeNo"]),
-							"name" : "{}".format(content["name"]),
-							"date" : "{}".format(new_date),
-							"time" : "{}".format(new_time),
-							"bm" : "{}".format(rs[0]['BM'])
+							data = {"id" : "{}".format(content["employeeNo"]),
+									"name" : "{}".format(content["name"]),
+									"date" : "{}".format(new_date),
+									"time" : "{}".format(new_time),
+									"bm" : "{}".format(rs[0]['BM'])
 
-					}
-					print(data)
+							}
+							print(data)
 
-# except:
+# except Exception as e:
+# 	print(e)
 # 	python = sys.executable
 # 	os.execl(python, python, * sys.argv)
 

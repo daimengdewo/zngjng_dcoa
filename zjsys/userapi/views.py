@@ -25,6 +25,7 @@ def newface(request):
                         "personName": "{}".format(name),
                         "validBeginTime": "2020-01-11T00:00:59+08:00",
                         "validEndTime": "2030-12-30T00:00:59+08:00",
+                        "verifyImage": False,
                         "faceImageBase64": "{}".format(face)}
 
         #新增人员
@@ -59,3 +60,5 @@ def delface(request):
 
         index = requests.post('https://api2.hik-cloud.com/api/v1/open/basic/persons/delete?employeeNo={}'.format(id),headers=form_header)
         return JsonResponse(index.json())
+
+

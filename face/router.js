@@ -15,6 +15,10 @@ module.exports = (app) => {
   router.post('/faceapi/getuser',HomeController.getuser)
   router.post('/faceapi/getlist',HomeController.getList)
   router.post('/faceapi/delguize',HomeController.delguize)
+  router.post('/faceapi/savejw',HomeController.savejw)
+  router.post('/faceapi/getjw',HomeController.getjw)
+  router.post('/faceapi/deljw',HomeController.deljw)
+  router.post('/faceapi/getalljw',HomeController.getalljw)
   app.use(router.routes())
      .use(router.allowedMethods())
 }

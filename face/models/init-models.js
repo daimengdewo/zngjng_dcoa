@@ -10,6 +10,7 @@ var _django_migrations = require("./django_migrations");
 var _django_session = require("./django_session");
 var _face = require("./face");
 var _guize = require("./guize");
+var _jingwei = require("./jingwei");
 var _kaoqin = require("./kaoqin");
 var _zjsys_user = require("./zjsys_user");
 var _zjsys_user_groups = require("./zjsys_user_groups");
@@ -27,6 +28,7 @@ function initModels(sequelize) {
   var django_session = _django_session(sequelize, DataTypes);
   var face = _face(sequelize, DataTypes);
   var guize = _guize(sequelize, DataTypes);
+  var jingwei = _jingwei(sequelize, DataTypes);
   var kaoqin = _kaoqin(sequelize, DataTypes);
   var zjsys_user = _zjsys_user(sequelize, DataTypes);
   var zjsys_user_groups = _zjsys_user_groups(sequelize, DataTypes);
@@ -67,6 +69,7 @@ function initModels(sequelize) {
     django_session,
     face,
     guize,
+    jingwei,
     kaoqin,
     zjsys_user,
     zjsys_user_groups,

@@ -37,3 +37,13 @@ class Kaoqin(models.Model):
 
     class Meta:
         db_table = 'kaoqin'
+
+
+class Jingwei(models.Model):
+    sid = models.IntegerField(primary_key=True)
+    lnglat = models.CharField(db_column='LngLat', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    bm = models.CharField(db_column='BM', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        db_table = 'jingwei'

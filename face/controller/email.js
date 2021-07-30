@@ -356,5 +356,51 @@ module.exports = {
       }
     })
     ctx.response.body = userList
+  },
+  savejw: async(ctx, next) => {
+    let {
+      lnglat,
+      bm,
+      address
+    } = ctx.request.body
+    const userList = await db.Jingwei.upsert({ BM:bm,LngLat:lnglat,address:address }, {updateOnDuplicate:true});
+    ctx.response.body = userList
+  },
+  getjw: async(ctx, next) => {
+    let {
+      bm
+    } = ctx.request.body
+    const userList = await db.Jingwei.findAll({
+      where: {
+        BM: bm
+      }
+    })
+    ctx.response.body = userList
+  },
+  getalljw: async(ctx, next) => {
+    const userList = await db.Jingwei.findAndCountAll({
+      // //offet去掉前多少个数据
+      // offset,
+      // //limit每页数据数量
+      // limit: 20
+    }).then(res => {
+        let result = {};
+        result.data = res.rows;
+        result.total = res.count;
+        return result;
+    });
+
+    ctx.response.body = userList
+  },
+  deljw: async(ctx, next) => {
+    let {
+      bm
+    } = ctx.request.body
+    const userList = await db.Jingwei.destroy({
+      where: {
+        BM:bm
+      }
+    })
+    ctx.response.body = userList
   }
 }
