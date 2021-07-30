@@ -99,7 +99,7 @@ export default {
     return {
       face_data: [{}], // 列表数据
       btn_size: "medium", // 按钮大小
-      face_list_total: 0, // 账号管理列表数据量
+      face_list_total: 0, // 数据量
       page_num:Number(this.$route.params.currentPage),
       change_num: 0,
     };
@@ -171,7 +171,6 @@ export default {
       })
         .then(() => {
           Promise.all([this.delFaceSubmit(id),this.delDeviceFaceSubmit(id)]).then(res=>{
-            console.log(res);
             if(res[0]==0 && res[1]==200){
               this.$message.success(`删除ID为：${id}人脸成功`);
               this.getFacelist();

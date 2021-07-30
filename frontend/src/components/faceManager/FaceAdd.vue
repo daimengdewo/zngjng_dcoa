@@ -53,7 +53,7 @@
         </template>
       </van-field>
       <div style="padding: 16px">
-        <van-button round block type="info" native-type="submit"
+        <van-button round block type="info" :disabled="!submit_button_status" native-type="submit"
           >提交</van-button
         >
       </div>
@@ -86,6 +86,7 @@ export default {
       face_photo: [],
       file: "",
       showPicker: false,
+      submit_button_status:true
     };
   },
   methods: {
@@ -98,7 +99,7 @@ export default {
       formdata.append("set", "1");
       formdata.append("BM", val["department"]);
       const post = () => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
           this.$axios({
             method: "post",
             url: "/nodeapi/faceapi/upload",
@@ -110,36 +111,58 @@ export default {
             resolve(res.data.ret);
           });
         });
-      }
+      };
       return await post();
     },
-    async pySubmit(val){
-      const post=()=>{
-        return new Promise((resolve,reject)=>{
-          this.$axios({
-            method:'post',
-            url: "/api/userapi/newface",
-            data: {
-              id:val["id"],
-              name:val["name"],
-              face:this.file
-            }
-          }).then(res=>{
-            resolve(res.data.code);
-          })
-        })
-      }
+    async pySubmit(val) {
+      const post = () => {
+        return new Promise((resolve, reject) => {
+          this.getBase64(this.file).then((res) => {
+            this.$axios({
+              method: "post",
+              url: "/api/userapi/newface",
+              data: {
+                id: val["id"],
+                name: val["name"],
+                face: res.split(",")[1],
+              },
+            }).then((res) => {
+              resolve(res.data.code);
+            });
+          });
+        });
+      };
       return await post();
     },
-    lastSubmit(val){
-      Promise.all([this.submit(val),this.pySubmit(val)]).then(res=>{
-        console.log(res);
-        if(res[0]==0 && res[1]==200){
+    lastSubmit(val) {
+      this.submit_button_status=false;
+      Promise.all([this.submit(val), this.pySubmit(val)]).then((res) => {
+        this.submit_button_status=true;
+        if (res[0] == 0 && res[1] == 200) {
           Toast.success("新增人脸成功");
-        }else{
+        } else {
           Toast.fail("新增人脸失败,请检查照片或网络");
         }
-      })
+      });
+    },
+    getBase64(file) {
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        let fileResult = "";
+        reader.readAsDataURL(file);
+        //开始转
+        reader.onload = function () {
+          fileResult = reader.result;
+        };
+        //转 失败
+        reader.onerror = function (error) {
+          reject(error);
+        };
+        //转 结束  咱就 resolve 出去
+        reader.onloadend = function () {
+          resolve(fileResult);
+        };
+      });
     },
     // 图片放入预览前的处理
     beforeRead(file) {

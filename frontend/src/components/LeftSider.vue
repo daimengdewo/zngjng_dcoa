@@ -31,17 +31,21 @@
           <i class="el-icon-postcard"></i>
           <span>考勤数据处理</span>
         </template>
-        <el-menu-item index="" @click="openDatabaseConnectDrawer()">
+        <el-menu-item index="" @click="openDatabaseConnectDrawer()" v-show="false">
           <i class="el-icon-setting"></i>
           <span> 数据库连接配置</span>
         </el-menu-item>
-        <el-menu-item index="/mgr/model">
+        <el-menu-item index="/mgr/model" v-show="false">
           <i class="el-icon-setting"></i>
           <span> 考勤模板管理</span>
         </el-menu-item>
         <el-menu-item index="/mgr/attencerule">
           <i class="el-icon-setting"></i>
           <span> 考勤规则</span>
+        </el-menu-item>
+        <el-menu-item index="/mgr/attencelocationmanager">
+          <i class="el-icon-setting"></i>
+          <span> 考勤地址管理</span>
         </el-menu-item>
         <el-menu-item index="/mgr/attencerulemanager">
           <i class="el-icon-setting"></i>
