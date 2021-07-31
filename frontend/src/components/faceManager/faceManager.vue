@@ -49,7 +49,7 @@
             <el-table-column align="right" width="300">
               <template slot="header" slot-scope="scope"> 操作</template>
               <template slot-scope="scope">
-                <el-button type="danger" v-show="scope.row.Set=='0'?false:true" :size="btn_size" icon="el-icon-s-check" round plain @click="auditFace(scope.row.ID,scope.row.name,scope.row.BM,scope.row.faceid)">审核</el-button>
+                <el-button type="danger" v-show="scope.row.Set=='0'?false:true" :size="btn_size" icon="el-icon-s-check" round plain @click="auditFaceSubmit(scope.row.ID,scope.row.name,scope.row.BM,scope.row.faceid)">审核</el-button>
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
@@ -92,6 +92,7 @@
 
 <script>
 import QRCode from "qrcodejs2";
+import utils from "@/store/utils";
 
 export default {
   name: "facemanager",
@@ -100,7 +101,7 @@ export default {
       face_data: [{}], // 列表数据
       btn_size: "medium", // 按钮大小
       face_list_total: 0, // 数据量
-      page_num:Number(this.$route.params.currentPage),
+      page_num: Number(this.$route.params.currentPage),
       change_num: 0,
     };
   },
@@ -121,33 +122,67 @@ export default {
     getFaceUrl(url) {
       return `https://${url}`;
     },
-    auditFace(ID, nm, BM,faceid) {
+    auditFaceSubmit(ID, nm, BM, faceid) {
       this.$confirm(`确定审核ID为${ID}的人脸？`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-            let formdata = new FormData();
-            formdata.append("id", ID);
-            formdata.append("nm", nm);
-            formdata.append("BM", BM);
-            formdata.append("set", "0");
-            formdata.append("url", faceid);
-            formdata.append("file","");
-            this.$axios({
-              method: "post",
-              url: "/nodeapi/faceapi/upload",
-              data: formdata,
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }).then((res) => {
-                this.$message.success(`ID为${ID}的人脸审核成功`);
-                this.getFacelist();
-            });
+          let formdata = new FormData();
+          formdata.append("id", ID);
+          formdata.append("nm", `${nm},${BM}`);
+          formdata.append("set", "0");
+          formdata.append("url", faceid);
+          formdata.append("file", "");
+          Promise.all([
+            this.auditFace(formdata),
+            this.auditDeviceFace(ID, nm, faceid),
+          ]).then((res) => {
+            if (res[0] && res[1] == 200) {
+              this.$message.success(`ID为${ID}的人脸审核成功`);
+              this.getFacelist();
+            }
+          });
         })
         .catch(() => {});
+    },
+    async auditFace(formdata) {
+      const post = () => {
+        return new Promise((resolve, reject) => {
+          this.$axios({
+            method: "post",
+            url: "/nodeapi/faceapi/upload",
+            data: formdata,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }).then((res) => {
+            resolve(true);
+          });
+        });
+      };
+      return await post();
+    },
+    async auditDeviceFace(ID, nm, faceid) {
+      const post = () => {
+        return new Promise((resolve, reject) => {
+          utils.urlToBase64(`/imageurl/${ID}.jpg`, (dataUrl) => {
+            this.$axios({
+              method: "post",
+              url: "/api/userapi/newface",
+              data: {
+                id: ID,
+                name: nm,
+                face: dataUrl.split(",")[1],
+              },
+            }).then((res) => {
+              resolve(res.data.code);
+            });
+          });
+        });
+      };
+      return await post();
     },
     getQRCodeUrl() {
       let reg; // 提取域名的正则表达式
@@ -170,21 +205,24 @@ export default {
         type: "warning",
       })
         .then(() => {
-          Promise.all([this.delFaceSubmit(id),this.delDeviceFaceSubmit(id)]).then(res=>{
-            if(res[0]==0 && res[1]==200){
+          Promise.all([
+            this.delFaceSubmit(id),
+            this.delDeviceFaceSubmit(id),
+          ]).then((res) => {
+            if (res[0] == 0 && res[1] == 200) {
               this.$message.success(`删除ID为：${id}人脸成功`);
               this.getFacelist();
-            }else{
+            } else {
               this.$message.error(`删除ID为：${id}人脸失败`);
               this.getFacelist();
             }
-          })
+          });
         })
         .catch(() => {});
     },
-    async delFaceSubmit(id){
-      const post=()=>{
-        return new Promise((resolve,reject)=>{
+    async delFaceSubmit(id) {
+      const post = () => {
+        return new Promise((resolve, reject) => {
           let formdata = new FormData();
           formdata.append("id", id);
           this.$axios({
@@ -194,26 +232,26 @@ export default {
           }).then((res) => {
             resolve(res.data.ret);
           });
-        })
-      }
+        });
+      };
       return await post();
     },
-    async delDeviceFaceSubmit(id){
-      const post=()=>{
-        return new Promise((resolve,reject)=>{
+    async delDeviceFaceSubmit(id) {
+      const post = () => {
+        return new Promise((resolve, reject) => {
           this.$axios({
-            method:'post',
+            method: "post",
             url: "/api/userapi/delface",
             data: {
-              id:id
-            }
-          }).then(res=>{
+              id: id,
+            },
+          }).then((res) => {
             resolve(res.data.code);
-          })
-        })
-      }
+          });
+        });
+      };
       return await post();
-    }
+    },
   },
   mounted() {
     this.getQRCodeUrl();

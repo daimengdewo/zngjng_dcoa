@@ -211,7 +211,7 @@ export default {
     setMap() {
       let self = this;
       let map = new AMap.Map("map", {
-        zoom: 17, //设置地图显示的缩放级别
+        zoom: 16, //设置地图显示的缩放级别
         mapStyle: "amap://styles/normal", //设置地图的显示样式
         viewMode: "2D", //设置地图模式
         lang: "zh_cn", //设置地图语言类型
@@ -241,7 +241,7 @@ export default {
       ]);
       this.setAddress();
     },
-    //设置地址
+    // 设置地址
     setAddress() {
       this.$axios({
         method: "get",

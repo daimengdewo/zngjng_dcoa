@@ -95,9 +95,8 @@ export default {
       formdata.append("url", "file");
       formdata.append("file", this.file);
       formdata.append("id", val["id"]);
-      formdata.append("nm", val["name"]);
+      formdata.append("nm", `${val["name"]},${val["department"]}`);
       formdata.append("set", "1");
-      formdata.append("BM", val["department"]);
       const post = () => {
         return new Promise((resolve, reject) => {
           this.$axios({
@@ -136,9 +135,9 @@ export default {
     },
     lastSubmit(val) {
       this.submit_button_status=false;
-      Promise.all([this.submit(val), this.pySubmit(val)]).then((res) => {
+      Promise.all([this.submit(val)]).then((res) => {
         this.submit_button_status=true;
-        if (res[0] == 0 && res[1] == 200) {
+        if (res[0] == 0) {
           Toast.success("新增人脸成功");
         } else {
           Toast.fail("新增人脸失败,请检查照片或网络");
