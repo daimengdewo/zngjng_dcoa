@@ -33,7 +33,7 @@
             :data="face_data"
             :key="change_num"
             height="700"
-            style="font-size: 0.9rem; text-align: center;width:1090px;"
+            style="font-size: 0.9rem; text-align: center;width:1405px"
           >
             <el-table-column prop="ID" label="id" width="100">
             </el-table-column>
@@ -46,9 +46,22 @@
                 <img :src="getFaceUrl(scope.row.faceid)"  style="width: 180px;height:auto;"></img>
               </template>
             </el-table-column>
+            <el-table-column label="请假状态" width="150">
+              <template slot-scope="scope">
+                <span>{{scope.row.QJ==0?"请假中":"未请假"}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="请假时间" width="165">
+              <template slot-scope="scope">
+                <span>{{scope.row.QJ==0?scope.row.QJdate1+scope.row.QJdate2:""}}</span>
+              </template>
+            </el-table-column>
             <el-table-column align="right" width="300">
               <template slot="header" slot-scope="scope"> 操作</template>
               <template slot-scope="scope">
+                <el-button type="warning" :size="btn_size" icon="el-icon-edit-outline" v-show="scope.row.Set=='0'&&scope.row.QJ=='1'?true:false" round plain @click="openAskOff(scope.row.name,scope.row.ID)">请假</el-button>
+                <el-button type="warning" :size="btn_size" icon="el-icon-edit-outline" v-show="scope.row.QJ=='0'?true:false" round plain @click="cancelAskOff(scope.row.name,scope.row.ID)">取消请假</el-button>
+                
                 <el-button type="danger" v-show="scope.row.Set=='0'?false:true" :size="btn_size" icon="el-icon-s-check" round plain @click="auditFaceSubmit(scope.row.ID,scope.row.name,scope.row.BM,scope.row.faceid)">审核</el-button>
                 <el-button
                   type="danger"
@@ -87,6 +100,26 @@
         <el-col :span="1" :offset="0"></el-col>
       </el-row>
     </el-card>
+    <el-dialog
+      :title="ask_off_name+'请假'"
+      :visible.sync="ask_off_status"
+      width="30%"
+      >
+      <el-form :model="ask_off_form" ref="ask_off_form" :rules="rules" label-width="80px" :inline="false" size="normal">
+        <el-form-item label="请假时间" prop="range_time">
+          <el-date-picker v-model="ask_off_form.range_time" type="datetimerange" style="width:100%"
+              range-separator="至"
+              start-placeholder="开始"
+              end-placeholder="结束" size="normal" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss">
+          </el-date-picker>
+        </el-form-item> 
+      </el-form>
+      <span slot="footer">
+        <el-button @click="ask_off_status=false">取消</el-button>
+        <el-button type="primary" @click="submitAskOff">确定</el-button>
+      </span>
+    </el-dialog>
+    
   </div>
 </template>
 
@@ -103,6 +136,21 @@ export default {
       face_list_total: 0, // 数据量
       page_num: Number(this.$route.params.currentPage),
       change_num: 0,
+      ask_off_status: false,
+      ask_off_form: {
+        range_time: "",
+        id: "",
+      },
+      rules: {
+        range_time: [
+          {
+            required: true,
+            message: "请先选择时间",
+            trigger: ["blur", "change"],
+          },
+        ],
+      },
+      ask_off_name: "",
     };
   },
   methods: {
@@ -252,6 +300,59 @@ export default {
       };
       return await post();
     },
+    openAskOff(name, id) {
+      this.ask_off_status = true;
+      this.ask_off_name = name;
+      this.ask_off_form.id = id;
+    },
+    submitAskOff() {
+      this.$refs["ask_off_form"].validate((valid) => {
+        if (valid) {
+          this.$axios({
+            method: "post",
+            url: "/api/userapi/qjset",
+            data: {
+              id: this.ask_off_form.id,
+              qjdate1: this.ask_off_form.range_time[0],
+              qjdate2: this.ask_off_form.range_time[1],
+              qj: "0",
+            },
+          }).then((res) => {
+            if(res.data.ret==0){
+              this.$message.success(`${this.ask_off_name}请假成功,请假从${this.ask_off_form.range_time[0]} 至 ${this.ask_off_form.range_time[1]}`);
+              this.ask_off_status=false;
+              this.$refs['ask_off_form'].resetFields();
+              this.getFacelist();
+            }else{
+              this.$message.error('请假失败');
+            }
+          });
+        }
+      });
+    },
+    cancelAskOff(name,id){
+      this.$confirm(`确定取消${name}的请假吗？`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(()=>{
+        this.$axios({
+          method:'post',
+          url: "/api/userapi/qjset",
+          data: {
+            id:id,
+            qj:"1"
+          }
+        }).then(res=>{
+          if(res.data.ret==0){
+            this.$message.success(`取消${name}的请假成功`);
+            this.getFacelist();
+          }else{
+            this.$message.error(`取消${name}的请假失败`);
+          }
+        })
+      })
+    }
   },
   mounted() {
     this.getQRCodeUrl();

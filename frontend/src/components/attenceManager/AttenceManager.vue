@@ -160,7 +160,7 @@ export default {
         let formdata = new FormData();
         formdata.append("nowdate", this.daterange[0]);
         formdata.append("nextdate", this.daterange[1]);
-        formdata.append("device", this.attence_rule[i].department);
+        formdata.append("bm", this.attence_rule[i].department);
         for (let j = 0; j < this.attence_rule[i].content.length; j++) {
           formdata.append(
             "time1",
@@ -196,7 +196,7 @@ export default {
         let formdata = new FormData();
         formdata.append("nowdate", this.daterange[0]);
         formdata.append("nextdate", this.daterange[1]);
-        formdata.append("device", this.attence_rule[i].department);
+        formdata.append("bm", this.attence_rule[i].department);
         for (let j = 0; j < this.attence_rule[i].content.length; j++) {
           formdata.append("time1", this.attence_rule[i].content[j].late_time);
           formdata.append(
@@ -232,7 +232,7 @@ export default {
         let formdata = new FormData();
         formdata.append("nowdate", this.daterange[0]);
         formdata.append("nextdate", this.daterange[1]);
-        formdata.append("device", this.attence_rule[i].department);
+        formdata.append("bm", this.attence_rule[i].department);
         for (let j = 0; j < this.attence_rule[i].content.length; j++) {
           formdata.append(
             "time1",
@@ -271,7 +271,7 @@ export default {
         let formdata = new FormData();
         formdata.append("nowdate", this.daterange[0]);
         formdata.append("nextdate", this.daterange[1]);
-        formdata.append("device", this.attence_rule[i].department);
+        formdata.append("bm", this.attence_rule[i].department);
         for (let j = 0; j < this.attence_rule[i].content.length; j++) {
           formdata.append(
             "time1",
@@ -310,7 +310,7 @@ export default {
         let formdata = new FormData();
         formdata.append("nowdate", this.daterange[0]);
         formdata.append("nextdate", this.daterange[1]);
-        formdata.append("device", this.attence_rule[i].department);
+        formdata.append("bm", this.attence_rule[i].department);
         for (let j = 0; j < this.attence_rule[i].content.length; j++) {
           formdata.append(
             "time1",
