@@ -1,4 +1,4 @@
-# This is an auto-generated Django model module.
+
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
@@ -109,6 +109,9 @@ class Face(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     set = models.CharField(db_column='Set', max_length=255, blank=True, null=True)  # Field name made lowercase.
     bm = models.CharField(db_column='BM', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    qj = models.CharField(db_column='QJ', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    qjdate1 = models.CharField(db_column='QJdate1', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    qjdate2 = models.CharField(db_column='QJdate2', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -126,7 +129,7 @@ class Guize(models.Model):
 
 
 class Jingwei(models.Model):
-    sid = models.IntegerField(primary_key=True)
+    sid = models.AutoField(primary_key=True)
     lnglat = models.CharField(db_column='LngLat', max_length=255, blank=True, null=True)  # Field name made lowercase.
     bm = models.CharField(db_column='BM', max_length=255, blank=True, null=True)  # Field name made lowercase.
     address = models.CharField(max_length=255, blank=True, null=True)

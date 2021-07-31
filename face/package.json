@@ -13,7 +13,7 @@
     "cos-nodejs-sdk-v5": "^2.9.21",
     "debug": "^2.6.3",
     "koa": "^2.2.0",
-    "koa-body": "^4.2.0",
+    "koa-body": "4.1.0",
     "koa-bodyparser": "^4.3.0",
     "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",

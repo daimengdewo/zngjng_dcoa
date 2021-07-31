@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     BM: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
+      unique: "1"
     },
     address: {
       type: DataTypes.STRING(255),
@@ -24,6 +25,14 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'jingwei',
     timestamps: false,
     indexes: [
+      {
+        name: "1",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "BM" },
+        ]
+      },
       {
         name: "PRIMARY",
         unique: true,

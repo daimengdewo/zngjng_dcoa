@@ -18,7 +18,7 @@ token = res['access_token']
 
 form_header = {"Authorization": "Bearer {}".format(token)}
 
-consumerId = '5bef4093287f4c9392f865fc437003e4'
+consumerId = '2d7c724cece24424bb6b982001ef5950'
 
 #构建data
 form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
@@ -34,7 +34,6 @@ while True:
 		if response is not None:
 			try:
 				res = response.json()
-				# print(res)
 			except:
 				pass
 
@@ -48,6 +47,7 @@ while True:
 					if 'consumerId' in code['data']:
 						consumerId = code['data']['consumerId']
 						form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
+						print(form_data)
 
 			if res['code'] == 514002:
 				#获取consumerId
@@ -57,36 +57,65 @@ while True:
 					if 'consumerId' in code['data']:
 						consumerId = code['data']['consumerId']
 						form_data = {"consumerId": "{}".format(consumerId),"autoCommit":"true"}
+						print(form_data)
 
-		time.sleep(4)
+		time.sleep(5)
 		if 'data' in res:
 			if res['data'] != [] and res['data'] != None:
 				resdata = list(res['data'])
 
-				if len(resdata) > 1 :
+				if len(resdata) > 0 :
 					for i in range(len(resdata)):
 						if json.loads(resdata[i]['content'])['eventCode'] == '10114':
 							content = json.loads(resdata[i]['content'])
+
 							t = content["dateTime"]
+							now_datetime_str = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%Y-%m-%d%H:%M:%S")
+							now_datetime = datetime.datetime.strptime(now_datetime_str,f"%Y-%m-%d%H:%M:%S")
 							new_date = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%Y-%m-%d")
 							new_time = datetime.datetime.strptime(t,f"%Y-%m-%dT%H:%M:%S+08:00").strftime(f"%H:%M:%S")
-							
+
 							db.ping(True)
 							cursor = db.cursor()
-							cursor.execute("select BM from face where ID = '{}'".format(content["employeeNo"]))
+							cursor.execute("select BM,QJ from face where ID = '{}'".format(content["employeeNo"]))
 							rs = cursor.fetchall()
-							cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
-							db.commit()
-							cursor.close()
 
-							data = {"id" : "{}".format(content["employeeNo"]),
-									"name" : "{}".format(content["name"]),
-									"date" : "{}".format(new_date),
-									"time" : "{}".format(new_time),
-									"bm" : "{}".format(rs[0]['BM'])
+							if rs[0]['QJ'] == '0':
 
-							}
-							print(data)
+								cursor.execute("select BM,QJ,QJdate1,QJdate2 from face where ID = '{}'".format(content["employeeNo"]))
+								rs = cursor.fetchall()
+
+								QJdate1 = datetime.datetime.strptime(rs[0]['QJdate1'],f"%Y-%m-%d %H:%M:%S")
+								QJdate2 = datetime.datetime.strptime(rs[0]['QJdate2'],f"%Y-%m-%d %H:%M:%S")
+
+								if now_datetime > QJdate1 and now_datetime < QJdate2 :
+									db.commit()
+									cursor.close()
+
+								elif now_datetime < QJdate1:
+									cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
+									db.commit()
+									cursor.close()
+									
+								elif now_datetime > QJdate2:
+									cursor.execute(" UPDATE face SET QJ = '1' WHERE ID = '{}' ".format(content["employeeNo"]))
+									cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
+									db.commit()
+									cursor.close()
+
+							else:
+								cursor.execute("insert into kaoqin(ID,name,date,time,BM) values('{}','{}','{}','{}','{}')".format(content["employeeNo"],content["name"],new_date,new_time,rs[0]['BM']))
+								db.commit()
+								cursor.close()
+
+								data = {"id" : "{}".format(content["employeeNo"]),
+										"name" : "{}".format(content["name"]),
+										"date" : "{}".format(new_date),
+										"time" : "{}".format(new_time),
+										"bm" : "{}".format(rs[0]['BM'])
+
+								}
+								print(data)
 
 # except Exception as e:
 # 	print(e)

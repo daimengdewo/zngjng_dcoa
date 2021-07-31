@@ -1,11 +1,10 @@
 const HomeService = require('../service/code')
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('new', 'new', 'new', {
+const sequelize = new Sequelize('apitest', 'apitest', 'apitest', {
 host: '127.0.0.1',
 dialect: 'mysql'/* 选择 'mysql' | 'mariadb' | 'postgres' | 'mssql' 其一 */
 })
 
-const send = require('koa-send')
 const db = require('../tool/db')
 const path = require('path')
 const fs = require('fs'); // 载入fs模块
@@ -49,15 +48,15 @@ module.exports = {
       date,
       time,
       id,
-      name
+      name,
+      bm
     } = ctx.request.body
 
     try{
       const { QueryTypes } = require('sequelize')
-      const userList = await sequelize.query(`select BM from face where ID = '${id}'`, { type: QueryTypes.SELECT })
-      let index = db.Kaoqin.create({ device: userList[0]['BM'] , ID: id , date : date , time: time , name : name , nbr: site })
-      // let index = await HomeService.checkCode(userMail,userCode)
-      ctx.response.body = index
+      const userList = await sequelize.query(`select QJ,QJdate1,QJdate2 from face where ID = '${id}'`, { type: QueryTypes.SELECT })
+      let index = await db.Kaoqin.create({ BM : bm , ID: id , date : date , time: time , name : name , nbr: site })
+      ctx.response.body = userList
     }catch(e){
       ctx.response.body = {errorMsg:e}
     }
@@ -84,72 +83,74 @@ module.exports = {
   },
   //人脸库
   upface: async(ctx, next) => {
+
     let {
       id,
       nm,
       set,
-      BM,
       url
     } = ctx.request.body
     // 上传单个文件
-    if (url=='file'){
-    let file = ctx.request.files.file; // 获取上传文件
+
+    let dt = String(nm).split(',')
+
+  if (url=='file'){
+      
+    let file = ctx.request.files.file;
     let Id = id + '.jpg'
     
-    
-      cos.putObject({
-      Bucket: 'zngjng-1257243133', /* 必须 */
-      Region: 'ap-guangzhou',    /* 必须 */
-      Key: Id ,              /* 必须 */
-      StorageClass: 'STANDARD',
-      Body: fs.createReadStream(file.path), // 上传文件对象
-      onProgress: function(progressData) {
-        console.log(JSON.stringify(progressData));
+    await cos.putObject({
+    Bucket: 'zngjng-1257243133', /* 必须 */
+    Region: 'ap-guangzhou',    /* 必须 */
+    Key: Id ,              /* 必须 */
+    StorageClass: 'STANDARD',
+    Body: fs.createReadStream(file.path), // 上传文件对象
+    onProgress: function(progressData) {
+      console.log(JSON.stringify(progressData));
+    }
+    }, function(err, data) {
+
+    db.Face.upsert({ faceid: data['Location'] , ID: id ,name: dt[0] , Set: set, BM: dt[1]}, {updateOnDuplicate:true});
+
+    if (set == 0){
+    // Depends on tencentcloud-sdk-nodejs version 4.0.3 or higher
+    const tencentcloud = require("tencentcloud-sdk-nodejs");
+
+    const IaiClient = tencentcloud.iai.v20200303.Client;
+
+    const clientConfig = {
+      credential: {
+        secretId: "AKIDlKgohNp21kETTDiyznPp7B3h6HEwPdcN",
+        secretKey: "Y05wXu2vZ7QUJtDJAmBMK5e1YxAB4mIa",
+      },
+      region: "ap-guangzhou",
+      profile: {
+        httpProfile: {
+          endpoint: "iai.tencentcloudapi.com",
+        },
+      },
+    };
+
+    const client = new IaiClient(clientConfig);
+    const params = {
+        "GroupId": "1",
+        "PersonName": nm,
+        "PersonId": id,
+        "Url": 'http://' +data['Location']
+    };
+    client.CreatePerson(params).then(
+      (data) => {
+        console.log(data)
+      },
+      (err) => {
+        console.error("error", err);
       }
-      }, function(err, data) {
-      db.Face.upsert({ faceid: data['Location'] , ID: id ,name: nm , Set: set, BM: BM}, {updateOnDuplicate:true});
-
-      if (set == 0){
-      // Depends on tencentcloud-sdk-nodejs version 4.0.3 or higher
-      const tencentcloud = require("tencentcloud-sdk-nodejs");
-
-      const IaiClient = tencentcloud.iai.v20200303.Client;
-
-      const clientConfig = {
-        credential: {
-          secretId: "AKIDlKgohNp21kETTDiyznPp7B3h6HEwPdcN",
-          secretKey: "Y05wXu2vZ7QUJtDJAmBMK5e1YxAB4mIa",
-        },
-        region: "ap-guangzhou",
-        profile: {
-          httpProfile: {
-            endpoint: "iai.tencentcloudapi.com",
-          },
-        },
-      };
-
-      const client = new IaiClient(clientConfig);
-      const params = {
-          "GroupId": "1",
-          "PersonName": nm,
-          "PersonId": id,
-          "Url": 'http://' +data['Location']
-      };
-      client.CreatePerson(params).then(
-        (data) => {
-          console.log(data)
-        },
-        (err) => {
-          console.error("error", err);
-        }
-      )
+    )
    }
    })
   }else{
-     
-    let Id = id + '.jpg'
-        
-    db.Face.upsert({ faceid: url , ID: id ,name: nm , Set: set, BM: BM}, {updateOnDuplicate:true});
+
+    db.Face.upsert({ faceid: url , ID: id ,name: dt[0] , Set: set, BM: dt[1]}, {updateOnDuplicate:true});
 
     if (set == 0){
       // Depends on tencentcloud-sdk-nodejs version 4.0.3 or higher
@@ -337,11 +338,11 @@ module.exports = {
       nextdate,
       time1,
       time2,
-      device
+      bm
     } = ctx.request.body
 
     const { QueryTypes } = require('sequelize')
-    const userList = await sequelize.query(` select * from (select * from (select ID,device,name,nbr,date,time FROM kaoqin where date between '${nowdate}'  and '${nextdate}') temp where temp.time between '${time1}' and '${time2}') temp where temp.device = '${device}' `, { type: QueryTypes.SELECT })
+    const userList = await sequelize.query(`select * from (select * from (select ID,BM,name,nbr,date,time from kaoqin where date between '${nowdate}'  and '${nextdate}') temp where temp.time between '${time1}' and '${time2}') temp where temp.BM = '${bm}' `, { type: QueryTypes.SELECT })
 
     ctx.response.body = userList
   },
