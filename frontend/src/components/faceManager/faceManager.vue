@@ -185,11 +185,13 @@ export default {
           formdata.append("file", "");
           Promise.all([
             this.auditFace(formdata),
-            this.auditDeviceFace(ID, nm, faceid),
+            this.auditDeviceFace(ID, nm),
           ]).then((res) => {
             if (res[0] && res[1] == 200) {
               this.$message.success(`ID为${ID}的人脸审核成功`);
               this.getFacelist();
+            } else {
+              this.$message.error(`ID为${ID}的人脸审核失败`);
             }
           });
         })
@@ -212,7 +214,7 @@ export default {
       };
       return await post();
     },
-    async auditDeviceFace(ID, nm, faceid) {
+    async auditDeviceFace(ID, nm) {
       const post = () => {
         return new Promise((resolve, reject) => {
           utils.urlToBase64(`/imageurl/${ID}.jpg`, (dataUrl) => {
@@ -253,16 +255,20 @@ export default {
         type: "warning",
       })
         .then(() => {
-          Promise.all([
-            this.delFaceSubmit(id),
-            this.delDeviceFaceSubmit(id),
-          ]).then((res) => {
-            if (res[0] == 0 && res[1] == 200) {
-              this.$message.success(`删除ID为：${id}人脸成功`);
-              this.getFacelist();
+          this.delFaceSubmit(id).then((res) => {
+            if (res.ret == 0) {
+              this.delDeviceFaceSubmit(id).then((res) => {
+                if (res == 200) {
+                  this.$message.success(`删除ID为：${id}人脸成功`);
+                  this.getFacelist();
+                } else {
+                  this.$message.error(`删除ID为：${id}人脸失败`);
+                }
+              });
+            } else if (res.ret == 1) {
+              this.$message.error(res.msg);
             } else {
               this.$message.error(`删除ID为：${id}人脸失败`);
-              this.getFacelist();
             }
           });
         })
@@ -273,12 +279,13 @@ export default {
         return new Promise((resolve, reject) => {
           let formdata = new FormData();
           formdata.append("id", id);
+          formdata.append("user", this.$store.state.username);
           this.$axios({
             method: "post",
             url: "/nodeapi/faceapi/delface",
             data: formdata,
           }).then((res) => {
-            resolve(res.data.ret);
+            resolve(res.data);
           });
         });
       };
@@ -292,6 +299,7 @@ export default {
             url: "/api/userapi/delface",
             data: {
               id: id,
+              user: this.$store.state.username,
             },
           }).then((res) => {
             resolve(res.data.code);
@@ -318,41 +326,43 @@ export default {
               qj: "0",
             },
           }).then((res) => {
-            if(res.data.ret==0){
-              this.$message.success(`${this.ask_off_name}请假成功,请假从${this.ask_off_form.range_time[0]} 至 ${this.ask_off_form.range_time[1]}`);
-              this.ask_off_status=false;
-              this.$refs['ask_off_form'].resetFields();
+            if (res.data.ret == 0) {
+              this.$message.success(
+                `${this.ask_off_name}请假成功,请假从${this.ask_off_form.range_time[0]} 至 ${this.ask_off_form.range_time[1]}`
+              );
+              this.ask_off_status = false;
+              this.$refs["ask_off_form"].resetFields();
               this.getFacelist();
-            }else{
-              this.$message.error('请假失败');
+            } else {
+              this.$message.error("请假失败");
             }
           });
         }
       });
     },
-    cancelAskOff(name,id){
+    cancelAskOff(name, id) {
       this.$confirm(`确定取消${name}的请假吗？`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      }).then(()=>{
+      }).then(() => {
         this.$axios({
-          method:'post',
+          method: "post",
           url: "/api/userapi/qjset",
           data: {
-            id:id,
-            qj:"1"
-          }
-        }).then(res=>{
-          if(res.data.ret==0){
+            id: id,
+            qj: "1",
+          },
+        }).then((res) => {
+          if (res.data.ret == 0) {
             this.$message.success(`取消${name}的请假成功`);
             this.getFacelist();
-          }else{
+          } else {
             this.$message.error(`取消${name}的请假失败`);
           }
-        })
-      })
-    }
+        });
+      });
+    },
   },
   mounted() {
     this.getQRCodeUrl();

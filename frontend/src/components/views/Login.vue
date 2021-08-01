@@ -108,7 +108,7 @@ export default {
                   username,
                 });
                 let usertype_int = parseInt(self.$AES.decrypt(usertype));
-                if (usertype_int >= 9) {
+                if (usertype_int >= 0) {
                   self.$router.push('/mgr/home');
                   self.$message.success("登录成功");
                 }

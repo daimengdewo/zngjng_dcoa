@@ -310,6 +310,7 @@ export default {
         .then(() => {
           let formdata = new FormData();
           formdata.append("bm", bm);
+          formdata.append("user", this.$store.state.username);
           this.$axios({
             method: "post",
             url: "/nodeapi/faceapi/deljw",
@@ -318,6 +319,10 @@ export default {
             if (res.data == 1) {
               this.$message.success(`删除${bm}的地址成功`);
               this.getLocationList();
+            }else if(res.data.ret==1){
+              this.$message.error(res.data.msg);
+            } else{
+              this.$message.error(`删除${bm}的地址失败`);
             }
           });
         })

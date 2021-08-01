@@ -28,14 +28,14 @@ const router = new Router({
       component: main,
       redirect: "/mgr/home",
       meta: {
-        usertype: 9
+        usertype: 0
       },
       children: [{
           path: "home",
           name: "home",
           meta: {
             title: "管理后台",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/views/Home")
         },
@@ -44,7 +44,7 @@ const router = new Router({
           name: "accountmanager",
           meta: {
             title: "账号管理",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/views/AccountManager")
         },
@@ -53,7 +53,7 @@ const router = new Router({
           name: "model",
           meta: {
             title: "考勤模板管理",
-            usertype: 1
+            usertype: 0
           },
           component: () => import("@/components/views/Model")
         },
@@ -62,7 +62,7 @@ const router = new Router({
           name: "dataExport",
           meta: {
             title: "数据导出",
-            usertype: 1
+            usertype: 0
           },
           component: () => import("@/components/views/DataExport")
         },
@@ -71,7 +71,7 @@ const router = new Router({
           name: "facemanager",
           meta: {
             title: "人脸数据管理",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/faceManager/FaceManager")
         },
@@ -80,7 +80,7 @@ const router = new Router({
           name: "attencemanager",
           meta: {
             title: "考勤数据管理",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/attenceManager/AttenceManager")
         },
@@ -89,7 +89,7 @@ const router = new Router({
           name: "attencerule",
           meta: {
             title: "考勤规则",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/attenceManager/AttenceRule")
         },
@@ -98,7 +98,7 @@ const router = new Router({
           name: "attencerulemanager",
           meta: {
             title: "考勤规则管理",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/attenceManager/AttenceRuleManager")
         },
@@ -107,7 +107,7 @@ const router = new Router({
           name: "attencelocationmanager",
           meta: {
             title: "考勤地址管理",
-            usertype: 9
+            usertype: 0
           },
           component: () => import("@/components/attenceManager/AttenceLocationManager")
         }

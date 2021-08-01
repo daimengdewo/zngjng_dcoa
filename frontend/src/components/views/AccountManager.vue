@@ -280,7 +280,7 @@ export default {
         url: "/api/adminapi/gettotal",
         data: {
           control: "password_md5",
-          username: username,
+          username: "admin",
         },
       }).then((res) => {
         if (res.data.ret == 0) {

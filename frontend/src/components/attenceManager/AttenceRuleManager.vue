@@ -138,13 +138,18 @@ export default {
         .then(() => {
           let formdata = new FormData();
           formdata.append("bm", BM);
+          formdata.append("user", this.$store.state.username);
           this.$axios({
             method: "post",
             url: "/nodeapi/faceapi/delguize",
             data: formdata,
           }).then((res) => {
-            this.$message.error("删除成功");
-            this.getAttenceRuleList();
+            if(res.data.ret==1){
+              this.$message.error(res.data.msg);
+            }else{
+              this.$message.success("删除成功");
+              this.getAttenceRuleList();
+            }
           });
         })
         .catch(() => {});
