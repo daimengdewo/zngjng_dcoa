@@ -2,7 +2,7 @@ export default {
   urlToBase64(url, callback) {
     var Img = new Image(),
       dataURL = '';
-    Img.src = url + '?v=' + Math.random();
+    Img.src = url;
     Img.setAttribute('crossOrigin', 'Anonymous');
     Img.onload = function () {
       var canvas = document.createElement('canvas'),

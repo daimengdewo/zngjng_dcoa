@@ -53,7 +53,12 @@
         </template>
       </van-field>
       <div style="padding: 16px">
-        <van-button round block type="info" :disabled="!submit_button_status" native-type="submit"
+        <van-button
+          round
+          block
+          type="info"
+          :disabled="!submit_button_status"
+          native-type="submit"
           >提交</van-button
         >
       </div>
@@ -72,6 +77,7 @@
 <script>
 import Vue from "vue";
 import { Toast } from "vant";
+import Compressor from "compressorjs";
 
 Vue.use(Toast);
 
@@ -86,7 +92,7 @@ export default {
       face_photo: [],
       file: "",
       showPicker: false,
-      submit_button_status:true
+      submit_button_status: true,
     };
   },
   methods: {
@@ -134,11 +140,13 @@ export default {
       return await post();
     },
     lastSubmit(val) {
-      this.submit_button_status=false;
+      this.submit_button_status = false;
       Promise.all([this.submit(val)]).then((res) => {
-        this.submit_button_status=true;
+        this.submit_button_status = true;
         if (res[0] == 0) {
           Toast.success("新增人脸成功");
+        } else if (res[0] == 1) {
+          Toast.fail(`新增人脸失败，ID${val["id"]}已存在`);
         } else {
           Toast.fail("新增人脸失败,请检查照片或网络");
         }
@@ -166,23 +174,34 @@ export default {
     // 图片放入预览前的处理
     beforeRead(file) {
       if (file.size > 1 * 1024 * 1024) {
-        const imageConversion = require("image-conversion"); // 导入依赖
-        // 压缩图片
-        imageConversion
-          .compressAccurately(file, {
-            size: 1024,
-            type: "image/jpeg",
-            width: 500,
-            height: 660,
-          })
-          .then((res) => {
-            //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
-            this.file = res;
-          });
+        return new Promise((resolve) => {
+          const imageConversion = require("image-conversion"); // 导入依赖
+          // 压缩图片
+          imageConversion
+            .compressAccurately(file, {
+              size: 1024,
+              type: "image/jpeg",
+            })
+            .then((res) => {
+              //The res in the promise is a compressed Blob type (which can be treated as a File type) file;
+              new Compressor(res, {
+                success: (data) => {
+                  this.file = data;
+                  resolve(data);
+                },
+              });
+            });
+        });
       } else {
-        this.file = file;
+        return new Promise((resolve) => {
+          new Compressor(file, {
+            success: (data) => {
+              this.file = data;
+              resolve(data);
+            },
+          });
+        });
       }
-      return true;
     },
     showDepartment() {
       this.$axios({
